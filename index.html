@@ -1,0 +1,2181 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ХЭҮК мэдээллийн сан</title>
+<meta name="description" content="Хүний эрхийн Үндэсний Комиссын санал, зөвлөмж, шаардлага, хууль тогтоомжийн төсөлд өгсөн санал, судалгаа, илтгэлийн нэгдсэн сан">
+<meta name="theme-color" content="#2350C2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232350C2'/%3E%3Cpath d='M18 44V20h7v9.5h14V20h7v24h-7v-9h-14v9z' fill='%23fff'/%3E%3C/svg%3E">
+<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Unbounded:wght@500;700&amp;display=swap" rel="stylesheet">
+<style id="app-css">
+/* Layout: a quiet left rail, a ledger-like content column, bottom tabs on phones; overlays for the document reader and edit sheets */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --sunk:#EBEEF3; --line:#DCE1E9; --line-2:#C7CEDA;
+  --ink:#111A2C; --ink-2:#465166; --ink-3:#737D92;
+  --accent:#2350C2; --accent-2:#1A3F9E; --accent-soft:#E3EAFA; --on-accent:#FFFFFF;
+  --ok:#15784B; --ok-soft:#DBF1E5; --warn:#975A06; --warn-soft:#FAEDD5; --bad:#B42318; --bad-soft:#FAE2DE; --wait:#5A6476; --wait-soft:#E6E9EE;
+  --t-zov:#2F5BD3; --t-sha:#8E3E9B; --t-san:#0B7F80; --t-gis:#C24E7F; --t-huu:#24406F; --t-sud:#8A6526; --t-ilt:#3A88B5;
+  --t-x1:#5E6AD2; --t-x2:#4E8A3E; --t-x3:#B05A3C; --t-dun:#6B5BBF;
+  --paper:#FFFFFF; --scrim:rgba(14,20,34,.42);
+  --shadow:0 1px 2px rgba(17,26,44,.05),0 10px 30px rgba(17,26,44,.10);
+  --f-display:"Unbounded","Golos Text",system-ui,sans-serif;
+  --f-body:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --r:14px; --r-sm:9px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0D121D; --surface:#151C2B; --sunk:#1A2233; --line:#263046; --line-2:#344059;
+  --ink:#E8EDF6; --ink-2:#AAB4C7; --ink-3:#7D889E;
+  --accent:#7FA3FF; --accent-2:#A9C1FF; --accent-soft:#1D2A4A; --on-accent:#0D121D;
+  --ok:#52C78F; --ok-soft:#12301F; --warn:#EEB25A; --warn-soft:#382811; --bad:#F2806F; --bad-soft:#3A1B16; --wait:#9BA5B7; --wait-soft:#232B3B;
+  --t-zov:#7C9BFF; --t-sha:#C98AD6; --t-san:#4FC2C2; --t-gis:#E78DB2; --t-huu:#93ACDC; --t-sud:#D3AF6B; --t-ilt:#7CC2E8;
+  --t-x1:#9AA3F0; --t-x2:#8CC77B; --t-x3:#E39477; --t-dun:#ABA0F2;
+  --paper:#FFFFFF; --scrim:rgba(0,0,0,.6);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.45);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0D121D; --surface:#151C2B; --sunk:#1A2233; --line:#263046; --line-2:#344059;
+  --ink:#E8EDF6; --ink-2:#AAB4C7; --ink-3:#7D889E;
+  --accent:#7FA3FF; --accent-2:#A9C1FF; --accent-soft:#1D2A4A; --on-accent:#0D121D;
+  --ok:#52C78F; --ok-soft:#12301F; --warn:#EEB25A; --warn-soft:#382811; --bad:#F2806F; --bad-soft:#3A1B16; --wait:#9BA5B7; --wait-soft:#232B3B;
+  --t-zov:#7C9BFF; --t-sha:#C98AD6; --t-san:#4FC2C2; --t-gis:#E78DB2; --t-huu:#93ACDC; --t-sud:#D3AF6B; --t-ilt:#7CC2E8;
+  --t-x1:#9AA3F0; --t-x2:#8CC77B; --t-x3:#E39477; --t-dun:#ABA0F2;
+  --paper:#FFFFFF; --scrim:rgba(0,0,0,.6);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.45);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+body.locked{overflow:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.mono{font-family:var(--f-mono);font-size:.86em;letter-spacing:-.01em}
+.num{font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;text-wrap:balance}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* shell */
+.app{display:grid;grid-template-columns:1fr;min-height:100vh}
+.rail{display:none}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;align-items:center;gap:12px;
+  padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  background:var(--bg);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;text-align:left}
+.brand-mark{flex:none;width:34px;height:34px;border-radius:10px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:11px;letter-spacing:.02em}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.brand-text b{font-family:var(--f-display);font-weight:700;font-size:14px;letter-spacing:.01em}
+.brand-text span{font-size:12px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar .grow{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--ink-2);border:1px solid var(--line);background:var(--surface)}
+.iconbtn:hover{color:var(--ink);border-color:var(--line-2)}
+.main{min-width:0;width:100%;max-width:1200px;margin:0 auto;padding-block:20px 120px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;justify-content:space-around;gap:4px;background:var(--surface);border-top:1px solid var(--line);
+  padding-top:6px;padding-bottom:max(8px,env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:10px;color:var(--ink-3);font-size:11px;font-weight:500}
+.tab[aria-current="page"]{color:var(--accent)}
+.tab svg{width:22px;height:22px}
+@media (min-width:960px){
+  .app{grid-template-columns:240px minmax(0,1fr)}
+  .topbar,.tabbar{display:none}
+  .rail{display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;padding:22px 16px;border-right:1px solid var(--line);background:var(--surface)}
+  .main{padding-block:32px 96px;padding-left:max(36px,env(safe-area-inset-left,0px));padding-right:max(36px,env(safe-area-inset-right,0px))}
+}
+.rail nav{display:flex;flex-direction:column;gap:2px}
+.nav{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;color:var(--ink-2);font-weight:500;text-align:left}
+.nav:hover{background:var(--sunk);color:var(--ink)}
+.nav[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+.nav svg{flex:none;width:19px;height:19px}
+.nav kbd{margin-left:auto}
+kbd{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:0 6px;background:var(--surface)}
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;font-size:12px;color:var(--ink-3)}
+
+/* save state chip */
+.savechip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;padding:5px 10px;border-radius:99px;background:var(--sunk);color:var(--ink-2);width:max-content}
+.savechip i{width:7px;height:7px;border-radius:50%;background:var(--ink-3)}
+.savechip[data-s="saved"] i{background:var(--ok)}
+.savechip[data-s="dirty"] i,.savechip[data-s="saving"] i{background:var(--warn)}
+.savechip[data-s="error"] i{background:var(--bad)}
+
+/* page head */
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 20px;margin-bottom:22px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.h1{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,3.2vw,30px);line-height:1.15;letter-spacing:-.01em;margin-top:6px}
+.sub{color:var(--ink-2);margin-top:6px;font-size:14px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--warn);background:var(--warn-soft);border-radius:99px;padding:3px 10px}
+
+/* search hero */
+.search{position:relative;display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);padding:0 14px;min-height:54px;box-shadow:var(--shadow)}
+.search svg{flex:none;color:var(--ink-3)}
+.search input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:16px;padding:14px 0}
+.search .hint{font-size:12px;color:var(--ink-3);white-space:nowrap}
+.search:focus-within{border-color:var(--accent)}
+@media (max-width:600px){ .search .hint{display:none} }
+.search-note{font-size:12.5px;color:var(--ink-3);margin-top:8px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 15px;border-radius:11px;border:1px solid var(--line-2);background:var(--surface);font-weight:500;font-size:14px;color:var(--ink);white-space:nowrap}
+.btn:hover{border-color:var(--ink-3)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--ink-2)}
+.btn.ghost:hover{background:var(--sunk)}
+.btn.danger{color:var(--bad);border-color:var(--bad-soft);background:var(--bad-soft)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn svg{width:17px;height:17px;flex:none}
+.btn .count{font-size:12px;background:var(--accent);color:var(--on-accent);border-radius:99px;padding:0 7px;line-height:18px}
+.row-actions{display:flex;flex-wrap:wrap;gap:8px}
+
+/* sections */
+.stack{display:flex;flex-direction:column;gap:22px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.panel-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px;margin-bottom:14px}
+.panel-h h2{font-size:16px;font-weight:600}
+.panel-h p{margin:0;font-size:13px;color:var(--ink-3)}
+.grid2{display:grid;grid-template-columns:1fr;gap:22px}
+@media (min-width:900px){ .grid2{grid-template-columns:1fr 1fr} }
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:700px){ .kpis{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (min-width:1100px){ .kpis{grid-template-columns:repeat(5,minmax(0,1fr))} }
+.kpi{display:flex;flex-direction:column;gap:4px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;min-width:0;transition:border-color .15s}
+.kpi:hover{border-color:var(--accent)}
+.kpi .k-l{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2);font-weight:500}
+.kpi .k-l i{width:8px;height:8px;border-radius:3px;background:var(--c,var(--accent))}
+.kpi .k-v{font-family:var(--f-display);font-weight:500;font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.kpi .k-s{font-size:12.5px;color:var(--ink-3)}
+.kpis .kpi:first-child{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.kpis .kpi:first-child .k-l,.kpis .kpi:first-child .k-s{color:inherit;opacity:.85}
+.kpis .kpi:first-child .k-l i{background:var(--on-accent)}
+@media (max-width:699px){ .kpis .kpi:first-child{grid-column:1 / -1} }
+
+/* charts */
+.chart{position:relative;min-width:0}
+.chart svg{display:block;max-width:100%;overflow:visible}
+.chart text{fill:var(--ink-3);font-size:11px;font-family:var(--f-body)}
+.chart .grid{stroke:var(--line);stroke-width:1}
+.chart .hit{cursor:pointer}
+.tip{position:absolute;z-index:5;pointer-events:none;background:var(--ink);color:var(--bg);border-radius:10px;padding:9px 11px;font-size:12px;line-height:1.45;min-width:150px;box-shadow:var(--shadow)}
+.tip b{font-size:13px}
+.tip .tr{display:flex;align-items:center;gap:7px}
+.tip .tr i{width:8px;height:8px;border-radius:2px;flex:none}
+.tip .tr span{flex:1}
+.legend{display:flex;flex-wrap:wrap;gap:6px}
+.lg{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;padding:4px 10px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2)}
+.lg i{width:9px;height:9px;border-radius:3px;background:var(--c)}
+.lg[aria-pressed="false"]{opacity:.45}
+.lg[aria-pressed="false"] i{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
+.selyear{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+select.inp,input.inp,textarea.inp{width:100%;min-height:40px;border:1px solid var(--line-2);border-radius:10px;background:var(--surface);padding:8px 11px;font-size:14px}
+textarea.inp{min-height:90px;resize:vertical;line-height:1.45}
+.selyear select{width:auto}
+
+/* status bars */
+.sbar{display:flex;height:12px;border-radius:99px;overflow:hidden;background:var(--sunk);gap:2px}
+.sbar i{display:block;height:100%}
+.sbar .ok{background:var(--ok)} .sbar .warn{background:var(--warn)} .sbar .bad{background:var(--bad)} .sbar .wait{background:var(--wait)} .sbar .info{background:var(--accent)} .sbar .na{background:var(--line-2)}
+.slist{display:flex;flex-direction:column;gap:2px;margin-top:12px}
+.sitem{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:9px;text-align:left;font-size:14px}
+.sitem:hover{background:var(--sunk)}
+.sitem .lab{flex:1;min-width:0}
+.sitem .n{font-variant-numeric:tabular-nums;font-weight:600}
+.sitem .pc{font-variant-numeric:tabular-nums;color:var(--ink-3);width:44px;text-align:right;font-size:13px}
+
+/* pills */
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;border-radius:99px;padding:3px 10px 3px 7px;white-space:nowrap;line-height:1.35}
+.pill svg{width:13px;height:13px;flex:none}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.wait{background:var(--wait-soft);color:var(--wait)}
+.pill.na{background:var(--sunk);color:var(--ink-2)}
+.pill.info{background:var(--accent-soft);color:var(--accent)}
+.dotc{display:inline-block;width:9px;height:9px;border-radius:3px;background:var(--c);flex:none}
+
+/* bars list */
+.blist{display:flex;flex-direction:column;gap:4px}
+.bitem{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:4px 10px;align-items:center;text-align:left;padding:7px 8px;border-radius:9px;font-size:14px}
+.bitem:hover{background:var(--sunk)}
+.bitem .bt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bitem .bn{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.bitem .bb{grid-column:1 / -1;height:6px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.bitem .bb i{display:block;height:100%;background:var(--accent);border-radius:99px}
+
+/* pivot */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-sm);max-height:520px}
+table.pivot{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+.pivot th,.pivot td{padding:8px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.pivot thead th{position:sticky;top:0;z-index:2;background:var(--sunk);font-weight:600;color:var(--ink-2);font-size:12.5px;vertical-align:bottom;white-space:normal;min-width:84px;line-height:1.3}
+.pivot th:first-child,.pivot td:first-child{position:sticky;left:0;z-index:1;text-align:left;background:var(--surface);font-weight:600}
+.pivot thead th:first-child{z-index:3;background:var(--sunk)}
+.pivot tfoot td{position:sticky;bottom:0;background:var(--sunk);font-weight:700;border-top:1px solid var(--line-2)}
+.pivot tfoot td:first-child{background:var(--sunk)}
+.pivot td.tot{font-weight:700;background:var(--accent-soft);color:var(--accent)}
+.pivot td.z{color:var(--ink-3);opacity:.6}
+.pivot button{color:inherit;font-variant-numeric:tabular-nums;padding:1px 4px;border-radius:5px}
+.pivot button:hover{background:var(--accent-soft);color:var(--accent)}
+.pivot .hd{display:inline-flex;align-items:center;gap:6px}
+
+/* docs list */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolbar .search{flex:1 1 320px;box-shadow:none;min-height:46px}
+.toolbar .search input{padding:10px 0;font-size:15px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin:16px 0 4px;scrollbar-width:thin}
+.chip{display:inline-flex;align-items:center;gap:7px;flex:none;padding:7px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.chip .cn{font-variant-numeric:tabular-nums;color:var(--ink-3);font-weight:400}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip[aria-pressed="true"] .cn{color:inherit;opacity:.7}
+.active-f{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.af{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:4px 6px 4px 10px;border-radius:8px;background:var(--accent-soft);color:var(--accent)}
+.af svg{width:14px;height:14px}
+.rescount{font-size:13px;color:var(--ink-3);margin:10px 0 8px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.docs{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.doc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);position:relative}
+.doc:last-child{border-bottom:0}
+.doc:hover{background:var(--sunk)}
+.doc::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--c)}
+.doc-type{grid-column:1 / -1;display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--c);letter-spacing:.01em}
+.doc-title{font-weight:500;font-size:15px;line-height:1.4;min-width:0}
+.doc-title mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 1px}
+.doc-meta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.doc-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.doc-pdf{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--ink-3);letter-spacing:.04em}
+.doc-pdf svg{width:16px;height:16px}
+@media (min-width:760px){
+  .doc{grid-template-columns:150px minmax(0,1fr) auto;align-items:start;padding:14px 18px}
+  .doc-type{grid-column:auto;padding-top:2px}
+  .doc-side{flex-direction:row;align-items:center;gap:14px}
+}
+.more{display:flex;justify-content:center;margin-top:14px}
+.empty{padding:40px 20px;text-align:center;color:var(--ink-3)}
+.empty b{display:block;color:var(--ink);font-size:16px;margin-bottom:6px}
+
+/* compilations */
+.comps{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:640px){ .comps{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (min-width:1100px){ .comps{grid-template-columns:repeat(3,minmax(0,1fr))} }
+.comp{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.comp:hover{border-color:var(--accent)}
+.comp-no{font-family:var(--f-display);font-weight:500;font-size:26px;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;min-width:40px}
+.comp-no small{display:block;font-family:var(--f-body);font-size:11px;color:var(--ink-3);font-weight:500;margin-top:6px;letter-spacing:.04em}
+.comp-body{display:flex;flex-direction:column;gap:8px;min-width:0}
+.comp-title{font-weight:600;font-size:14.5px;line-height:1.35}
+.comp-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--ink-3)}
+.rleg{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2)}
+.rleg span{display:inline-flex;align-items:center;gap:5px}
+.rleg i{width:8px;height:8px;border-radius:2px}
+.rleg .ok{background:var(--ok)} .rleg .warn{background:var(--warn)} .rleg .bad{background:var(--bad)} .rleg .wait{background:var(--wait)} .rleg .info{background:var(--accent)}
+
+/* compilation detail */
+.back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-2);font-weight:500;margin-bottom:14px}
+.back:hover{color:var(--accent)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px 22px}
+.fact dt{font-size:12px;color:var(--ink-3);font-weight:500;letter-spacing:.02em}
+.fact dd{margin:3px 0 0;font-size:14px;font-weight:500;min-width:0}
+.pairs{display:flex;flex-direction:column;gap:10px}
+.pair{display:grid;grid-template-columns:1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.pair-l,.pair-r{padding:14px 16px;min-width:0}
+.pair-l{display:grid;grid-template-columns:30px minmax(0,1fr);gap:4px 10px}
+.pair-n{font-family:var(--f-mono);font-size:13px;color:var(--ink-3);padding-top:1px}
+.pair-tx{font-size:14.5px;line-height:1.5}
+.pair-area{grid-column:2;font-size:12px;color:var(--ink-3)}
+.pair-r{background:var(--sunk);border-top:1px dashed var(--line-2);display:flex;flex-direction:column;gap:8px}
+.pair-r .cl{display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:space-between}
+.pair-r .cltag{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2)}
+.pair-r q{quotes:none;font-size:14px;line-height:1.5;color:var(--ink)}
+.pair-r .none{font-size:13.5px;color:var(--ink-3)}
+.pair-adm{display:flex;gap:6px}
+.pair-note{font-size:12.5px;color:var(--ink-3);line-height:1.45}
+.tag{display:inline-block;font-size:11px;font-weight:600;color:var(--ink-2);border:1px solid var(--line-2);border-radius:6px;padding:0 6px;margin-left:4px;vertical-align:1px}
+@media (min-width:860px){
+  .pair{grid-template-columns:minmax(0,1fr) 40px minmax(0,1fr)}
+  .pair-r{border-top:0;border-left:1px dashed var(--line-2)}
+  .pair-arrow{display:grid;place-items:center;color:var(--ink-3);background:linear-gradient(90deg,var(--surface) 50%,var(--sunk) 50%)}
+}
+@media (max-width:859px){ .pair-arrow{display:none} }
+.pair[data-st="full"]{border-left:4px solid var(--ok)}
+.pair[data-st="partial"]{border-left:4px solid var(--warn)}
+.pair[data-st="none"]{border-left:4px solid var(--bad)}
+.pair[data-st="pending"]{border-left:4px solid var(--wait)}
+
+/* overlays */
+.ov{position:fixed;inset:0;z-index:60;background:var(--bg);display:flex;flex-direction:column}
+.ov-bar{display:flex;align-items:center;gap:10px;padding-top:max(10px,env(safe-area-inset-top,0px));padding-bottom:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line);background:var(--surface)}
+.ov-bar .t{flex:1;min-width:0;display:flex;flex-direction:column}
+.ov-bar .t b{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ov-bar .t span{font-size:12px;color:var(--ink-3)}
+.ov-body{flex:1;min-height:0;display:grid;grid-template-columns:1fr;overflow:auto}
+.reader-info{padding:18px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px;min-width:0}
+.reader-title{font-weight:600;font-size:19px;line-height:1.38}
+.meta{display:grid;grid-template-columns:minmax(84px,34%) minmax(0,1fr);gap:8px 14px;font-size:14px;margin:0}
+.meta dd{overflow-wrap:anywhere}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0;font-weight:500;min-width:0}
+.summary{font-size:14.5px;line-height:1.6;color:var(--ink-2);margin:0}
+.lawbox{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border-radius:var(--r-sm);background:var(--sunk)}
+.lawbox .nums{display:flex;gap:20px;font-size:13px;color:var(--ink-2)}
+.lawbox .nums b{display:block;font-family:var(--f-display);font-size:22px;font-weight:500;color:var(--ink)}
+.related{display:flex;flex-direction:column;gap:2px}
+.related h3{font-size:13px;color:var(--ink-3);font-weight:600;margin-bottom:6px}
+.rel{text-align:left;padding:8px 10px;border-radius:9px;font-size:13.5px;line-height:1.35;display:flex;flex-direction:column;gap:2px}
+.rel:hover{background:var(--sunk)}
+.rel span{font-size:12px;color:var(--ink-3)}
+.reader-pdf{display:flex;flex-direction:column;min-height:70vh;background:var(--sunk);border-top:1px solid var(--line);min-width:0}
+.reader-pdf.native .pdf-tools{display:none}
+.reader-pdf.native .pdf-scroll{padding:0;display:flex}
+.reader-pdf.native .pdf-pages{max-width:none;flex:1}
+.pdf-native{display:block;width:100%;flex:1;min-height:70vh;border:0;background:var(--paper)}
+.reader-pdf.native .pdf-pages{display:flex;flex-direction:column}
+.pdf-alt{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:8px 12px;font-size:13px;color:var(--ink-2);background:var(--surface);border-bottom:1px solid var(--line)}
+.pdf-alt a{color:var(--accent);font-weight:500}
+.pdf-tools{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surface);font-size:13px;color:var(--ink-2)}
+.pdf-tools .sp{flex:1}
+.pdf-tools .iconbtn{width:34px;height:34px;border-radius:9px}
+.pdf-scroll{flex:1;overflow-x:auto;padding:16px}
+@media (max-width:520px){ .hide-s{display:none} }
+@media (max-width:479px){ .doc{grid-template-columns:1fr} .doc-side{flex-direction:row;align-items:center;justify-content:space-between} }
+.pdf-pages{margin:0 auto;display:flex;flex-direction:column;gap:14px;width:100%;max-width:820px}
+.pdf-page{width:100%;background:var(--paper);border-radius:4px;box-shadow:var(--shadow);overflow:hidden}
+.pdf-page canvas{display:block}
+.pdf-msg{padding:40px 16px;text-align:center;color:var(--ink-3);display:flex;flex-direction:column;align-items:center;gap:12px}
+@media (min-width:960px){
+  .ov-body{grid-template-columns:380px minmax(0,1fr);grid-template-rows:minmax(0,1fr);overflow:hidden}
+  .pdf-scroll{overflow:auto}
+  .reader-info{overflow:auto;border-right:1px solid var(--line);background:var(--surface);padding:22px}
+  .reader-pdf{border-top:0;min-height:0}
+}
+
+/* sheet */
+.scrim{position:fixed;inset:0;z-index:70;background:var(--scrim);display:flex;justify-content:flex-end;align-items:flex-end}
+.sheet{width:100%;max-height:92vh;background:var(--surface);border-radius:18px 18px 0 0;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+@media (min-width:760px){ .scrim{align-items:stretch} .sheet{width:min(560px,100%);max-height:none;height:100%;border-radius:0} }
+.sheet-h{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.sheet-h h2{flex:1;font-size:17px;font-weight:600}
+.sheet-b{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:14px}
+.sheet-f{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;padding:12px 18px;padding-bottom:max(12px,env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.fld{display:flex;flex-direction:column;gap:6px;min-width:0}
+.fld label,.fld .lb{font-size:13px;font-weight:500;color:var(--ink-2)}
+.fld small{font-size:12px;color:var(--ink-3)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check{display:flex;align-items:center;gap:9px;font-size:14px}
+.check input{width:18px;height:18px;accent-color:var(--accent)}
+
+/* modal */
+.modal{width:min(420px,calc(100% - 32px));margin:auto;background:var(--surface);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px;box-shadow:var(--shadow)}
+.scrim.center{align-items:center;justify-content:center}
+.modal h2{font-size:17px}
+.modal p{margin:0;color:var(--ink-2);font-size:14px}
+
+/* palette */
+.pal{width:min(680px,100%);margin:0 auto;align-self:flex-start;background:var(--surface);display:flex;flex-direction:column;max-height:100%;box-shadow:var(--shadow)}
+@media (min-width:760px){ .scrim.top{align-items:flex-start;justify-content:center;padding-top:10vh} .pal{border-radius:16px;max-height:76vh} }
+@media (max-width:759px){ .scrim.top{align-items:stretch} .pal{height:100%;padding-top:env(safe-area-inset-top,0px)} }
+.pal-in{display:flex;align-items:center;gap:10px;padding:6px 16px;border-bottom:1px solid var(--line)}
+.pal-in input{flex:1;min-width:0;border:0;background:none;outline:none;font-size:17px;padding:14px 0}
+.pal-res{overflow:auto;padding:8px}
+.pal-g{font-size:11.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:10px 10px 4px}
+.pal-it{display:flex;gap:10px;width:100%;text-align:left;padding:9px 10px;border-radius:10px;align-items:flex-start}
+.pal-it[aria-selected="true"],.pal-it:hover{background:var(--accent-soft)}
+.pal-it .dotc{margin-top:6px}
+.pal-it .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.pal-it .tx b{font-weight:500;font-size:14.5px;line-height:1.35}
+.pal-it .tx b mark{background:var(--warn-soft);color:inherit;border-radius:3px}
+.pal-it .tx span{font-size:12px;color:var(--ink-3)}
+.pal-foot{display:flex;flex-wrap:wrap;gap:6px 14px;padding:10px 16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+.recent{display:flex;flex-wrap:wrap;gap:6px;padding:4px 10px 10px}
+
+/* admin */
+.adm{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:900px){ .adm{grid-template-columns:1fr 1fr} }
+.typerow{display:grid;grid-template-columns:14px minmax(0,1fr) 150px;gap:8px;align-items:center}
+@media (min-width:760px){ .sheet.wide{width:min(920px,100%)} }
+.drop{border:2px dashed var(--line-2);border-radius:var(--r);padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:var(--ink-2);font-size:14px;transition:border-color .15s,background .15s}
+.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop b{color:var(--ink);font-size:15px}
+.cov{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:13.5px}
+.cov span:nth-child(even){font-variant-numeric:tabular-nums;color:var(--ink-3);text-align:right}
+.bp-sum{display:flex;flex-wrap:wrap;gap:6px}
+.bp-group{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:14px 0 2px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;padding:10px 0;border-bottom:1px solid var(--line)}
+@media (min-width:760px){ .mrow{grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr) 132px;align-items:center;gap:12px} }
+.mfile{font-family:var(--f-mono);font-size:12.5px;color:var(--ink-2);overflow-wrap:anywhere;line-height:1.4}
+.mfile small{display:block;font-family:var(--f-body);color:var(--ink-3)}
+.mpick .inp{min-height:38px;font-size:13.5px}
+.mpick small{display:block;font-size:12px;color:var(--warn);margin-top:3px}
+.progress{height:8px;border-radius:99px;background:var(--sunk);overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.note{font-size:13px;color:var(--ink-2);background:var(--sunk);border-radius:10px;padding:10px 12px;line-height:1.5}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-size:14px;box-shadow:var(--shadow);max-width:calc(100% - 32px)}
+@media (min-width:960px){ .toast{bottom:28px} }
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:25;width:52px;height:52px;border-radius:16px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;box-shadow:var(--shadow)}
+@media (min-width:960px){ .fab{display:none} }
+.skel{height:14px;border-radius:7px;background:var(--sunk)}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important;scroll-behavior:auto!important} }
+
+/* GitHub edition: admin sign-in link and clickable save chip */
+.linkbtn{font-size:12.5px;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;width:max-content}
+.linkbtn:hover{color:var(--accent)}
+.foot{display:flex;justify-content:center;padding:6px 0 2px}
+button.savechip{cursor:pointer}
+button.savechip:hover{background:var(--accent-soft);color:var(--accent-2)}
+.note ol a{color:var(--accent);overflow-wrap:anywhere}
+a.btn{text-decoration:none}
+</style>
+</head>
+<body>
+<script id="heuk-gh" type="application/json">{"owner": "euyangam-ctrl", "repo": "heuk-medeelliin-san", "branch": "main"}</script>
+<div class="app" id="app">
+  <aside class="rail" aria-label="Үндсэн цэс">
+    <button class="brand" data-act="nav" data-view="dash" aria-label="Нүүр">
+      <span class="brand-mark">ХЭҮК</span>
+      <span class="brand-text"><b id="siteName">Мэдээллийн сан</b><span>Санал, зөвлөмжийн бүртгэл</span></span>
+    </button>
+    <nav id="railNav"></nav>
+    <div class="rail-foot" id="railFoot"></div>
+  </aside>
+  <header class="topbar">
+    <button class="brand" data-act="nav" data-view="dash" aria-label="Нүүр">
+      <span class="brand-mark">ХЭҮК</span>
+      <span class="brand-text"><b>Мэдээллийн сан</b><span id="topUpd"></span></span>
+    </button>
+    <span class="grow"></span>
+    <button class="iconbtn" data-act="palette" aria-label="Хурдан хайлт" id="topSearch"></button>
+  </header>
+  <main class="main" id="main" tabindex="-1">
+    <div class="stack" aria-busy="true">
+      <div class="skel" style="width:40%;height:28px"></div>
+      <div class="skel" style="height:54px"></div>
+      <div class="skel" style="height:120px"></div>
+    </div>
+  </main>
+  <nav class="tabbar" id="tabbar" aria-label="Үндсэн цэс"></nav>
+</div>
+<div class="ov" id="reader" hidden=""></div>
+<div id="layer"></div>
+<div class="toast" id="toast" role="status" hidden=""></div>
+<input type="file" id="xlsIn" accept=".xlsx,.xls,.csv" class="sr" tabindex="-1" aria-hidden="true">
+<input type="file" id="bpDir" webkitdirectory="" directory="" multiple="" class="sr" tabindex="-1" aria-hidden="true">
+<input type="file" id="bpFiles" accept="application/pdf,.pdf" multiple="" class="sr" tabindex="-1" aria-hidden="true">
+<input type="file" id="offDir" webkitdirectory="" directory="" multiple="" class="sr" tabindex="-1" aria-hidden="true">
+<script id="app-js">
+(() => {
+'use strict';
+const SHELL = ['app', 'reader', 'layer', 'toast', 'xlsIn', 'bpDir', 'bpFiles', 'offDir'].map(id => { const el = document.getElementById(id); return el ? el.outerHTML : ''; }).join('\n');
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const fmtDate = iso => iso ? String(iso).slice(0, 10).replace(/-/g, '.') : '';
+const pad = n => String(n).padStart(2, '0');
+const todayISO = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+const nf = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+const sum = (a, f) => a.reduce((s, x) => s + (f(x) || 0), 0);
+const uid = () => Math.random().toString(36).slice(2, 8);
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage unavailable */ } }
+};
+
+const P = {
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  home: '<rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/>',
+  docs: '<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  layers: '<path d="m12 3 9 5-9 5-9-5 9-5z"/><path d="m3 13 9 5 9-5"/>',
+  gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  x: '<path d="M6 6l12 12M18 6 6 18"/>',
+  back: '<path d="M15 18l-6-6 6-6"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>',
+  up: '<path d="M12 20V9M7 14l5-5 5 5M5 4h14"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
+  edit: '<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/>',
+  trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+  filter: '<path d="M4 5h16l-6 8v5l-4 2v-7L4 5z"/>',
+  pdf: '<path d="M7 3h7l5 5v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M8.5 16.5v-4h1.2a1.2 1.2 0 0 1 0 2.4H8.5"/>',
+  minus: '<path d="M5 12h14"/>',
+  ok: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/>',
+  half: '<circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/>',
+  bad: '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+  wait: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>',
+  na: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
+  reply: '<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v5"/>'
+};
+const ic = (n, s = 20) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+
+/* ---------- vocabulary ---------- */
+const TYPE_SHORT = { zov: 'Зөвлөмж', sha: 'Шаардлага', san: 'Санал', gis: 'Гишүүний зөвлөмж', huu: 'Хуулийн төсөл', sud: 'Судалгаа', ilt: 'Илтгэл', dun: 'Дүн шинжилгээ' };
+const TYPE_KIND = { huu: 'law', sud: 'pub', ilt: 'pub', dun: 'pub' };
+const KNOWN = ['zov', 'sha', 'san', 'gis', 'huu', 'sud', 'ilt', 'dun'];
+const ST = {
+  doc: [['done', 'Хэрэгжсэн'], ['partial', 'Хэсэгчлэн хэрэгжсэн'], ['none', 'Хэрэгжээгүй'], ['pending', 'Хариу хүлээгдэж буй']],
+  law: [['done', 'Тусгагдсан'], ['partial', 'Хэсэгчлэн тусгагдсан'], ['none', 'Тусгагдаагүй'], ['pending', 'Хэлэлцэгдэж буй']],
+  pub: [['na', 'Нийтлэгдсэн']],
+  item: [['full', 'Бүрэн туссан'], ['partial', 'Хэсэгчлэн туссан'], ['none', 'Тусаагүй'], ['pending', 'Тогтоол гараагүй']]
+};
+const ST_CLS = { done: 'ok', full: 'ok', partial: 'warn', none: 'bad', pending: 'wait', na: 'na' };
+const ST_IC = { ok: 'ok', warn: 'half', bad: 'bad', wait: 'wait', na: 'na', info: 'reply' };
+const KIND_LABEL = { doc: 'Хэрэгжилт хянагдана', law: 'Хуулийн төсөл, саналын тоотой', pub: 'Нийтлэл, тайлан' };
+
+/* ---------- state ---------- */
+const S = {
+  data: null, view: 'dash', compId: null, readerId: null,
+  f: freshF(), sort: 'auto', limit: 40, dashYear: 'all', chartHide: new Set(), itemSt: 'all',
+  admin: false, pending: new Map(), pendingDel: new Set(), blob: {}, saveState: 'idle', saveTimer: 0, rev: 0
+};
+function freshF(o = {}) { return Object.assign({ q: '', type: 'all', y1: '', y2: '', area: '', to: '', st: '', pdf: false, file: false, x: {} }, o); }
+
+/* ---------- platform capabilities ---------- */
+const CAP = {};
+const STANDALONE = !!document.getElementById('heuk-data');
+const GHCFG = (() => { const el = document.getElementById('heuk-gh'); if (!el) return null; try { return JSON.parse(el.textContent); } catch (e) { return {}; } })();
+const GHM = !STANDALONE && !!GHCFG;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function cap(n) {
+  if (!(n in CAP)) {
+    const c = window.claude;
+    CAP[n] = c && typeof c.use === 'function' ? Promise.resolve(c.use(n)).catch(() => null) : Promise.resolve(null);
+  }
+  return CAP[n];
+}
+
+/* ---------- search: Cyrillic plus informal Latin ---------- */
+const CYR = { а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'yo', ж: 'j', з: 'z', и: 'i', й: 'i', к: 'k', л: 'l', м: 'm', н: 'n', о: 'o', ө: 'u', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ү: 'u', ф: 'f', х: 'h', ц: 'c', ч: 'ch', ш: 'sh', щ: 'sh', ъ: '', ы: 'i', ь: 'i', э: 'e', ю: 'yu', я: 'ya' };
+const norm = s => String(s ?? '').toLowerCase().replace(/ё/g, 'е').replace(/\s+/g, ' ');
+function loose(s) {
+  return s.replace(/kh/g, 'h').replace(/zh/g, 'j').replace(/ts/g, 'c').replace(/[öü]/g, 'u').replace(/w/g, 'v').replace(/q/g, 'k')
+    .replace(/y(?![aeuo])/g, 'i').replace(/o/g, 'u').replace(/(.)\1+/g, '$1');
+}
+function lat(s) { let o = ''; for (const ch of norm(s)) o += (ch in CYR) ? CYR[ch] : ch; return loose(o); }
+function terms(q) { return norm(q).split(' ').filter(Boolean).map(t => ({ c: t, l: lat(t) })); }
+function indexRec(r, parts, title) {
+  const all = parts.filter(Boolean).join(' ');
+  Object.defineProperty(r, '_ix', { value: { tc: norm(title), c: norm(all), tl: lat(title), l: lat(all) }, enumerable: false, configurable: true, writable: true });
+}
+function score(r, ts) {
+  const x = r._ix; if (!x) return 0;
+  let s = 0;
+  for (const t of ts) {
+    const useL = t.l.length >= 3;
+    const tc = x.tc.includes(t.c), cc = tc || x.c.includes(t.c);
+    const tl = useL && x.tl.includes(t.l), cl = tl || (useL && x.l.includes(t.l));
+    if (!cc && !cl) return 0;
+    s += tc ? 6 : tl ? 4 : cc ? 2 : 1;
+  }
+  return s;
+}
+function hl(text, q) {
+  let h = esc(text);
+  const ts = terms(q).map(t => t.c).filter(t => t.length > 1 && /[а-яөү0-9]/.test(t));
+  for (const t of ts) {
+    const re = new RegExp('(' + esc(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+    h = h.replace(re, '<mark>$1</mark>');
+  }
+  return h;
+}
+
+/* ---------- data access ---------- */
+const types = () => S.data.types;
+const tOf = k => types().find(t => t.key === k) || { key: k, label: k, short: k };
+const tShort = k => { const t = tOf(k); return t.short || TYPE_SHORT[k] || t.label; };
+const kindOf = k => tOf(k).kind || TYPE_KIND[k] || 'doc';
+const tColor = k => KNOWN.includes(k) ? `var(--t-${k})` : `var(--t-x${(k.split('').reduce((a, c) => a + c.charCodeAt(0), 0) % 3) + 1})`;
+const stList = k => ST[kindOf(k)];
+const stLabel = d => (stList(d.type).find(s => s[0] === d.status) || ST.doc.find(s => s[0] === d.status) || ['', ''])[1];
+const itemLabel = st => (ST.item.find(s => s[0] === st) || ['', ''])[1];
+const findDoc = id => S.data.docs.find(d => d.id === id);
+const findComp = id => S.data.comps.find(c => c.id === id);
+const pdfUrl = p => S.blob[p] || (GHM && PV.ver && p === PV.path ? `${p}?v=${PV.ver}` : p);
+const fmtD = d => (d && d.dateText) || fmtDate(d && d.date);
+const noTxt = d => d.no ? `№ ${d.no}` : '';
+const CF = () => Object.assign({ n: 'Эмхэтгэл', g: 'Эмхэтгэлийн', i: 'Эмхэтгэлээр' }, (S.data && S.data.meta.compForms) || {});
+const lc = t => t.charAt(0).toLowerCase() + t.slice(1);
+const AL = () => (S.data && S.data.meta.areaLabel) || 'Эрхийн чиглэл';
+const facets = () => (S.data && S.data.meta.facets) || [];
+const projOf = d => kindOf(d.type) === 'law' ? (+d.projects || 1) : 0;
+const clauseTag = c => !c ? 'Тогтоолын заалт' : (/^\d/.test(c) ? `Заалт ${c}` : c);
+function ruleHit(rules, text) { const t = String(text || '').toLowerCase(); for (const [k, v] of rules || []) if (k && t.includes(k)) return v; return 'Бусад'; }
+function noteStatus(note) {
+  const t = String(note || '').toLowerCase();
+  if (!t) return 'unk';
+  if (t.includes('шаардаагүй')) return 'noneed';
+  if (['ирүүлээгүй', 'ирээгүй', 'өгөөгүй', 'хариугүй', 'хариу байхгүй'].some(k => t.includes(k))) return 'noreply';
+  if (['биелсэн', 'биелүүлсэн', 'хэрэгжсэн', 'хэрэгжүүлсэн', 'шийдвэрлэсэн', 'хангагдсан', 'арилгасан', 'засварласан'].some(k => t.includes(k))) return 'done';
+  if (['хариу', 'ирүүлсэн', 'ирсэн', 'тоот', 'албан бичг', 'мэдэгдсэн', 'дарга', 'сайд', 'захирал', 'орлогч', 'захирагч', 'прокурор', 'шүүгч', 'эрхлэгч', 'гүйцэтгэгч', 'ерөнхийлөгч', 'тайлан', 'өдрийн'].some(k => t.includes(k)) || /\d{4}\.\d{1,2}\.\d{1,2}/.test(t)) return 'reply';
+  return 'other';
+}
+function applyRules(d) {
+  const R = S.data.meta && S.data.meta.rules; if (!R) return;
+  d.x = d.x || {};
+  const text = d.title + ' ' + (d.summary || '');
+  if (!d.area && R.area) d.area = ruleHit(R.area, text);
+  for (const [k, rules] of Object.entries(R)) {
+    if (k === 'area' || d.x[k]) continue;
+    const src = k === 'Байгууллагын ангилал' ? d.to : text;
+    if (src) d.x[k] = ruleHit(rules, src);
+  }
+}
+function pill(st, label) { if (!label) return ''; const c = ST_CLS[st] || 'na'; return `<span class="pill ${c}">${ic(ST_IC[c], 13)}${esc(label)}</span>`; }
+function yearsAll() {
+  const ys = S.data.docs.map(d => d.year).concat(S.data.comps.map(c => c.year)).filter(Boolean);
+  const lo = Math.min(...ys), hi = Math.max(...ys);
+  const out = []; for (let y = lo; y <= hi; y++) out.push(y); return out;
+}
+function prep() {
+  const D = S.data;
+  if (D.statuses) for (const k of ['doc', 'law', 'pub']) if (D.statuses[k]) { ST[k] = D.statuses[k].map(x => [x[0], x[1]]); D.statuses[k].forEach(x => { if (x[2]) ST_CLS[x[0]] = x[2]; }); }
+  D.types.forEach(t => { if (!t.short) t.short = TYPE_SHORT[t.key] || t.label; if (!t.kind) t.kind = TYPE_KIND[t.key] || 'doc'; });
+  D.docs.forEach(d => { d.year = +String(d.date || d.year).slice(0, 4) || d.year; });
+  D.docs.sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  D.comps.sort((a, b) => b.no - a.no);
+  for (const d of D.docs) indexRec(d, [d.title, d.no, d.date && fmtDate(d.date), d.dateText, d.year, d.to, d.area, d.summary, tOf(d.type).label, tShort(d.type), stLabel(d)].concat(Object.values(d.x || {})), d.title + ' ' + (d.no || ''));
+  for (const c of D.comps) {
+    indexRec(c, [c.title, 'эмхэтгэл', c.no, c.year, c.res && c.res.title, c.res && c.res.no], c.title);
+    for (const it of c.items) indexRec(it, [it.text, it.ctext, it.area, it.note, itemLabel(it.st), c.title], it.text);
+  }
+}
+
+/* ---------- navigation ---------- */
+const NAV = [
+  ['dash', 'Хянах самбар', 'home'],
+  ['docs', 'Баримтууд', 'docs'],
+  ['comps', 'Эмхэтгэл', 'layers']
+];
+function renderNav() {
+  const cur = S.view === 'comp' ? 'comps' : S.view;
+  const items = [['dash', 'Хянах самбар', 'home'], ['docs', 'Баримтууд', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
+  $('#railNav').innerHTML = items.map(([v, l, i]) => `<button class="nav" data-act="nav" data-view="${v}" ${cur === v ? 'aria-current="page"' : ''}>${ic(i)}${l}</button>`).join('') +
+    `<button class="nav" data-act="palette">${ic('search')}Хурдан хайлт<kbd>/</kbd></button>` +
+    (STANDALONE && S.data && offNeeded().length ? `<button class="nav" data-act="off-pick">${ic('pdf')}${esc(offStatus())}</button>` : '');
+  const tabs = [['dash', 'Самбар', 'home'], ['docs', 'Баримт', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers'], ['_s', 'Хайлт', 'search']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
+  $('#tabbar').innerHTML = tabs.map(([v, l, i]) => v === '_s'
+    ? `<button class="tab" data-act="palette">${ic(i)}${l}</button>`
+    : `<button class="tab" data-act="nav" data-view="${v}" ${cur === v ? 'aria-current="page"' : ''}>${ic(i)}${l}</button>`).join('');
+  $('#topSearch').innerHTML = ic('search');
+  if (S.data) {
+    const upd = 'Шинэчилсэн ' + fmtDate(S.data.meta.updated);
+    $('#topUpd').textContent = upd; ghTop();
+    const nm = S.data.meta.name.replace(/^ХЭҮК\s*/, '') || 'Мэдээллийн сан';
+    $('#siteName').textContent = nm.charAt(0).toUpperCase() + nm.slice(1);
+    $('#railFoot').innerHTML = (S.admin ? saveChip() : '') + `<span>${esc(upd)}</span>` + (STANDALONE ? `<span class="badge">Татаж авсан хувилбар</span>` : '') + (S.data.meta.sample ? `<span class="badge">Жишээ өгөгдөл</span>` : '') + (GHM && !S.admin ? `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>` : '');
+  }
+}
+function saveChip() {
+  const m = { idle: 'Бүх өөрчлөлт хадгалагдсан', saved: 'Хадгалагдсан', dirty: 'Хадгалахыг хүлээж байна', saving: 'Хадгалж байна', error: 'Хадгалж чадсангүй', demo: 'Туршилт: хадгалагдахгүй' };
+  const s = S.saveState === 'idle' ? 'saved' : S.saveState;
+  if (GHM && (S.saveState === 'dirty' || S.saveState === 'error')) return `<button class="savechip" data-s="${s}" data-act="save-now" title="${S.saveState === 'dirty' ? 'Хадгалаагүй өөрчлөлт байна' : 'Хадгалж чадсангүй'}"><i></i>${S.saveState === 'dirty' ? 'Одоо хадгалах' : 'Дахин хадгалах'}</button>`;
+  return `<span class="savechip" data-s="${s}"><i></i>${m[S.saveState]}</span>`;
+}
+function go(view, opt = {}) {
+  S.view = view;
+  if (view === 'comp') { S.compId = opt.id; S.itemSt = 'all'; }
+  if (view === 'docs') S.limit = 40;
+  render();
+  window.scrollTo(0, 0);
+}
+function render() {
+  renderNav();
+  const m = $('#main');
+  if (!S.data) return;
+  if (S.view === 'admin' && !S.admin) S.view = 'dash';
+  const v = { dash: viewDash, docs: viewDocs, comps: viewComps, comp: viewComp, admin: viewAdmin }[S.view] || viewDash;
+  m.innerHTML = v();
+  if (S.view === 'dash') drawCharts();
+  if (S.view === 'docs') renderDocsDyn();
+  const fab = $('#fab'); if (fab) fab.remove();
+  if (S.admin && (S.view === 'docs' || S.view === 'dash' || S.view === 'comps')) {
+    const b = document.createElement('button');
+    b.className = 'fab'; b.id = 'fab'; b.setAttribute('aria-label', 'Мэдээлэл нэмэх');
+    b.dataset.act = S.view === 'comps' ? 'add-comp' : 'add-doc'; b.innerHTML = ic('plus', 24);
+    document.body.appendChild(b);
+  }
+}
+
+/* ---------- dashboard ---------- */
+function scopeDocs() { return S.dashYear === 'all' ? S.data.docs : S.data.docs.filter(d => d.year === +S.dashYear); }
+function scopeComps() { return S.dashYear === 'all' ? S.data.comps : S.data.comps.filter(c => c.year === +S.dashYear); }
+function viewDash() {
+  const D = S.data, docs = scopeDocs(), ys = yearsAll(), F = CF();
+  const laws = docs.filter(d => kindOf(d.type) === 'law');
+  const projects = sum(laws, projOf), props = sum(laws, d => +d.proposals);
+  const comps = scopeComps(), allIt = comps.flatMap(c => c.items), items = allIt.filter(i => !i.kind);
+  const full = allIt.filter(i => i.st === 'full').length, part = allIt.filter(i => i.st === 'partial').length;
+  const pct = items.length ? Math.round((full + part) / items.length * 100) : 0;
+  const yl = S.dashYear === 'all' ? `${ys[0]} оноос хойш` : `${S.dashYear} он`;
+  const kpi = (act, attrs, c, l, v, s) => `<button class="kpi" data-act="${act}" ${attrs} style="--c:${c}"><span class="k-l"><i></i>${esc(l)}</span><span class="k-v">${v}</span><span class="k-s">${esc(s)}</span></button>`;
+  return `
+  <div class="head">
+    <div><div class="eyebrow">${esc(D.meta.name)}</div><h1 class="h1">Санал, зөвлөмж, шаардлагын нэгдсэн сан</h1>
+    <p class="sub">Сүүлд шинэчилсэн ${fmtDate(D.meta.updated)}${D.meta.sample ? ' <span class="badge">Жишээ өгөгдөл</span>' : ''}</p></div>
+    <label class="selyear">Он <select class="inp" id="dashYear" data-bind="dashYear">
+      <option value="all">Бүх он</option>${ys.slice().reverse().map(y => `<option value="${y}" ${String(S.dashYear) === String(y) ? 'selected' : ''}>${y}</option>`).join('')}
+    </select></label>
+  </div>
+  <div class="stack">
+    <div>
+      <button class="search" data-act="palette" style="width:100%;text-align:left;cursor:text">${ic('search')}<span style="flex:1;color:var(--ink-3);font-size:16px;padding:14px 0">Агуулга, дугаар, хүлээн авагчаар хайх</span><span class="hint"><kbd>/</kbd> товчоор нээнэ</span></button>
+      <p class="search-note">Кирилл болон латин үсгээр хайна. Жишээ нь <b>hudulmur</b> гэж бичихэд хөдөлмөрийн асуудлаарх баримтууд гарна.</p>
+    </div>
+    <div class="kpis">
+      ${kpi('kpi', 'data-type="all"', 'var(--accent)', 'Нийт баримт', nf(docs.length), yl)}
+      ${kpi('kpi', 'data-type="huu"', tColor('huu'), 'Хуулийн төсөл', nf(projects), `${nf(laws.length)} албан бичгээр санал хүргүүлсэн`)}
+      ${kpi('kpi', 'data-type="huu"', tColor('huu'), 'Хуулийн төсөлд өгсөн санал', nf(props), projects ? `Нэг төсөлд дунджаар ${Math.round(props / projects)} санал` : '')}
+      ${kpi('nav', 'data-view="comps"', 'var(--accent)', `${F.g} санал`, nf(items.length), `${comps.length} ${lc(F.n)}`)}
+      ${kpi('nav', 'data-view="comps"', 'var(--ok)', 'Тогтоолд туссан', pct + '%', `Бүрэн ${full}, хэсэгчлэн ${part}`)}
+    </div>
+    <section class="panel">
+      <div class="panel-h"><h2>Он оноорх баримтын тоо</h2><p>Баганыг дарж тухайн оныг сонгоно</p></div>
+      <div class="legend" style="margin-bottom:12px">${types().map(t => `<button class="lg" data-act="legend" data-type="${t.key}" aria-pressed="${!S.chartHide.has(t.key)}" style="--c:${tColor(t.key)}"><i></i>${esc(t.short)}</button>`).join('')}</div>
+      <div class="chart" id="yearChart"></div>
+    </section>
+    <div class="grid2">
+      <section class="panel">${typePanel(docs)}</section>
+      <section class="panel">
+        <div class="panel-h"><h2>${F.g} санал тогтоолд</h2><p>${D.comps.length} ${lc(F.n)}</p></div>
+        <div class="chart" id="compChart"></div>
+        <div class="rleg" style="margin-top:10px">${ST.item.map(([k, l]) => `<span><i class="${ST_CLS[k]}"></i>${l}</span>`).join('')}</div>
+      </section>
+    </div>
+    <div class="grid2">
+      <section class="panel">${statusPanel(docs)}</section>
+      <section class="panel">${addrPanel(docs)}</section>
+    </div>
+    <section class="panel">
+      <div class="panel-h"><h2>Он оноорх нэгтгэл</h2><div class="row-actions"><button class="btn ghost" data-act="dl-pivot">${ic('dl')}Excel татах</button></div></div>
+      ${pivotTable()}
+    </section>
+    <section class="panel">
+      <div class="panel-h"><h2>Сүүлд бүртгэгдсэн</h2><button class="btn ghost" data-act="nav" data-view="docs">Бүгдийг харах</button></div>
+      <div class="related">${D.docs.slice(0, 6).map(d => `<button class="rel" data-act="open" data-id="${d.id}"><b style="font-weight:500">${esc(d.title)}</b><span>${esc([tShort(d.type), noTxt(d), fmtD(d)].filter(Boolean).join(', '))}</span></button>`).join('')}</div>
+    </section>
+    ${GHM && !S.admin ? `<div class="foot"><button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button></div>` : ''}
+  </div>`;
+}
+function typePanel(docs) {
+  const c = {}; docs.forEach(d => c[d.type] = (c[d.type] || 0) + 1);
+  const n = docs.length || 1;
+  return `<div class="panel-h"><h2>Баримтын төрлөөр</h2><p>${nf(docs.length)} баримт</p></div>
+  <div class="sbar" role="img" aria-label="Төрлийн харьцаа">${types().map(t => c[t.key] ? `<i style="width:${c[t.key] / n * 100}%;background:${tColor(t.key)}"></i>` : '').join('')}</div>
+  <div class="slist">${types().map(t => `<button class="sitem" data-act="kpi" data-type="${t.key}"><span class="dotc" style="--c:${tColor(t.key)}"></span><span class="lab">${esc(t.label)}</span><span class="n">${nf(c[t.key] || 0)}</span><span class="pc">${Math.round((c[t.key] || 0) / n * 100)}%</span></button>`).join('')}</div>`;
+}
+function statusPanel(docs) {
+  const ds = docs.filter(d => kindOf(d.type) === 'doc'), sts = ST.doc.filter(x => x[1]);
+  const c = {}; ds.forEach(d => c[d.status] = (c[d.status] || 0) + 1);
+  const n = ds.length || 1;
+  return `<div class="panel-h"><h2>Хариу, хэрэгжилт</h2><p>${nf(ds.length)} санал, зөвлөмж, шаардлага</p></div>
+  <div class="sbar" role="img" aria-label="Хариу, хэрэгжилтийн харьцаа">${sts.map(([k]) => c[k] ? `<i class="${ST_CLS[k] || 'na'}" style="width:${c[k] / n * 100}%"></i>` : '').join('')}</div>
+  <div class="slist">${sts.map(([k, l]) => `<button class="sitem" data-act="stf" data-st="${k}">${pill(k, l)}<span class="lab"></span><span class="n">${nf(c[k] || 0)}</span><span class="pc">${Math.round((c[k] || 0) / n * 100)}%</span></button>`).join('')}</div>
+  ${S.data.statuses ? '<p class="search-note">Төлөвийг Тайлбар баганын бичвэрээс түлхүүр үгээр тодорхойлсон. Админ баримт бүрийн төлөвийг засаж болно.</p>' : ''}`;
+}
+function addrPanel(docs) {
+  const fk = S.data.meta.addrFacet; const c = {};
+  docs.forEach(d => { const v = fk ? (d.x || {})[fk] : (d.to !== 'Нийтэд' ? d.to : ''); if (v) c[v] = (c[v] || 0) + 1; });
+  const top = Object.entries(c).sort((a, b) => b[1] - a[1]).slice(0, 8);
+  const mx = top.length ? top[0][1] : 1;
+  return `<div class="panel-h"><h2>Хүлээн авсан байгууллага</h2>${fk ? `<p>${esc(fk)}</p>` : ''}</div>
+  <div class="blist">${top.map(([k, v]) => `<button class="bitem" data-act="tof" data-v="${esc(k)}"><span class="bt">${esc(k)}</span><span class="bn">${nf(v)}</span><span class="bb"><i style="width:${v / mx * 100}%"></i></span></button>`).join('') || '<p class="empty">Мэдээлэл алга</p>'}</div>`;
+}
+function pivotData() {
+  const ys = yearsAll().slice().reverse(), T = types();
+  const rows = ys.map(y => {
+    const ds = S.data.docs.filter(d => d.year === y);
+    const r = { y, total: ds.length, c: {}, proj: 0, p: 0, ci: 0 };
+    T.forEach(t => r.c[t.key] = ds.filter(d => d.type === t.key).length);
+    const laws = ds.filter(d => kindOf(d.type) === 'law');
+    r.proj = sum(laws, projOf); r.p = sum(laws, d => +d.proposals);
+    r.ci = S.data.comps.filter(c => c.year === y).reduce((a, c) => a + c.items.filter(i => !i.kind).length, 0);
+    return r;
+  });
+  return { ys, rows, T };
+}
+function pivotTable() {
+  const { rows, T } = pivotData(), F = CF();
+  const cell = (n, a) => n ? `<td><button data-act="pv" ${a}>${nf(n)}</button></td>` : `<td class="z">0</td>`;
+  const plain = n => `<td class="${n ? '' : 'z'}">${nf(n)}</td>`;
+  const dot = k => `<span class="dotc" style="--c:${tColor(k)}"></span>`;
+  const head = T.map(t => kindOf(t.key) === 'law'
+    ? `<th><span class="hd">${dot(t.key)}Хуулийн төсөл (тоо)</span></th><th>Төсөлд өгсөн санал (тоо)</th>`
+    : `<th><span class="hd">${dot(t.key)}${esc(t.short)}</span></th>`).join('') + `<th>${esc(F.g)} санал</th>`;
+  const body = rows.map(r => `<tr><td>${r.y}</td>${T.map(t => kindOf(t.key) === 'law'
+    ? cell(r.proj, `data-type="${t.key}" data-y="${r.y}"`) + plain(r.p)
+    : cell(r.c[t.key], `data-type="${t.key}" data-y="${r.y}"`)).join('')}${plain(r.ci)}<td class="tot">${r.total ? `<button data-act="pv" data-type="all" data-y="${r.y}">${nf(r.total)}</button>` : '0'}</td></tr>`).join('');
+  const foot = `<tr><td>Нийт</td>${T.map(t => kindOf(t.key) === 'law' ? `<td>${nf(sum(rows, r => r.proj))}</td><td>${nf(sum(rows, r => r.p))}</td>` : `<td>${nf(sum(rows, r => r.c[t.key]))}</td>`).join('')}<td>${nf(sum(rows, r => r.ci))}</td><td class="tot">${nf(sum(rows, r => r.total))}</td></tr>`;
+  return `<div class="tablewrap"><table class="pivot"><thead><tr><th>Он</th>${head}<th>Нийт баримт</th></tr></thead><tbody>${body}</tbody><tfoot>${foot}</tfoot></table></div>`;
+}
+function niceMax(v) { if (v <= 5) return 5; const p = Math.pow(10, Math.floor(Math.log10(v))); const n = v / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
+function drawCharts() { drawYearChart(); drawCompChart(); }
+function drawYearChart() {
+  const el = $('#yearChart'); if (!el) return;
+  const W = Math.max(280, el.clientWidth), H = W < 560 ? 210 : 250, L = 30, R = 4, T = 10, B = 24;
+  const ys = yearsAll(), Ts = types().filter(t => !S.chartHide.has(t.key));
+  const by = {}; S.data.docs.forEach(d => { (by[d.year] = by[d.year] || {})[d.type] = (by[d.year][d.type] || 0) + 1; });
+  const tot = y => Ts.reduce((a, t) => a + ((by[y] || {})[t.key] || 0), 0);
+  const mx = niceMax(Math.max(1, ...ys.map(tot)));
+  const iw = W - L - R, ih = H - T - B, bw = iw / ys.length, barW = Math.max(3, Math.min(24, bw * 0.66));
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Он оноорх баримтын тоо">`;
+  for (let i = 0; i <= 4; i++) { const v = mx * i / 4, y = T + ih - ih * i / 4; s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}" fill="none"/>`; if (Number.isInteger(v)) s += `<text x="${L - 6}" y="${y + 4}" text-anchor="end">${v}</text>`; }
+  ys.forEach((y, i) => {
+    const x = L + bw * i + (bw - barW) / 2; let yb = T + ih;
+    const dim = S.dashYear !== 'all' && +S.dashYear !== y;
+    Ts.forEach(t => { const n = (by[y] || {})[t.key] || 0; if (!n) return; const h = n / mx * ih; s += `<rect x="${x.toFixed(1)}" y="${(yb - h).toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(0, h - 1).toFixed(1)}" rx="2" fill="${tColor(t.key)}" opacity="${dim ? .28 : 1}"/>`; yb -= h; });
+    if (y % 5 === 0 || i === 0) s += `<text x="${(L + bw * i + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle" ${+S.dashYear === y ? 'style="fill:var(--ink);font-weight:600"' : ''}>${y}</text>`;
+  });
+  ys.forEach((y, i) => { s += `<rect class="hit" data-year="${y}" x="${(L + bw * i).toFixed(1)}" y="${T}" width="${bw.toFixed(1)}" height="${ih}" fill="transparent"/>`; });
+  s += '</svg><div class="tip" hidden></div>';
+  el.innerHTML = s;
+  const tip = $('.tip', el);
+  el.onpointermove = e => {
+    const h = e.target.closest('.hit'); if (!h) { tip.hidden = true; return; }
+    const y = +h.dataset.year, row = by[y] || {};
+    tip.innerHTML = `<b>${y} он</b>` + Ts.filter(t => row[t.key]).map(t => `<div class="tr"><i style="background:${tColor(t.key)}"></i><span>${esc(t.short)}</span>${row[t.key]}</div>`).join('') + `<div class="tr" style="margin-top:3px;font-weight:600"><span>Нийт</span>${tot(y)}</div>`;
+    tip.hidden = false;
+    const r = el.getBoundingClientRect(), tw = tip.offsetWidth;
+    let x = e.clientX - r.left + 14; if (x + tw > r.width) x = e.clientX - r.left - tw - 14; if (x < 0) x = 0;
+    tip.style.left = x + 'px'; tip.style.top = '4px';
+  };
+  el.onpointerleave = () => { tip.hidden = true; };
+}
+function drawCompChart() {
+  const el = $('#compChart'); if (!el) return;
+  const W = Math.max(260, el.clientWidth), H = 170, L = 30, R = 4, T = 8, B = 22;
+  const cs = S.data.comps.slice().sort((a, b) => a.no - b.no);
+  const iw = W - L - R, ih = H - T - B, bw = iw / Math.max(1, cs.length), barW = Math.max(3, Math.min(20, bw * 0.66));
+  const col = { full: 'var(--ok)', partial: 'var(--warn)', none: 'var(--bad)', pending: 'var(--wait)' };
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Эмхэтгэл бүрийн тусгалтын хувь">`;
+  [0, 50, 100].forEach(v => { const y = T + ih - ih * v / 100; s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y}" y2="${y}" fill="none"/><text x="${L - 6}" y="${y + 4}" text-anchor="end">${v}%</text>`; });
+  cs.forEach((c, i) => {
+    const n = c.items.length || 1, x = L + bw * i + (bw - barW) / 2; let yb = T + ih;
+    const dim = S.dashYear !== 'all' && +S.dashYear !== c.year;
+    ['full', 'partial', 'none', 'pending'].forEach(k => { const m = c.items.filter(it => it.st === k).length; if (!m) return; const h = m / n * ih; s += `<rect x="${x.toFixed(1)}" y="${(yb - h).toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(0, h - 1).toFixed(1)}" fill="${col[k]}" opacity="${dim ? .28 : 1}"/>`; yb -= h; });
+    if (c.no % 5 === 0 || i === 0) s += `<text x="${(L + bw * i + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle">№${c.no}</text>`;
+    s += `<rect class="hit" data-comp="${c.id}" x="${(L + bw * i).toFixed(1)}" y="${T}" width="${bw.toFixed(1)}" height="${ih}" fill="transparent"><title>${esc(CF().n)} №${c.no}, ${c.year}</title></rect>`;
+  });
+  el.innerHTML = s + '</svg>';
+}
+
+/* ---------- documents ---------- */
+function applyFilters(skipType) {
+  const f = S.f; let a = S.data.docs;
+  if (!skipType && f.type !== 'all') a = a.filter(d => d.type === f.type);
+  if (f.y1) a = a.filter(d => d.year >= +f.y1);
+  if (f.y2) a = a.filter(d => d.year <= +f.y2);
+  if (f.area) a = a.filter(d => d.area === f.area);
+  if (f.to) { const t = norm(f.to); a = a.filter(d => norm(d.to).includes(t)); }
+  if (f.st) a = a.filter(d => d.status === f.st);
+  if (f.pdf) a = a.filter(d => d.pdf);
+  if (f.file) a = a.filter(d => d.hasFile);
+  for (const [k, v] of Object.entries(f.x || {})) if (v) a = a.filter(d => d.x && d.x[k] === v);
+  if (f.q.trim()) {
+    const ts = terms(f.q);
+    const sc = a.map(d => [d, score(d, ts)]).filter(x => x[1] > 0);
+    if (S.sort === 'auto') sc.sort((x, y) => y[1] - x[1] || String(y[0].date).localeCompare(String(x[0].date)));
+    a = sc.map(x => x[0]);
+  }
+  if (S.sort === 'old') a = a.slice().sort((x, y) => String(x.date).localeCompare(String(y.date)));
+  if (S.sort === 'new') a = a.slice().sort((x, y) => String(y.date).localeCompare(String(x.date)));
+  if (S.sort === 'title') a = a.slice().sort((x, y) => x.title.localeCompare(y.title, 'mn'));
+  return a;
+}
+function viewDocs() {
+  return `
+  <div class="head"><div><div class="eyebrow">Бүртгэл</div><h1 class="h1">Баримтууд</h1></div>
+    <div class="row-actions">${S.admin ? `<button class="btn" data-act="bulk-pdf">${ic('pdf')}PDF бөөнөөр холбох</button><button class="btn primary" data-act="add-doc">${ic('plus')}Баримт нэмэх</button>` : ''}</div></div>
+  <div class="toolbar">
+    <label class="search">${ic('search')}<span class="sr">Хайх</span><input id="docQ" type="search" placeholder="Агуулга, дугаар, хүлээн авагчаар хайх" value="${esc(S.f.q)}" autocomplete="off"></label>
+    <button class="btn" data-act="filters" id="fBtn">${ic('filter')}Дэлгэрэнгүй хайлт</button>
+    <select class="inp" id="docSort" data-bind="sort" style="width:auto" aria-label="Эрэмбэ">
+      ${[['auto', 'Тохирох'], ['new', 'Шинэ нь эхэндээ'], ['old', 'Хуучин нь эхэндээ'], ['title', 'Гарчгаар']].map(([k, l]) => `<option value="${k}" ${S.sort === k ? 'selected' : ''}>${l}</option>`).join('')}
+    </select>
+  </div>
+  <div id="docsDyn"></div>`;
+}
+function renderDocsDyn() {
+  const host = $('#docsDyn'); if (!host) return;
+  const base = applyFilters(true), res = applyFilters(false), f = S.f;
+  const cnt = {}; base.forEach(d => cnt[d.type] = (cnt[d.type] || 0) + 1);
+  const chips = `<div class="chips" role="group" aria-label="Баримтын төрөл">
+    <button class="chip" data-act="tchip" data-type="all" aria-pressed="${f.type === 'all'}">Бүгд <span class="cn">${base.length}</span></button>
+    ${types().map(t => `<button class="chip" data-act="tchip" data-type="${t.key}" aria-pressed="${f.type === t.key}"><span class="dotc" style="--c:${tColor(t.key)}"></span>${esc(t.short)} <span class="cn">${cnt[t.key] || 0}</span></button>`).join('')}</div>`;
+  const act = [];
+  if (f.y1 || f.y2) act.push(['yr', f.y1 && f.y2 ? (f.y1 === f.y2 ? `${f.y1} он` : `${f.y1} оноос ${f.y2} он хүртэл`) : f.y1 ? `${f.y1} оноос хойш` : `${f.y2} он хүртэл`]);
+  if (f.area) act.push(['area', f.area]);
+  if (f.to) act.push(['to', f.to]);
+  if (f.st) act.push(['st', (ST.doc.concat(ST.law, ST.pub).find(s => s[0] === f.st) || ['', f.st])[1]]);
+  if (f.pdf) act.push(['pdf', 'PDF-тэй']);
+  if (f.file) act.push(['file', 'Эх файлтай']);
+  for (const [k, v] of Object.entries(f.x || {})) if (v) act.push(['fx:' + k, v]);
+  const fb = $('#fBtn'); if (fb) fb.innerHTML = ic('filter') + 'Дэлгэрэнгүй хайлт' + (act.length ? ` <span class="count">${act.length}</span>` : '');
+  const list = res.slice(0, S.limit);
+  host.innerHTML = chips +
+    (act.length ? `<div class="active-f">${act.map(([k, l]) => `<button class="af" data-act="clearf" data-k="${k}" aria-label="${esc(l)} шүүлтүүрийг арилгах">${esc(l)}${ic('x', 14)}</button>`).join('')}<button class="af" data-act="clearf" data-k="all" style="background:transparent">Бүгдийг арилгах</button></div>` : '') +
+    `<div class="rescount"><span>${nf(res.length)} баримт олдлоо</span><button class="btn ghost" data-act="dl-results" ${res.length ? '' : 'disabled'}>${ic('dl')}Үр дүнг Excel-ээр татах</button></div>` +
+    (list.length ? `<div class="docs">${list.map(docRow).join('')}</div>` :
+      `<div class="docs"><div class="empty"><b>Илэрц олдсонгүй</b>Хайлтын үгээ богиносгох эсвэл шүүлтүүрээ арилгаж үзнэ үү.</div></div>`) +
+    (res.length > S.limit ? `<div class="more"><button class="btn" data-act="more">Дахиж харах (${nf(res.length - S.limit)})</button></div>` : '');
+}
+function docRow(d) {
+  const law = kindOf(d.type) === 'law';
+  return `<button class="doc" data-act="open" data-id="${d.id}" style="--c:${tColor(d.type)}">
+    <span class="doc-type">${esc(tShort(d.type))}</span>
+    <span><span class="doc-title">${hl(d.title, S.f.q)}</span>
+      <span class="doc-meta">${d.no ? `<span class="mono">№ ${esc(d.no)}</span>` : ''}<span class="num">${esc(fmtD(d))}</span>${d.to && d.to !== 'Нийтэд' ? `<span>${esc(d.to)}</span>` : ''}${law ? `<span>${projOf(d)} төсөл, ${d.proposals || 0} санал</span>` : ''}</span></span>
+    <span class="doc-side">${pill(d.status, stLabel(d))}${d.pdf ? `<span class="doc-pdf">${ic('pdf', 16)}PDF</span>` : ''}</span>
+  </button>`;
+}
+function openFilters() {
+  const f = S.f, ys = yearsAll(), D = S.data;
+  const cnt = key => { const c = {}; D.docs.forEach(d => { const v = key(d); if (v) c[v] = (c[v] || 0) + 1; }); return Object.entries(c).sort((a, b) => b[1] - a[1]); };
+  const sts = []; ST.doc.concat(ST.law, ST.pub).forEach(x => { if (x[1] && !sts.some(y => y[0] === x[0])) sts.push(x); });
+  const yopt = v => `<option value="">Бүгд</option>` + ys.map(y => `<option ${String(v) === String(y) ? 'selected' : ''}>${y}</option>`).join('');
+  const fx = facets().map((k, i) => `<div class="fld"><label for="ff_x${i}">${esc(k)}</label><select class="inp" id="ff_x${i}" name="fx_${i}"><option value="">Бүгд</option>${cnt(d => d.x && d.x[k]).slice(0, 300).map(([v, n]) => `<option value="${esc(v)}" ${f.x && f.x[k] === v ? 'selected' : ''}>${esc(v)} (${n})</option>`).join('')}</select></div>`).join('');
+  const tos = cnt(d => d.to).slice(0, 250).map(([v]) => `<option value="${esc(v)}">`).join('');
+  sheet('Дэлгэрэнгүй хайлт', `
+    <form id="fForm" class="stack" style="gap:14px">
+      <div class="fld"><label for="ff_q">Түлхүүр үг</label><input class="inp" id="ff_q" name="q" value="${esc(f.q)}" placeholder="Жишээ нь цагдан хорих"><small>Агуулга, дугаар, хүлээн авагч, тайлбараас хайна.</small></div>
+      <div class="fld"><label for="ff_type">Баримтын төрөл</label><select class="inp" id="ff_type" name="type"><option value="all">Бүх төрөл</option>${types().map(t => `<option value="${t.key}" ${f.type === t.key ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select></div>
+      <div class="two"><div class="fld"><label for="ff_y1">Он, эхлэх</label><select class="inp" id="ff_y1" name="y1">${yopt(f.y1)}</select></div><div class="fld"><label for="ff_y2">Он, дуусах</label><select class="inp" id="ff_y2" name="y2">${yopt(f.y2)}</select></div></div>
+      <div class="fld"><label for="ff_area">${esc(AL())}</label><select class="inp" id="ff_area" name="area"><option value="">Бүгд</option>${D.areas.map(a => `<option ${f.area === a ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>
+      ${fx}
+      <div class="fld"><label for="ff_to">Хүлээн авагч</label><input class="inp" id="ff_to" name="to" list="ffToList" value="${esc(f.to)}" placeholder="Байгууллага эсвэл албан тушаалтны нэр"><datalist id="ffToList">${tos}</datalist></div>
+      <div class="fld"><label for="ff_st">Төлөв</label><select class="inp" id="ff_st" name="st"><option value="">Бүх төлөв</option>${sts.map(([k, l]) => `<option value="${k}" ${f.st === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
+      <label class="check"><input type="checkbox" id="ff_file" name="file" ${f.file ? 'checked' : ''}>Эх файлтай гэж бүртгэгдсэн</label>
+      <label class="check"><input type="checkbox" id="ff_pdf" name="pdf" ${f.pdf ? 'checked' : ''}>PDF хавсаргасан</label>
+    </form>`,
+    `<button class="btn ghost" data-act="freset">Арилгах</button><button class="btn primary" data-act="fapply" id="fApply">Харах</button>`);
+  const form = $('#fForm');
+  const upd = () => { const g = readFilterForm(); const keep = S.f; S.f = g; const n = applyFilters(false).length; S.f = keep; $('#fApply').textContent = `${nf(n)} баримт харах`; };
+  form.addEventListener('input', upd); form.addEventListener('change', upd);
+  form.addEventListener('submit', e => { e.preventDefault(); ACT.fapply(); });
+  upd();
+}
+function readFilterForm() {
+  const fd = new FormData($('#fForm')); const x = {};
+  facets().forEach((k, i) => { const v = fd.get('fx_' + i); if (v) x[k] = v; });
+  return freshF({ q: fd.get('q') || '', type: fd.get('type') || 'all', y1: fd.get('y1') || '', y2: fd.get('y2') || '', area: fd.get('area') || '', to: (fd.get('to') || '').trim(), st: fd.get('st') || '', pdf: !!fd.get('pdf'), file: !!fd.get('file'), x });
+}
+
+/* ---------- compilations ---------- */
+function rstats(c) { const r = { full: 0, partial: 0, none: 0, pending: 0 }; c.items.forEach(i => r[i.st] = (r[i.st] || 0) + 1); return r; }
+function rbar(c) { const r = rstats(c), n = c.items.length || 1; return `<div class="sbar" role="img" aria-label="Тусгалт">${['full', 'partial', 'none', 'pending'].map(k => r[k] ? `<i class="${ST_CLS[k]}" style="width:${r[k] / n * 100}%"></i>` : '').join('')}</div>`; }
+function rleg(c) {
+  if (!c.items.length) return `<div class="rleg"><span>Санал бүртгэгдээгүй</span></div>`;
+  const r = rstats(c);
+  return `<div class="rleg">${r.full ? `<span><i class="ok"></i>${r.full} бүрэн</span>` : ''}${r.partial ? `<span><i class="warn"></i>${r.partial} хэсэгчлэн</span>` : ''}${r.none ? `<span><i class="bad"></i>${r.none} тусаагүй</span>` : ''}${r.pending ? `<span><i class="wait"></i>${r.pending} тогтоол гараагүй</span>` : ''}</div>`;
+}
+const resShort = c => c.res ? (c.res.no ? `Тогтоол № ${c.res.no}${c.res.date ? ', ' + fmtDate(c.res.date) : ''}` : 'Тогтоол гарсан') : 'Тогтоол гараагүй';
+function viewComps() {
+  const F = CF(), cs = S.data.comps, allIt = cs.flatMap(c => c.items), all = allIt.filter(i => !i.kind);
+  const full = allIt.filter(i => i.st === 'full').length, part = allIt.filter(i => i.st === 'partial').length;
+  return `
+  <div class="head"><div><div class="eyebrow">Тогтоолд тусгалт</div><h1 class="h1">${esc(F.i)} өгсөн санал</h1>
+    <p class="sub">${cs.length} ${esc(lc(F.n))}, ${nf(all.length)} санал. Үүнээс ${nf(full)} нь бүрэн, ${nf(part)} нь хэсэгчлэн тогтоолд туссан.</p></div>
+    <div class="row-actions">${S.admin ? `<button class="btn primary" data-act="add-comp">${ic('plus')}${esc(F.n)} нэмэх</button>` : ''}</div></div>
+  <div class="comps">${cs.map(c => `<button class="comp" data-act="comp" data-id="${c.id}">
+    <span class="comp-no">${pad(c.no)}<small>${c.year}</small></span>
+    <span class="comp-body"><span class="comp-title">${esc(c.title)}</span>
+      <span class="comp-meta"><span>${c.items.length} санал</span><span>${esc(resShort(c))}</span></span>
+      ${rbar(c)}${rleg(c)}</span></button>`).join('')}</div>`;
+}
+function viewComp() {
+  const F = CF(), c = findComp(S.compId); if (!c) return `<p class="empty">${esc(F.n)} олдсонгүй.</p>`;
+  const r = rstats(c);
+  const items = S.itemSt === 'all' ? c.items : c.items.filter(i => i.st === S.itemSt);
+  const fchip = (k, l, n) => `<button class="chip" data-act="itf" data-st="${k}" aria-pressed="${S.itemSt === k}">${esc(l)} <span class="cn">${n}</span></button>`;
+  return `
+  <button class="back" data-act="nav" data-view="comps">${ic('back', 18)}Бүх ${esc(lc(F.n))}</button>
+  <div class="head"><div><div class="eyebrow">${esc(F.n)} № ${c.no}</div><h1 class="h1">${esc(c.title)}</h1></div>
+    <div class="row-actions">${c.pdf ? `<button class="btn" data-act="open-comp-pdf" data-id="${c.id}">${ic('pdf')}${esc(F.g)} PDF</button>` : ''}
+    ${S.admin ? `<button class="btn" data-act="edit-comp" data-id="${c.id}">${ic('edit')}Засах</button><button class="btn primary" data-act="add-item" data-id="${c.id}">${ic('plus')}Санал нэмэх</button>` : ''}</div></div>
+  <div class="stack">
+    <section class="panel"><dl class="facts">
+      <div class="fact"><dt>Хүргүүлсэн</dt><dd>${esc(c.to)}${fmtD(c) ? ', ' + esc(fmtD(c)) : ''}</dd></div>
+      <div class="fact"><dt>Санал, зөвлөмж</dt><dd>${c.items.length}</dd></div>
+      <div class="fact" style="grid-column:1 / -1"><dt>Дээд байгууллагын тогтоол</dt><dd>${c.res ? esc(c.res.title || resShort(c)) : 'Тогтоол гараагүй'}${c.note ? `<div class="pair-note" style="margin-top:4px">${esc(c.note)}</div>` : ''}</dd></div>
+      <div class="fact" style="grid-column:1 / -1"><dt>Тусгалт</dt><dd>${rbar(c)}<div style="margin-top:8px">${rleg(c)}</div></dd></div>
+    </dl></section>
+    ${c.items.length ? `<div class="chips" style="margin:0">${fchip('all', 'Бүгд', c.items.length)}${ST.item.filter(([k]) => r[k]).map(([k, l]) => fchip(k, l, r[k])).join('')}</div>` : ''}
+    <div class="pairs">${items.map(it => pairRow(c, it)).join('') || '<div class="panel empty">Энэ төлөвтэй санал алга.</div>'}</div>
+  </div>`;
+}
+function pairRow(c, it) {
+  const refl = it.st === 'full' || it.st === 'partial';
+  const head = refl
+    ? `<div class="cl"><span class="cltag">${esc(clauseTag(it.clause))}</span>${pill(it.st, itemLabel(it.st))}</div>`
+    : `<div class="cl"><span class="none">${it.st === 'pending' ? 'Дээд байгууллагын тогтоол гараагүй.' : 'Тогтоолд тусгагдаагүй.'}</span>${pill(it.st, itemLabel(it.st))}</div>`;
+  const note = it.note && !/^Тогтоолд тусгагдаагүй\.?$/.test(it.note) ? `<span class="pair-note">${esc(it.note)}</span>` : '';
+  return `<article class="pair" data-st="${it.st}">
+    <div class="pair-l"><span class="pair-n">${pad(it.n)}</span><span class="pair-tx">${esc(it.text)}</span><span class="pair-area">${esc(it.area || '')}${it.kind ? `<span class="tag">${esc(it.kind)}</span>` : ''}</span></div>
+    <div class="pair-arrow" aria-hidden="true">${ic('arrow', 18)}</div>
+    <div class="pair-r">${head}${it.ctext ? `<q>${esc(it.ctext)}</q>` : ''}${note}${S.admin ? `<div class="pair-adm"><button class="btn ghost" data-act="edit-item" data-id="${c.id}" data-n="${it.n}">${ic('edit')}Засах</button><button class="btn ghost" data-act="del-item" data-id="${c.id}" data-n="${it.n}">${ic('trash')}Устгах</button></div>` : ''}</div>
+  </article>`;
+}
+
+/* ---------- reader with PDF ---------- */
+const PV = { pdf: null, zoom: 1, obs: null, token: 0, path: '', name: '', ver: '' };
+let pdfjsP = null;
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
+function getPdfjs() {
+  if (!pdfjsP) {
+    pdfjsP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(() => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = (STANDALONE || GHM) ? 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js' : 'pdf.worker.min.js'; return window.pdfjsLib; });
+    pdfjsP.catch(() => { pdfjsP = null; });
+  }
+  return pdfjsP;
+}
+const offlinePdf = rec => STANDALONE && !!rec.pdf && !/^(https?:|blob:|data:)/i.test(String(rec.pdf));
+async function sha256(file) { try { if (!window.crypto || !crypto.subtle) return ''; const h = await crypto.subtle.digest('SHA-256', await file.arrayBuffer()); return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, '0')).join(''); } catch (e) { return ''; } }
+async function stampPdf(rec, file, path) { rec.pdfName = path || file.name; rec.pdfSize = file.size; const h = await sha256(file); if (h) rec.pdfSha = h; else delete rec.pdfSha; }
+function openReader(kind, id) {
+  const rec = kind === 'doc' ? findDoc(id) : findComp(id); if (!rec) return;
+  const F = CF();
+  S.readerId = id; S.readerKind = kind;
+  const v = $('#reader');
+  const sub = kind === 'doc' ? [tShort(rec.type), noTxt(rec)].filter(Boolean).join(', ') : `${F.n} № ${rec.no}, ${rec.year}`;
+  let info;
+  if (kind === 'doc') {
+    const rel = S.data.docs.filter(d => d.id !== rec.id && d.area === rec.area && d.area !== 'Бусад' && d.type === rec.type).slice(0, 4);
+    const law = kindOf(rec.type) === 'law';
+    const xs = Object.entries(rec.x || {}).filter(([, val]) => val);
+    const hasAcc = rec.accepted != null && rec.accepted !== '';
+    info = `<span class="doc-type" style="--c:${tColor(rec.type)}"><span class="dotc"></span>${esc(tOf(rec.type).label)}</span>
+      <h2 class="reader-title">${esc(rec.title)}</h2>
+      ${stLabel(rec) ? `<div>${pill(rec.status, stLabel(rec))}</div>` : ''}
+      <dl class="meta">
+        ${rec.no ? `<dt>Дугаар</dt><dd class="mono">№ ${esc(rec.no)}</dd>` : ''}
+        <dt>Огноо</dt><dd class="num">${esc(fmtD(rec))}</dd>
+        ${rec.to ? `<dt>Хүлээн авагч</dt><dd>${esc(rec.to)}</dd>` : ''}
+        <dt>${esc(AL())}</dt><dd>${esc(rec.area || '')}</dd>
+        ${xs.map(([k, val]) => `<dt>${esc(k)}</dt><dd>${esc(val)}</dd>`).join('')}
+        <dt>Эх файл</dt><dd>${rec.pdf ? 'PDF хавсаргасан' : rec.hasFile ? 'Байгууллагад хадгалагдаж буй' : 'Бүртгэлгүй'}</dd>
+      </dl>
+      ${law ? `<div class="lawbox"><div class="nums"><span><b>${projOf(rec)}</b>төсөл</span><span><b>${rec.proposals || 0}</b>өгсөн санал</span>${hasAcc ? `<span><b>${rec.accepted}</b>тусгагдсан</span>` : ''}</div>${hasAcc && rec.proposals ? `<div class="sbar"><i class="ok" style="width:${rec.accepted / rec.proposals * 100}%"></i></div>` : ''}</div>` : ''}
+      ${rec.summary ? `<p class="summary">${esc(rec.summary)}</p>` : ''}
+      ${rel.length ? `<div class="related"><h3>Ижил сэдвийн баримт</h3>${rel.map(d => `<button class="rel" data-act="open" data-id="${d.id}">${esc(d.title)}<span>${esc([tShort(d.type), fmtD(d)].join(', '))}</span></button>`).join('')}</div>` : ''}`;
+  } else {
+    info = `<span class="eyebrow">${esc(F.n)} № ${rec.no}</span><h2 class="reader-title">${esc(rec.title)}</h2>${rbar(rec)}${rleg(rec)}
+      <dl class="meta"><dt>Хүргүүлсэн</dt><dd>${esc(rec.to)}</dd><dt>Он</dt><dd>${esc(fmtD(rec))}</dd><dt>Тогтоол</dt><dd>${esc(resShort(rec))}</dd></dl>
+      <button class="btn" data-act="comp-from-reader" data-id="${rec.id}">Санал тус бүрийн тусгалтыг харах</button>`;
+  }
+  v.innerHTML = `
+    <div class="ov-bar">
+      <button class="iconbtn" data-act="close-reader" aria-label="Хаах">${ic('back')}</button>
+      <div class="t"><b>${esc(rec.title)}</b><span>${esc(sub)}</span></div>
+      ${rec.pdf && (!offlinePdf(rec) || OFF.byDoc[rec.id]) ? `<button class="btn" data-act="dl-pdf">${ic('dl')}<span class="hide-s">Татах</span></button>` : ''}
+      ${S.admin && kind === 'doc' ? `<button class="iconbtn" data-act="edit-doc" data-id="${rec.id}" aria-label="Засах">${ic('edit')}</button><button class="iconbtn" data-act="del-doc" data-id="${rec.id}" aria-label="Устгах">${ic('trash')}</button>` : ''}
+    </div>
+    <div class="ov-body">
+      <div class="reader-info">${info}</div>
+      <div class="reader-pdf">
+        <div class="pdf-tools"><span id="pdfPos">PDF</span><span class="sp"></span>
+          <button class="iconbtn" data-act="zoom" data-d="-1" aria-label="Жижигрүүлэх">${ic('minus', 18)}</button>
+          <span id="pdfZoom" class="num" style="min-width:44px;text-align:center">100%</span>
+          <button class="iconbtn" data-act="zoom" data-d="1" aria-label="Томруулах">${ic('plus', 18)}</button></div>
+        <div class="pdf-scroll" id="pdfScroll"><div class="pdf-pages" id="pdfPages"></div></div>
+      </div>
+    </div>`;
+  v.hidden = false; document.body.classList.add('locked');
+  PV.path = rec.pdf || ''; PV.ver = rec.pdfSha ? String(rec.pdfSha).slice(0, 12) : ''; PV.name = (kind === 'doc' ? `${tShort(rec.type)} ${rec.no || ''} ${rec.title}` : `${F.n} ${rec.no} ${rec.year}`);
+  if (rec.pdf && offlinePdf(rec)) showLocalPdf(rec);
+  else if (rec.pdf) loadPdf(rec.pdf);
+  else $('#pdfPages').innerHTML = `<div class="pdf-msg"><b>PDF хавсаргаагүй байна</b><span>${rec.hasFile ? 'Эх файл байгууллагад хадгалагдаж байгаа гэж бүртгэгдсэн. PDF-ийг хавсаргавал энд нээгдэнэ.' : 'PDF хавсаргавал энд нээгдэнэ.'}</span>${S.admin && kind === 'doc' ? `<button class="btn" data-act="edit-doc" data-id="${rec.id}">${ic('up')}PDF хавсаргах</button>` : ''}</div>`;
+  $('.ov-bar .iconbtn', v).focus();
+}
+function closeReader() {
+  destroyPdf(); if (OFF.url) { URL.revokeObjectURL(OFF.url); OFF.url = ''; } const v = $('#reader'); v.hidden = true; v.innerHTML = ''; S.readerId = null;
+  if (!$('#layer').children.length) document.body.classList.remove('locked');
+}
+function destroyPdf() { PV.token++; if (PV.obs) PV.obs.disconnect(); PV.obs = null; if (PV.pdf) { try { PV.pdf.destroy(); } catch (e) { /* already closed */ } } PV.pdf = null; }
+async function loadPdf(path) {
+  destroyPdf(); const token = PV.token; const host = $('#pdfPages');
+  host.innerHTML = `<div class="pdf-msg">PDF нээж байна</div>`;
+  try {
+    const lib = await getPdfjs();
+    const pdf = await lib.getDocument({ url: pdfUrl(path), isEvalSupported: false }).promise;
+    if (token !== PV.token) { pdf.destroy(); return; }
+    PV.pdf = pdf; PV.zoom = 1;
+    const first = await pdf.getPage(1); const vp = first.getViewport({ scale: 1 });
+    host.innerHTML = '';
+    const scroller = $('#pdfScroll');
+    PV.obs = new IntersectionObserver(ents => ents.forEach(en => { if (en.isIntersecting) renderPage(en.target, token); }), { root: null, rootMargin: '600px 0px' });
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const div = document.createElement('div'); div.className = 'pdf-page'; div.dataset.page = i;
+      div.style.aspectRatio = `${vp.width} / ${vp.height}`; host.appendChild(div); PV.obs.observe(div);
+    }
+    const pos = () => { const el = $('#pdfPos'); if (!el) return; let cur = 1; for (const p of $$('.pdf-page', host)) { if (p.getBoundingClientRect().top < window.innerHeight / 2) cur = +p.dataset.page; } el.textContent = `Хуудас ${cur} / ${pdf.numPages}`; };
+    scroller.onscroll = pos; const body = $('#reader .ov-body'); if (body) body.onscroll = pos; pos();
+  } catch (err) {
+    if (token !== PV.token) return;
+    host.innerHTML = `<div class="pdf-msg"><b>PDF-ийг энд харуулж чадсангүй</b><span>Файлыг татаж аваад нээж болно.</span><button class="btn" data-act="dl-pdf">${ic('dl')}Татаж авах</button></div>`;
+  }
+}
+async function renderPage(div, token) {
+  if (!PV.pdf || token !== PV.token || div.dataset.z === String(PV.zoom)) return;
+  div.dataset.z = String(PV.zoom);
+  try {
+    const page = await PV.pdf.getPage(+div.dataset.page);
+    const w = div.clientWidth || 600, vp1 = page.getViewport({ scale: 1 });
+    const dpr = Math.min(2, window.devicePixelRatio || 1), vp = page.getViewport({ scale: w / vp1.width * dpr });
+    const c = document.createElement('canvas'); c.width = Math.floor(vp.width); c.height = Math.floor(vp.height); c.style.width = '100%'; c.style.height = '100%';
+    await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+    if (token === PV.token) div.replaceChildren(c);
+  } catch (e) { div.dataset.z = ''; }
+}
+function zoom(d) {
+  if (!PV.pdf) return;
+  PV.zoom = Math.min(2.5, Math.max(0.6, Math.round((PV.zoom + d * 0.2) * 10) / 10));
+  $('#pdfPages').style.maxWidth = (820 * PV.zoom) + 'px';
+  $('#pdfPages').style.width = PV.zoom > 1 ? (100 * PV.zoom) + '%' : '100%';
+  $('#pdfZoom').textContent = Math.round(PV.zoom * 100) + '%';
+  PV.obs.disconnect(); $$('.pdf-page').forEach(p => PV.obs.observe(p));
+}
+
+/* ---------- offline copy: PDFs from a local folder ---------- */
+const OFF = { byDoc: {}, found: 0, need: 0, read: null, url: '', busy: false };
+function offNeeded() { return S.data ? S.data.docs.filter(d => offlinePdf(d)) : []; }
+function offStatus() {
+  const need = offNeeded().length;
+  if (!need) return '';
+  return OFF.read == null ? 'PDF хавтас сонгох' : `PDF: ${nf(OFF.found)} / ${nf(need)} олдсон`;
+}
+function showLocalPdf(rec) {
+  const host = $('#pdfPages'); if (!host) return;
+  const f = OFF.byDoc[rec.id];
+  const wrap = host.closest('.reader-pdf');
+  if (f) {
+    if (OFF.url) URL.revokeObjectURL(OFF.url);
+    OFF.url = URL.createObjectURL(new Blob([f], { type: 'application/pdf' }));
+    wrap.classList.add('native');
+    host.innerHTML = `<div class="pdf-alt"><span class="mono">${esc(f.name)}</span><a href="${OFF.url}" target="_blank" rel="noopener">Шинэ цонхонд нээх</a></div><iframe class="pdf-native" src="${OFF.url}" title="${esc(rec.title)}"></iframe>`;
+    return;
+  }
+  wrap.classList.remove('native');
+  const info = OFF.read == null ? '' : OFF.read === 0
+    ? 'Сонгосон хавтсаас PDF файл олдсонгүй. Хавтас зөв эсэхийг шалгана уу.'
+    : `Сонгосон хавтаснаас ${nf(OFF.read)} PDF уншиж, ${nf(OFF.found)} баримттай тааруулсан. Энэ баримтын PDF тэдгээрийн дотор олдсонгүй.`;
+  host.innerHTML = `<div class="pdf-msg"><b>${OFF.read == null ? 'PDF хавтсаа сонгоно уу' : 'Энэ баримтын PDF олдсонгүй'}</b>
+    <span>${info || 'Энэ нь татаж авсан хувилбар. PDF файлуудыг таны компьютер дээрх хавтаснаас нээнэ. E:\\uyanga\\data\\data хавтсыг бүхэлд нь сонгоно уу. Хөтөч "файл оруулах уу" гэж асуувал зөвшөөрнө. Файлууд таны компьютерээс гадагш гарахгүй.'}</span>
+    <div class="row-actions" style="justify-content:center"><button class="btn primary" data-act="off-pick">${ic('layers')}${OFF.read == null ? 'PDF хавтас сонгох' : 'Өөр хавтас сонгох'}</button></div>
+    ${OFF.busy ? '<span>Файлуудыг шалгаж байна</span>' : ''}</div>`;
+}
+const IDB = {
+  db() { return new Promise((res, rej) => { try { const r = indexedDB.open('heuk-offline', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); } catch (e) { rej(e); } }); },
+  async get(k) { try { const db = await IDB.db(); return await new Promise(res => { const q = db.transaction('kv').objectStore('kv').get(k); q.onsuccess = () => res(q.result); q.onerror = () => res(null); }); } catch (e) { return null; } },
+  async set(k, v) { try { const db = await IDB.db(); db.transaction('kv', 'readwrite').objectStore('kv').put(v, k); } catch (e) { /* storage unavailable */ } }
+};
+async function offWalkHandle(dir, prefix, out) {
+  for await (const [name, h] of dir.entries()) {
+    if (h.kind === 'file') { if (/\.pdf$/i.test(name)) { try { out.push({ file: await h.getFile(), path: prefix + name }); } catch (e) { /* unreadable */ } } }
+    else await offWalkHandle(h, prefix + name + '/', out);
+  }
+}
+function offPick() { const i = $('#offDir'); i.value = ''; i.click(); }
+async function offIndex(list) {
+  OFF.busy = true;
+  const docs = offNeeded(); const byDoc = {};
+  const files = list.filter(x => /\.pdf$/i.test(x.file.name));
+  // 1. exact content (size + SHA-256)
+  const bySize = {}; files.forEach(x => { (bySize[x.file.size] = bySize[x.file.size] || []).push(x); });
+  const shaCache = new Map();
+  const shaOf = async x => { if (!shaCache.has(x)) shaCache.set(x, await sha256(x.file)); return shaCache.get(x); };
+  for (const d of docs) {
+    if (!d.pdfSize) continue;
+    const cands = bySize[d.pdfSize] || []; if (!cands.length) continue;
+    if (d.pdfSha) { for (const x of cands) { if (await shaOf(x) === d.pdfSha) { byDoc[d.id] = x.file; break; } } }
+    else if (cands.length === 1) byDoc[d.id] = cands[0].file;
+    else {
+      const nm = d.pdfName ? d.pdfName.split('/').pop() : '';
+      let hit = nm ? cands.find(x => x.file.name === nm) : null;
+      if (!hit) { const sc = cands.map(x => [x, matchSig(fileSignals(x.path), [d])]).filter(z => z[1].id).sort((a, b) => b[1].sc - a[1].sc); if (sc.length && (sc.length === 1 || sc[0][1].sc > sc[1][1].sc)) hit = sc[0][0]; }
+      if (!hit && new Set(cands.map(x => x.file.size + '|' + x.file.name)).size === 1) hit = cands[0];
+      if (hit) byDoc[d.id] = hit.file;
+    }
+  }
+  // 2. original file name, when recorded
+  const byName = {}; files.forEach(x => { (byName[x.file.name] = byName[x.file.name] || []).push(x); });
+  for (const d of docs) {
+    if (byDoc[d.id] || !d.pdfName) continue;
+    const tail = d.pdfName.split('/').slice(-2).join('/'); const nm = d.pdfName.split('/').pop();
+    const c = (byName[nm] || []); const hit = c.find(x => x.path.endsWith(tail)) || (c.length === 1 ? c[0] : null);
+    if (hit) byDoc[d.id] = hit.file;
+  }
+  // 3. the same file name matcher the online linker uses
+  const left = docs.filter(d => !byDoc[d.id]);
+  if (left.length) {
+    const used = new Set(Object.values(byDoc));
+    const pools = {};
+    for (const x of files) {
+      if (used.has(x.file)) continue;
+      const type = typeFromPath(x.path);
+      const pool = (pools[type || '*'] = pools[type || '*'] || left.filter(d => !type || d.type === type));
+      if (!pool.length) continue;
+      const m = matchSig(fileSignals(x.path), pool);
+      if (m.conf === 'ok' && !byDoc[m.id]) { byDoc[m.id] = x.file; used.add(x.file); }
+    }
+  }
+  OFF.byDoc = byDoc; OFF.found = Object.keys(byDoc).length; OFF.read = files.length; OFF.busy = false;
+  renderNav();
+  toast(files.length ? `${nf(files.length)} PDF уншиж, ${nf(OFF.found)} / ${nf(docs.length)} баримттай тааруулсан` : 'Сонгосон хавтсаас PDF файл олдсонгүй');
+  if (S.readerId && S.readerKind === 'doc') { const rec = findDoc(S.readerId); if (rec && offlinePdf(rec)) openReader('doc', rec.id); }
+}
+function buildOffline() {
+  const font = document.querySelector('link[href*="fonts.googleapis.com/css2"]');
+  const css = document.getElementById('app-css'), js = document.getElementById('app-js');
+  const json = JSON.stringify(S.data).replace(/<\//g, '<\\/');
+  return '<!doctype html>\n<html lang="mn">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+    + '<title>' + esc(S.data.meta.name || 'ХЭҮК мэдээллийн сан') + '</title>\n'
+    + '<style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>\n'
+    + (font ? font.outerHTML + '\n' : '') + '<style id="app-css">' + css.textContent + '</style>\n</head>\n<body>\n'
+    + '<script id="heuk-data" type="application/json">' + json + '<\/script>\n'
+    + SHELL + '\n<script id="app-js">' + js.textContent + '<\/script>\n</body>\n</html>\n';
+}
+async function exportOffline() {
+  toast('Офлайн хувилбар бэлтгэж байна');
+  const need = S.data.docs.filter(d => /^\/_blob\//.test(String(d.pdf || '')) && !d.pdfSize);
+  const assets = await cap('assets');
+  if (need.length && assets) {
+    try { const ls = await assets.list(); const sz = {}; ls.assets.forEach(a => { sz[a.id] = a.sizeBytes; }); let n = 0; need.forEach(d => { const v = sz[d.pdf.slice(7)]; if (v) { d.pdfSize = v; n++; } }); if (n) changed(); }
+    catch (e) { /* sizes stay unknown; the offline copy then matches by name */ }
+  }
+  try { await offer(`HEUK_medeelliin_san_${todayISO()}.html`, buildOffline()); }
+  catch (e) { toast('Офлайн хувилбар үүсгэж чадсангүй'); }
+}
+
+/* ---------- quick search palette ---------- */
+let palSel = 0, palItems = [];
+function openPalette(q = '') {
+  layer(`<div class="scrim top" data-act="scrim"><div class="pal" role="dialog" aria-label="Хурдан хайлт">
+    <div class="pal-in">${ic('search')}<input id="palQ" type="search" placeholder="Юу хайж байна вэ?" autocomplete="off" value="${esc(q)}" aria-label="Хурдан хайлт"><button class="iconbtn" data-act="close-layer" aria-label="Хаах" style="width:34px;height:34px">${ic('x', 18)}</button></div>
+    <div class="pal-res" id="palRes"></div>
+    <div class="pal-foot"><span>Латин үсгээр бичиж болно</span><span><kbd>↑</kbd> <kbd>↓</kbd> сонгох</span><span><kbd>Enter</kbd> нээх</span><span><kbd>Esc</kbd> хаах</span></div>
+  </div></div>`);
+  const inp = $('#palQ');
+  inp.addEventListener('input', () => palSearch(inp.value));
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); palMove(1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); palMove(-1); }
+    else if (e.key === 'Enter') { e.preventDefault(); const it = palItems[palSel]; if (it) it.click(); }
+  });
+  palSearch(q); setTimeout(() => inp.focus(), 30);
+}
+function palSearch(q) {
+  const res = $('#palRes'); if (!res) return;
+  if (!q.trim()) {
+    const rec = store.get('heuk.recent', []);
+    res.innerHTML = (rec.length ? `<div class="pal-g">Сүүлд хайсан</div><div class="recent">${rec.map(r => `<button class="chip" data-act="pal-q" data-q="${esc(r)}">${esc(r)}</button>`).join('')}</div>` : '') +
+      `<div class="pal-g">Санал болгох</div>` +
+      ['цагдан хорих', 'хүүхдийн эрх', 'эрүү шүүлт', 'hudulmur'].map(s => `<button class="pal-it" data-act="pal-q" data-q="${esc(s)}">${ic('search', 16)}<span class="tx"><b>${esc(s)}</b></span></button>`).join('');
+    palItems = $$('.pal-it', res); palSel = 0; palMark(); return;
+  }
+  const ts = terms(q);
+  const docs = S.data.docs.map(d => [d, score(d, ts)]).filter(x => x[1]).sort((a, b) => b[1] - a[1] || String(b[0].date).localeCompare(String(a[0].date)));
+  const comps = S.data.comps.map(c => [c, score(c, ts)]).filter(x => x[1]).sort((a, b) => b[1] - a[1]);
+  const items = []; S.data.comps.forEach(c => c.items.forEach(it => { const s = score(it, ts); if (s) items.push([c, it, s]); })); items.sort((a, b) => b[2] - a[2]);
+  let h = '';
+  if (docs.length) h += `<div class="pal-g">Баримт, ${docs.length}</div>` + docs.slice(0, 7).map(([d]) => `<button class="pal-it" data-act="open" data-id="${d.id}" data-rq="${esc(q)}"><span class="dotc" style="--c:${tColor(d.type)}"></span><span class="tx"><b>${hl(d.title, q)}</b><span>${esc([tShort(d.type), noTxt(d), fmtD(d), d.to && d.to !== 'Нийтэд' ? d.to : ''].filter(Boolean).join(', '))}</span></span></button>`).join('');
+  if (docs.length > 7) h += `<button class="pal-it" data-act="pal-all" data-q="${esc(q)}">${ic('arrow', 16)}<span class="tx"><b>Бүх ${docs.length} баримтыг жагсаалтаар харах</b></span></button>`;
+  const F = CF();
+  if (comps.length) h += `<div class="pal-g">${esc(F.n)}</div>` + comps.slice(0, 3).map(([c]) => `<button class="pal-it" data-act="comp" data-id="${c.id}" data-rq="${esc(q)}">${ic('layers', 16)}<span class="tx"><b>${hl(c.title, q)}</b><span>${esc(F.n)} № ${c.no}, ${c.items.length} санал</span></span></button>`).join('');
+  if (items.length) h += `<div class="pal-g">${esc(F.g)} санал ба тогтоолын заалт</div>` + items.slice(0, 6).map(([c, it]) => `<button class="pal-it" data-act="comp" data-id="${c.id}" data-rq="${esc(q)}">${ic('arrow', 16)}<span class="tx"><b>${hl(it.text, q)}</b><span>${esc(F.n)} № ${c.no}, ${c.year}, ${esc(itemLabel(it.st))}</span></span></button>`).join('');
+  res.innerHTML = h || `<div class="empty"><b>Илэрц олдсонгүй</b>Өөр үгээр, эсвэл богино хэлбэрээр нь хайж үзнэ үү.</div>`;
+  palItems = $$('.pal-it', res); palSel = 0; palMark();
+}
+function palMove(d) { if (!palItems.length) return; palSel = (palSel + d + palItems.length) % palItems.length; palMark(); palItems[palSel].scrollIntoView({ block: 'nearest' }); }
+function palMark() { palItems.forEach((b, i) => b.setAttribute('aria-selected', i === palSel ? 'true' : 'false')); }
+function rememberQ(q) { q = (q || '').trim(); if (q.length < 2) return; const r = store.get('heuk.recent', []).filter(x => x !== q); r.unshift(q); store.set('heuk.recent', r.slice(0, 6)); }
+
+/* ---------- layers: sheet, modal, toast ---------- */
+function layer(html) { $('#layer').innerHTML = html; document.body.classList.add('locked'); }
+function closeLayer() { if (S.confirmRes) { const r = S.confirmRes; S.confirmRes = null; setTimeout(() => r(null), 0); } if (BP.busy && $('#bpRows')) toast('PDF холбох ажил үргэлжилж байна. Дуусахад мэдэгдэнэ.'); $('#layer').innerHTML = ''; if ($('#reader').hidden) document.body.classList.remove('locked'); }
+function sheet(title, body, foot, wide) {
+  layer(`<div class="scrim" data-act="scrim"><div class="sheet${wide ? ' wide' : ''}" role="dialog" aria-label="${esc(title)}"><div class="sheet-h"><h2>${esc(title)}</h2><button class="iconbtn" data-act="close-layer" aria-label="Хаах">${ic('x')}</button></div><div class="sheet-b">${body}</div><div class="sheet-f">${foot}</div></div></div>`);
+}
+function confirmBox(title, text, okLabel = 'Устгах', noLabel = 'Болих', okCls = 'danger') {
+  return new Promise(res => {
+    layer(`<div class="scrim center"><div class="modal" role="alertdialog" aria-label="${esc(title)}"><h2>${esc(title)}</h2><p>${esc(text)}</p><div class="row-actions" style="justify-content:flex-end"><button class="btn ghost" id="cNo">${esc(noLabel)}</button><button class="btn ${okCls}" id="cYes">${esc(okLabel)}</button></div></div></div>`);
+    S.confirmRes = res;
+    $('#cNo').onclick = () => { S.confirmRes = null; closeLayer(); res(false); };
+    $('#cYes').onclick = () => { S.confirmRes = null; closeLayer(); res(true); };
+    $('#cNo').focus();
+  });
+}
+let toastT = 0;
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 3200); }
+
+/* ---------- GitHub edition: admins sign in with a token and save straight to the repository ---------- */
+const GH = {
+  cfg: { owner: '', repo: '', branch: 'main' }, token: '', user: '', headSha: '', dataSha: '', staged: new Map(),
+  init() {
+    const c = Object.assign({ owner: '', repo: '', branch: 'main' }, GHCFG || {});
+    const h = location.hostname.toLowerCase();
+    if (/\.github\.io$/.test(h)) {
+      c.owner = h.replace(/\.github\.io$/, '');
+      const seg = decodeURIComponent(location.pathname.split('/').filter(Boolean)[0] || '');
+      c.repo = seg && !/\.[a-z0-9]+$/i.test(seg) ? seg : h;
+    }
+    this.cfg = c;
+  },
+  saved() { try { return localStorage.getItem('heuk.gh.token') || sessionStorage.getItem('heuk.gh.token') || ''; } catch (e) { return ''; } },
+  keep(token, remember) {
+    try { localStorage.removeItem('heuk.gh.token'); sessionStorage.removeItem('heuk.gh.token'); if (token) (remember ? localStorage : sessionStorage).setItem('heuk.gh.token', token); }
+    catch (e) { /* storage unavailable: the token lives only in this page */ }
+  },
+  repoUrl() { return `https://github.com/${this.cfg.owner}/${this.cfg.repo}`; },
+  async api(path, o = {}) {
+    const url = /^https:/.test(path) ? path : `https://api.github.com/repos/${encodeURIComponent(this.cfg.owner)}/${encodeURIComponent(this.cfg.repo)}${path}`;
+    const headers = { Accept: o.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' };
+    if (this.token) headers.Authorization = `Bearer ${this.token}`;
+    if (o.body) headers['Content-Type'] = 'application/json';
+    const body = o.body ? JSON.stringify(o.body) : undefined;
+    for (let i = 0; ; i++) {
+      let r;
+      try { r = await fetch(url, { method: o.method || 'GET', headers, body, cache: 'no-store' }); }
+      catch (e) { if (i < 2) { await sleep(1500 * (i + 1)); continue; } throw Object.assign(new Error('network'), { code: 'network' }); }
+      if (r.ok) return o.raw ? r.text() : r.status === 204 ? null : r.json();
+      let info = null; try { info = await r.json(); } catch (e) { /* no body */ }
+      const msg = String((info && info.message) || '');
+      const limited = r.status === 429 || (r.status === 403 && (/rate limit/i.test(msg) || r.headers.get('retry-after')));
+      if ((limited || r.status >= 500) && i < 4) { await sleep(((+r.headers.get('retry-after')) || 4 * (i + 1)) * 1000); continue; }
+      const code = r.status === 401 ? 'bad_token' : (r.status === 403 || r.status === 404) ? 'no_access' : r.status === 409 ? 'conflict' : r.status === 422 ? 'invalid' : 'github';
+      throw Object.assign(new Error(`GitHub ${r.status} ${msg}`), { code, status: r.status, info });
+    }
+  },
+  async login(token) {
+    this.token = String(token || '').trim();
+    try {
+      if (!this.token) throw Object.assign(new Error('empty'), { code: 'bad_token' });
+      const repo = await this.api('');
+      if (!repo.permissions || !repo.permissions.push) throw Object.assign(new Error('read only'), { code: 'no_push' });
+      if (repo.default_branch) this.cfg.branch = repo.default_branch;
+    } catch (e) { this.token = ''; throw e; }
+    try { this.user = (await this.api('https://api.github.com/user')).login || ''; } catch (e) { this.user = ''; }
+  },
+  async head() {
+    const ref = await this.api(`/git/ref/heads/${encodeURIComponent(this.cfg.branch)}`);
+    const commit = ref.object.sha;
+    const c = await this.api(`/git/commits/${commit}`);
+    const t = await this.api(`/git/trees/${c.tree.sha}`);
+    const ent = n => (t.tree || []).find(e => e.path === n) || {};
+    return { commit, tree: c.tree.sha, dataSha: ent('data.json').sha || '', pdfTree: ent('pdf').sha || '' };
+  },
+  async loadData() {
+    const h = await this.head();
+    if (!h.dataSha) throw Object.assign(new Error('data.json missing'), { code: 'github' });
+    const data = JSON.parse(await this.api(`/git/blobs/${h.dataSha}`, { raw: true }));
+    this.headSha = h.commit; this.dataSha = h.dataSha;
+    return data;
+  },
+  b64(file) {
+    return new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => { const s = String(fr.result); res(s.slice(s.indexOf(',') + 1)); }; fr.onerror = () => rej(fr.error); fr.readAsDataURL(file); });
+  },
+  async blob(x) {
+    const body = typeof x === 'string' ? { content: x, encoding: 'utf-8' } : { content: await this.b64(x), encoding: 'base64' };
+    return (await this.api('/git/blobs', { method: 'POST', body })).sha;
+  },
+  async commit(message, force) {
+    const entries = [...this.staged];
+    for (let attempt = 0; ; attempt++) {
+      const h = await this.head();
+      if (!force && this.dataSha && h.dataSha && h.dataSha !== this.dataSha) throw Object.assign(new Error('changed elsewhere'), { code: 'conflict' });
+      let have = null;
+      if (entries.some(([, sha]) => sha === null)) {
+        have = new Set();
+        if (h.pdfTree) { const t = await this.api(`/git/trees/${h.pdfTree}`); (t.tree || []).forEach(e => have.add('pdf/' + e.path)); }
+      }
+      const tree = entries.filter(([p, sha]) => sha !== null || have.has(p)).map(([path, sha]) => ({ path, mode: '100644', type: 'blob', sha }));
+      const nt = await this.api('/git/trees', { method: 'POST', body: { base_tree: h.tree, tree } });
+      const c = await this.api('/git/commits', { method: 'POST', body: { message, tree: nt.sha, parents: [h.commit] } });
+      try { await this.api(`/git/refs/heads/${encodeURIComponent(this.cfg.branch)}`, { method: 'PATCH', body: { sha: c.sha, force: false } }); }
+      catch (e) { if ((e.code === 'invalid' || e.code === 'conflict') && attempt === 0) continue; if (e.code === 'invalid') e.code = 'conflict'; throw e; }
+      this.headSha = c.sha;
+      const dj = entries.find(([p]) => p === 'data.json'); if (dj) this.dataSha = dj[1];
+      for (const [p, sha] of entries) if (this.staged.get(p) === sha) this.staged.delete(p);
+      return;
+    }
+  }
+};
+GH.init();
+function dropPdf(rec) {
+  const p = rec && rec.pdf;
+  if (!GHM || !p || !/^pdf\//.test(String(p))) return;
+  if (S.pending.has(p)) S.pending.delete(p); else S.pendingDel.add(p);
+}
+async function ghSaveOnce() {
+  if (S.ghAsk) return;
+  if (!S.admin || !GH.token) { setSave('demo'); return; }
+  const force = !!S.ghForce; S.ghForce = false;
+  const rev = S.rev;
+  setSave('saving');
+  try {
+    for (const [p, f] of [...S.pending]) { const sha = await GH.blob(f); if (S.pending.get(p) === f) { S.pending.delete(p); GH.staged.set(p, sha); } }
+    for (const p of [...S.pendingDel]) { GH.staged.set(p, null); S.pendingDel.delete(p); }
+    S.data.meta.updated = todayISO();
+    GH.staged.set('data.json', await GH.blob(JSON.stringify(S.data)));
+    await GH.commit(`Мэдээллийн сан шинэчлэв, ${todayISO()}${GH.user ? ', ' + GH.user : ''}`, force);
+    setSave(S.rev === rev && !S.pending.size && !S.pendingDel.size ? 'saved' : 'dirty'); renderNav();
+    if (!S.ghTold) { S.ghTold = true; toast('Хадгаллаа. Нийтийн хуудсанд 1-2 минутын дотор шинэчлэгдэнэ'); }
+  } catch (e) {
+    const code = e && e.code;
+    console.warn('GitHub save failed', e);
+    if (code === 'conflict') { setSave('dirty'); setTimeout(ghConflict, 0); return; }
+    if (code === 'bad_token') { setSave('error'); GH.token = ''; openGhLogin('Нэвтрэх түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал хадгалаагүй өөрчлөлт хадгалагдана.'); return; }
+    if (code === 'no_access') { setSave('error'); toast('Түлхүүрт энэ репод бичих эрх алга. Contents зүйлд Read and write эрх олгоно уу.'); return; }
+    setSave('error'); toast('Хадгалж чадсангүй. Интернэт холболтоо шалгаад дахин оролдоно уу.');
+  }
+}
+async function ghConflict() {
+  if (S.ghAsk) return;
+  S.ghAsk = true; clearTimeout(S.saveTimer);
+  const mine = await confirmBox('Өөр админ шинэчилсэн байна', 'Таныг засварлаж байх хооронд өөр админ өөрчлөлт хадгалсан байна. Өөрийн хувилбараар хадгалбал тэр өөрчлөлт дарагдана. Сүүлийн хувилбарыг ачаалбал таны хадгалаагүй өөрчлөлт алга болно.', 'Миний хувилбараар хадгалах', 'Сүүлийн хувилбарыг ачаалах', 'primary');
+  S.ghAsk = false;
+  if (mine === null) return;
+  if (mine) { S.ghForce = true; await saveNow(); return; }
+  clearTimeout(S.saveTimer); S.pending.clear(); S.pendingDel.clear(); GH.staged.clear();
+  try { S.data = await GH.loadData(); prep(); setSave('saved'); render(); toast('Сүүлийн хувилбарыг ачааллаа'); }
+  catch (e) { setSave('error'); toast('Сүүлийн хувилбарыг ачаалж чадсангүй'); }
+}
+function ghErr(e) {
+  const c = e && e.code;
+  if (c === 'bad_token') return 'Түлхүүр буруу эсвэл хугацаа нь дууссан байна';
+  if (c === 'no_push' || c === 'no_access') return 'Энэ түлхүүрээр репод бичих эрх алга';
+  if (c === 'network') return 'GitHub-тэй холбогдож чадсангүй. Интернэт холболтоо шалгана уу';
+  return 'Нэвтэрч чадсангүй. Дахин оролдоно уу';
+}
+function openGhLogin(msg) {
+  sheet('Админ нэвтрэх', `
+    ${msg ? `<p class="note" style="margin:0">${esc(msg)}</p>` : ''}
+    <p class="search-note" style="margin:0">Мэдээлэл нэмэх, засах эрх ${esc(GH.cfg.owner)}/${esc(GH.cfg.repo)} репод бичих эрхтэй хэрэглэгчид олгогдоно. Нэвтрэхдээ GitHub-ийн хандалтын түлхүүр ашиглана.</p>
+    <form id="ghForm" class="stack" style="gap:14px">
+      <div class="fld"><label for="ghTok">Хандалтын түлхүүр</label><input class="inp" id="ghTok" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_"></div>
+      <label class="check"><input type="checkbox" id="ghKeep" checked>Энэ төхөөрөмж дээр сануулах</label>
+    </form>
+    <div class="note"><p style="margin:0 0 6px">Түлхүүр үүсгэх дараалал</p><ol style="margin:0;padding-left:20px;display:grid;gap:4px">
+      <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> хуудсыг нээнэ.</li>
+      <li>Token name талбарт нэр өгч, Expiration талбарт хүчинтэй хугацааг сонгоно.</li>
+      <li>Repository access хэсэгт Only select repositories сонголтыг сонгож, ${esc(GH.cfg.repo)} репог нэмнэ.</li>
+      <li>Permissions хэсгийн Repository permissions доторх Contents зүйлд Read and write эрх олгоно.</li>
+      <li>Generate token товчийг дарж, гарсан түлхүүрийг хуулж энд буулгана.</li>
+    </ol></div>`,
+    `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="ghGo">Нэвтрэх</button>`);
+  const go = async () => {
+    const t = $('#ghTok').value.trim(); if (!t) { $('#ghTok').focus(); return; }
+    const b = $('#ghGo'); b.disabled = true; b.textContent = 'Шалгаж байна';
+    try { await ghEnter(t, $('#ghKeep').checked); closeLayer(); }
+    catch (e) { b.disabled = false; b.textContent = 'Нэвтрэх'; toast(ghErr(e)); }
+  };
+  $('#ghGo').onclick = go;
+  $('#ghForm').addEventListener('submit', e => { e.preventDefault(); go(); });
+  setTimeout(() => { const i = $('#ghTok'); if (i) i.focus(); }, 30);
+}
+async function ghEnter(token, remember, silent) {
+  await GH.login(token);
+  if (remember != null) GH.keep(GH.token, remember);
+  await BOOT.catch(() => {});
+  if (S.admin && ['dirty', 'error'].includes(S.saveState)) { renderNav(); toast('Дахин нэвтэрлээ. Өөрчлөлтийг хадгалж байна'); saveNow(); return; }
+  S.data = await GH.loadData(); prep();
+  S.admin = true; S.saveState = 'idle';
+  render();
+  if (!silent) toast(`${GH.user || 'Админ'} нэвтэрлээ. Мэдээлэл нэмж, засах боломжтой`);
+}
+async function ghBoot() {
+  const t = GH.saved();
+  if (t) { try { await ghEnter(t, null, true); } catch (e) { if (e && e.code !== 'network') GH.keep('', false); } return; }
+  if (/[?&]admin(=|&|$)/.test(location.search)) { await BOOT.catch(() => {}); openGhLogin(); }
+}
+async function ghLogout() {
+  const unsaved = ['dirty', 'saving', 'error'].includes(S.saveState);
+  if (unsaved && !await confirmBox('Хадгалаагүй өөрчлөлт байна', 'Гарвал хадгалаагүй өөрчлөлт алга болно.', 'Гарах')) return;
+  clearTimeout(S.saveTimer); GH.keep('', false); GH.token = ''; GH.user = ''; GH.staged.clear(); S.pending.clear(); S.pendingDel.clear();
+  if (unsaved) { location.reload(); return; }
+  S.admin = false; S.saveState = 'idle'; if (S.view === 'admin') S.view = 'dash';
+  render(); toast('Админ эрхээс гарлаа');
+}
+function ghPanel() {
+  return `<section class="panel stack" style="gap:12px">
+      <div class="panel-h" style="margin:0"><h2>GitHub холболт</h2></div>
+      <p class="note" style="margin:0">Мэдээлэл ${esc(GH.cfg.owner)}/${esc(GH.cfg.repo)} репогийн ${esc(GH.cfg.branch)} салбарт хадгалагдана${GH.user ? `. Нэвтэрсэн хэрэглэгч ${esc(GH.user)}` : ''}. Засвар хийснээс хойш 10 секунд өнгөрөхөд автоматаар хадгална. Хадгалаагүй өөрчлөлт байх үед дээд талын товчоор шууд хадгалж болно.</p>
+      <div class="row-actions"><a class="btn ghost" href="${esc(GH.repoUrl())}" target="_blank" rel="noopener">Репог нээх</a><button class="btn ghost" data-act="gh-logout">Гарах</button></div>
+    </section>`;
+}
+function ghTop() {
+  if (!GHM || !S.admin) return;
+  const el = $('#topUpd');
+  if (el) el.textContent = { idle: 'Бүх өөрчлөлт хадгалагдсан', saved: 'Бүх өөрчлөлт хадгалагдсан', dirty: 'Хадгалаагүй өөрчлөлт байна', saving: 'Хадгалж байна', error: 'Хадгалж чадсангүй', demo: 'Хадгалах боломжгүй' }[S.saveState] || '';
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && GHM && S.admin && S.saveState === 'dirty') { clearTimeout(S.saveTimer); saveNow(); } });
+window.addEventListener('beforeunload', e => { if (GHM && S.admin && ['dirty', 'saving', 'error'].includes(S.saveState)) { e.preventDefault(); e.returnValue = ''; } });
+
+/* ---------- saving (admin) ---------- */
+function setSave(s) { S.saveState = s; $$('.savechip').forEach(c => { c.outerHTML = saveChip(); }); ghTop(); }
+function changed() {
+  prep(); S.rev++; setSave('dirty');
+  clearTimeout(S.saveTimer); S.saveTimer = setTimeout(saveNow, GHM ? 10000 : 1600);
+}
+async function saveNow() {
+  clearTimeout(S.saveTimer);
+  if (S.saving) { S.saveAgain = true; return; }
+  S.saving = true;
+  try { await saveOnce(); } finally { S.saving = false; }
+  if (S.saveAgain) { S.saveAgain = false; await saveNow(); }
+}
+async function saveOnce() {
+  if (GHM) return ghSaveOnce();
+  const art = await cap('artifact');
+  if (!art) { setSave('demo'); if (!S.warned) toast('Энэ орчинд хадгалах боломжгүй тул өөрчлөлт зөвхөн энэ нээлтэд үлдэнэ'); S.warned = true; return; }
+  S.data.meta.updated = todayISO();
+  const files = { 'data.json': JSON.stringify(S.data) };
+  for (const [p, b] of S.pending) files[p] = b;
+  setSave('saving');
+  try {
+    await art.publish(files);
+    S.pending.clear(); setSave('saved'); renderNav();
+  } catch (e) {
+    const code = e && e.code;
+    if (code === 'conflict') { toast('Өөр хүн шинэчилсэн тул хамгийн сүүлийн хувилбарыг ачаалж байна'); return; }
+    if (code === 'not_writer' || code === 'not_granted' || code === 'consent_required' || code === 'capability_disabled' || code === 'not_declared') { S.admin = false; setSave('demo'); toast('Танд засварлах эрх алга. Өөрчлөлт хадгалагдсангүй.'); render(); return; }
+    if (code === 'too_large') { setSave('error'); toast('Файлын хэмжээ хэтэрсэн тул хадгалсангүй'); return; }
+    if (code === 'rate_limited') { S.saveTimer = setTimeout(saveNow, 8000); setSave('dirty'); return; }
+    setSave('error'); toast('Хадгалж чадсангүй. Дахин оролдоно уу.');
+  }
+}
+async function attachPdf(rec, file) {
+  if (GHM) {
+    if (file.size > 95 * 1048576) { toast('PDF файл 95 МБ-аас их байна'); return false; }
+    const path = `pdf/${rec.id}.pdf`;
+    if (rec.pdf && rec.pdf !== path) dropPdf(rec);
+    S.pendingDel.delete(path); S.pending.set(path, file);
+    if (S.blob[path]) URL.revokeObjectURL(S.blob[path]);
+    S.blob[path] = URL.createObjectURL(file); rec.pdf = path; await stampPdf(rec, file); return true;
+  }
+  const assets = await cap('assets');
+  if (assets) {
+    try { const r = await assets.upload(file); rec.pdf = '/_blob/' + r.id; S.blob[rec.pdf] = r.url; await stampPdf(rec, file); return true; }
+    catch (e) { if (e && e.code === 'too_large') { toast('PDF файл 16 МБ-аас их байна'); return false; } }
+  }
+  const path = `docs/u-${rec.id}-${uid()}.pdf`;
+  S.pending.set(path, file); S.blob[path] = URL.createObjectURL(file); rec.pdf = path; return true;
+}
+
+/* ---------- admin forms ---------- */
+function statusOptions(type, cur) { return stList(type).map(([k, l]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${esc(l || 'Төлөвгүй')}</option>`).join(''); }
+function xKeysFor(type, rec) {
+  const ks = new Set(Object.keys((rec && rec.x) || {}));
+  let n = 0;
+  for (const d of S.data.docs) { if (d.type !== type || !d.x) continue; Object.keys(d.x).forEach(k => ks.add(k)); if (++n > 300) break; }
+  facets().forEach(k => ks.add(k));
+  return [...ks];
+}
+function openDocForm(id) {
+  const D = S.data;
+  const defType = S.f.type !== 'all' ? S.f.type : D.types[0].key;
+  const d = id ? findDoc(id) : { type: defType, date: todayISO(), status: (stList(defType).find(x => x[0] === 'unk') || stList(defType)[0])[0], area: '', x: {} };
+  const cnt = {}; D.docs.forEach(x => { if (x.to) cnt[x.to] = (cnt[x.to] || 0) + 1; });
+  const tos = Object.entries(cnt).sort((a, b) => b[1] - a[1]).slice(0, 250).map(([t]) => t);
+  const xk = xKeysFor(d.type, d);
+  const hasAcc = d.accepted != null && d.accepted !== '';
+  sheet(id ? 'Баримт засах' : 'Шинэ баримт', `
+  <form id="docForm" class="stack" style="gap:14px">
+    <div class="fld"><label for="df_type">Баримтын төрөл</label><select class="inp" id="df_type" name="type">${types().map(t => `<option value="${t.key}" ${d.type === t.key ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select></div>
+    <div class="two"><div class="fld"><label for="df_no">Дугаар</label><input class="inp" id="df_no" name="no" value="${esc(d.no || '')}" placeholder="1/155"></div>
+      <div class="fld"><label for="df_date">Огноо</label><input class="inp" id="df_date" type="date" name="date" value="${esc(String(d.date || '').slice(0, 10))}" required></div></div>
+    <div class="fld"><label for="df_title">Агуулга, гарчиг</label><textarea class="inp" id="df_title" name="title" required style="min-height:64px">${esc(d.title || '')}</textarea></div>
+    <div class="fld"><label for="df_to">Хүлээн авагч</label><input class="inp" id="df_to" name="to" list="toList" value="${esc(d.to || '')}"><datalist id="toList">${tos.map(t => `<option value="${esc(t)}">`).join('')}</datalist></div>
+    <div class="two"><div class="fld"><label for="df_area">${esc(AL())}</label><select class="inp" id="df_area" name="area"><option value="">Автоматаар тодорхойлох</option>${D.areas.map(a => `<option ${d.area === a ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>
+      <div class="fld"><label for="df_status">Төлөв</label><select class="inp" id="df_status" name="status">${statusOptions(d.type, d.status)}</select></div></div>
+    <div class="stack" id="lawFields" style="gap:12px" ${kindOf(d.type) === 'law' ? '' : 'hidden'}>
+      <div class="two"><div class="fld"><label for="df_pj">Төслийн тоо</label><input class="inp" id="df_pj" type="number" min="1" name="projects" value="${d.projects || 1}"></div>
+        <div class="fld"><label for="df_p">Өгсөн саналын тоо</label><input class="inp" id="df_p" type="number" min="0" name="proposals" value="${d.proposals || 0}"></div></div>
+      <div class="fld"><label for="df_a">Тусгагдсан саналын тоо</label><input class="inp" id="df_a" type="number" min="0" name="accepted" value="${hasAcc ? d.accepted : ''}" placeholder="Мэдээгүй бол хоосон үлдээнэ"></div>
+    </div>
+    <div class="fld"><label for="df_sum">Товч агуулга</label><textarea class="inp" id="df_sum" name="summary">${esc(d.summary || '')}</textarea></div>
+    ${xk.map((k, i) => `<div class="fld"><label for="df_x${i}">${esc(k)}</label>${k === 'Тайлбар' || k.length > 24 ? `<textarea class="inp" id="df_x${i}" data-xk="${esc(k)}" style="min-height:64px">${esc((d.x || {})[k] || '')}</textarea>` : `<input class="inp" id="df_x${i}" data-xk="${esc(k)}" value="${esc((d.x || {})[k] || '')}" ${facets().includes(k) ? 'placeholder="Хоосон бол автоматаар тодорхойлно"' : ''}>`}</div>`).join('')}
+    <label class="check"><input type="checkbox" id="df_file" name="hasFile" ${d.hasFile ? 'checked' : ''}>Эх файл байгууллагад хадгалагдаж байгаа</label>
+    <div class="fld"><label for="df_pdf">PDF файл</label><input class="inp" id="df_pdf" type="file" name="pdf" accept="application/pdf,.pdf"><small>${d.pdf ? 'Одоогийн файлыг солих бол шинийг сонгоно уу.' : 'Баримтын эх хувийг PDF хэлбэрээр хавсаргана.'}</small></div>
+  </form>`, `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="dfSave">Хадгалах</button>`);
+  const form = $('#docForm');
+  $('#df_type').addEventListener('change', e => { const k = e.target.value; $('#df_status').innerHTML = statusOptions(k, ''); $('#lawFields').hidden = kindOf(k) !== 'law'; });
+  const submit = async () => {
+    if (!form.reportValidity()) return;
+    const fd = new FormData(form);
+    const rec = id ? findDoc(id) : {};
+    const newDate = fd.get('date');
+    if (rec.date && String(rec.date).slice(0, 10) !== newDate) delete rec.dateText;
+    rec.type = fd.get('type'); rec.date = newDate; rec.year = +String(newDate).slice(0, 4);
+    rec.no = (fd.get('no') || '').trim();
+    rec.title = fd.get('title').trim(); rec.to = (fd.get('to') || '').trim(); rec.area = fd.get('area') || ''; rec.status = fd.get('status'); rec.summary = (fd.get('summary') || '').trim();
+    if (!rec.summary) delete rec.summary;
+    if (kindOf(rec.type) === 'law') {
+      rec.projects = Math.max(1, +fd.get('projects') || 1); rec.proposals = +fd.get('proposals') || 0;
+      const a = String(fd.get('accepted') || '').trim(); if (a === '') delete rec.accepted; else rec.accepted = Math.min(rec.proposals, +a || 0);
+    } else { delete rec.projects; delete rec.proposals; delete rec.accepted; }
+    rec.x = {}; $$('[data-xk]', form).forEach(i => { const val = i.value.trim(); if (val) rec.x[i.dataset.xk] = val; });
+    rec.hasFile = !!fd.get('hasFile');
+    applyRules(rec);
+    if (!id) { rec.id = `${rec.type}-${rec.year}-${uid()}`; S.data.docs.unshift(rec); }
+    const file = fd.get('pdf');
+    $('#dfSave').disabled = true;
+    if (file && file.size) await attachPdf(rec, file);
+    closeLayer(); changed(); render(); toast(id ? 'Өөрчлөлтийг хадгаллаа' : 'Шинэ баримт нэмэгдлээ');
+    if (S.readerId === rec.id) openReader('doc', rec.id);
+  };
+  $('#dfSave').onclick = submit; form.addEventListener('submit', e => { e.preventDefault(); submit(); });
+}
+function openCompForm(id) {
+  const ny = new Date().getFullYear();
+  const F = CF();
+  const c = id ? findComp(id) : { no: Math.max(0, ...S.data.comps.map(x => x.no)) + 1, year: ny, title: `${ny} оны ${lc(F.n)}`, date: todayISO(), to: 'Улсын Их Хурал', res: null, items: [] };
+  const r = c.res || { issuer: 'Улсын Их Хурал', no: '', title: '', date: '' };
+  sheet(id ? `${F.n} засах` : `Шинэ ${lc(F.n)}`, `
+  <form id="cForm" class="stack" style="gap:14px">
+    <div class="two"><div class="fld"><label for="cf_no">${esc(F.g)} дугаар</label><input class="inp" id="cf_no" type="number" min="1" name="no" value="${c.no}" required></div>
+      <div class="fld"><label for="cf_year">Он</label><input class="inp" id="cf_year" type="number" name="year" value="${c.year}" required></div></div>
+    <div class="fld"><label for="cf_title">Нэр</label><input class="inp" id="cf_title" name="title" value="${esc(c.title)}" required></div>
+    <div class="two"><div class="fld"><label for="cf_to">Хүргүүлсэн</label><input class="inp" id="cf_to" name="to" value="${esc(c.to)}"></div>
+      <div class="fld"><label for="cf_date">Огноо</label><input class="inp" id="cf_date" type="date" name="date" value="${esc(c.date)}"></div></div>
+    <label class="check"><input type="checkbox" id="cf_has" name="has" ${c.res ? 'checked' : ''}>Дээд байгууллагын тогтоол гарсан</label>
+    <div id="resFields" class="stack" style="gap:14px" ${c.res ? '' : 'hidden'}>
+      <div class="two"><div class="fld"><label for="cf_ri">Тогтоол гаргасан</label><input class="inp" id="cf_ri" name="ri" value="${esc(r.issuer)}"></div>
+        <div class="fld"><label for="cf_rn">Тогтоолын дугаар</label><input class="inp" id="cf_rn" name="rn" value="${esc(r.no)}"></div></div>
+      <div class="fld"><label for="cf_rt">Тогтоолын нэр</label><input class="inp" id="cf_rt" name="rt" value="${esc(r.title)}"></div>
+      <div class="fld"><label for="cf_rd">Тогтоолын огноо</label><input class="inp" id="cf_rd" type="date" name="rd" value="${esc(r.date)}"></div>
+    </div>
+    <div class="fld"><label for="cf_note">Тайлбар</label><input class="inp" id="cf_note" name="note" value="${esc(c.note || '')}"></div>
+    <div class="fld"><label for="cf_pdf">${esc(F.g)} PDF</label><input class="inp" id="cf_pdf" type="file" name="pdf" accept="application/pdf,.pdf"></div>
+  </form>`, `${id ? `<button class="btn danger" data-act="del-comp" data-id="${id}">${ic('trash')}Устгах</button>` : ''}<span style="flex:1"></span><button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="cfSave">Хадгалах</button>`);
+  $('#cf_has').addEventListener('change', e => { $('#resFields').hidden = !e.target.checked; });
+  const submit = async () => {
+    const form = $('#cForm'); if (!form.reportValidity()) return;
+    const fd = new FormData(form); const rec = id ? findComp(id) : c;
+    if (rec.date !== fd.get('date')) delete rec.dateText;
+    rec.no = +fd.get('no'); rec.year = +fd.get('year'); rec.title = fd.get('title').trim(); rec.to = fd.get('to').trim(); rec.date = fd.get('date');
+    const nt = (fd.get('note') || '').trim(); if (nt) rec.note = nt; else delete rec.note;
+    rec.res = fd.get('has') ? { issuer: fd.get('ri').trim(), no: fd.get('rn').trim(), title: fd.get('rt').trim(), date: fd.get('rd') } : null;
+    if (!rec.res) rec.items.forEach(it => { it.st = 'pending'; });
+    else rec.items.forEach(it => { if (it.st === 'pending') it.st = 'none'; });
+    if (!id) { rec.id = `emh-${uid()}`; S.data.comps.push(rec); }
+    const file = fd.get('pdf'); $('#cfSave').disabled = true;
+    if (file && file.size) await attachPdf(rec, file);
+    closeLayer(); changed(); go('comp', { id: rec.id }); toast('Хадгаллаа');
+  };
+  $('#cfSave').onclick = submit;
+}
+function openItemForm(cid, n) {
+  const c = findComp(cid); const it = n ? c.items.find(x => x.n === +n) : { n: (Math.max(0, ...c.items.map(x => x.n)) + 1), text: '', area: '', st: c.res ? 'none' : 'pending', clause: '', ctext: '' };
+  const chs = [...new Set(S.data.comps.flatMap(x => x.items.map(i => i.area)).filter(Boolean))];
+  sheet(n ? `Санал ${pad(it.n)} засах` : 'Санал нэмэх', `
+  <form id="iForm" class="stack" style="gap:14px">
+    <div class="fld"><label for="if_t">Комиссын санал</label><textarea class="inp" id="if_t" name="text" required>${esc(it.text)}</textarea></div>
+    <div class="fld"><label for="if_a">Бүлэг, сэдэв</label><input class="inp" id="if_a" name="area" list="chList" value="${esc(it.area || '')}"><datalist id="chList">${chs.map(a => `<option value="${esc(a)}">`).join('')}</datalist></div>
+    <div class="fld"><label for="if_k">Төрөл</label><select class="inp" id="if_k" name="kind"><option>Үндсэн</option><option ${it.kind === 'Дэд заалт' ? 'selected' : ''}>Дэд заалт</option></select></div>
+    <div class="fld"><label for="if_s">Тогтоолд тусгалт</label><select class="inp" id="if_s" name="st">${ST.item.map(([k, l]) => `<option value="${k}" ${it.st === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
+    <div id="clF" class="stack" style="gap:14px">
+      <div class="fld"><label for="if_c">Тогтоолын заалт</label><input class="inp" id="if_c" name="clause" value="${esc(it.clause)}" placeholder="3 эсвэл 2.1"></div>
+      <div class="fld"><label for="if_ct">Тогтоолд тусгагдсан заалт</label><textarea class="inp" id="if_ct" name="ctext">${esc(it.ctext)}</textarea></div>
+    </div>
+    <div class="fld"><label for="if_n">Тайлбар</label><textarea class="inp" id="if_n" name="note" style="min-height:64px">${esc(it.note || '')}</textarea></div>
+  </form>`, `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="ifSave">Хадгалах</button>`);
+  const sync = () => { const v = $('#if_s').value; $('#clF').hidden = !(v === 'full' || v === 'partial'); };
+  $('#if_s').addEventListener('change', sync); sync();
+  $('#ifSave').onclick = () => {
+    const form = $('#iForm'); if (!form.reportValidity()) return;
+    const fd = new FormData(form);
+    it.text = fd.get('text').trim(); it.area = (fd.get('area') || '').trim(); it.st = fd.get('st');
+    if (fd.get('kind') === 'Дэд заалт') it.kind = 'Дэд заалт'; else delete it.kind;
+    const nt = (fd.get('note') || '').trim(); if (nt) it.note = nt; else delete it.note;
+    const refl = it.st === 'full' || it.st === 'partial';
+    it.clause = refl ? fd.get('clause').trim() : ''; it.ctext = refl ? fd.get('ctext').trim() : (it.ctext || '');
+    if (!n) c.items.push(it);
+    closeLayer(); changed(); render(); toast('Саналыг хадгаллаа');
+  };
+}
+function viewAdmin() {
+  const D = S.data;
+  return `
+  <div class="head"><div><div class="eyebrow">Админ</div><h1 class="h1">Удирдлага</h1><p class="sub">${GHM ? 'Хадгалсан өөрчлөлт нийтийн хуудсанд 1-2 минутын дотор гарна.' : 'Энд хийсэн өөрчлөлт бүх хэрэглэгчид шууд харагдана.'}</p></div><div>${saveChip()}</div></div>
+  <div class="adm">
+    ${GHM ? ghPanel() : ''}
+    <section class="panel stack" style="gap:12px">
+      <div class="panel-h" style="margin:0"><h2>Мэдээлэл нэмэх</h2></div>
+      <div class="row-actions"><button class="btn primary" data-act="add-doc">${ic('plus')}Баримт нэмэх</button><button class="btn" data-act="add-comp">${ic('plus')}${esc(CF().n)} нэмэх</button></div>
+      <div class="row-actions"><button class="btn primary" data-act="bulk-pdf">${ic('pdf')}PDF бөөнөөр холбох</button></div>
+      <div class="row-actions"><button class="btn" data-act="import">${ic('up')}Excel-ээс оруулах</button><button class="btn ghost" data-act="template">${ic('dl')}Excel загвар татах</button></div>
+      <p class="note">Танай одоогийн Excel-ийн бүртгэлийн хуудсуудыг (Д/д, Төрөл, Он, Агуулга, Огноо, Дугаар, Хэнд, Хянасан, Боловсруулсан, Тайлбар, Файл) шууд таньж оруулна. Хуудасны нэр төрлийн нэртэй ижил бол Төрөл баганыг орхиж болно. Аль хэдийн байгаа баримтыг давхар оруулахгүй.</p>
+    </section>
+    <section class="panel stack" style="gap:12px">
+      <div class="panel-h" style="margin:0"><h2>Татаж авах</h2></div>
+      <div class="row-actions"><button class="btn primary" data-act="export-offline">${ic('dl')}Офлайн хувилбар, HTML</button></div>
+      <div class="row-actions"><button class="btn" data-act="export-all">${ic('dl')}Бүх мэдээлэл, Excel</button><button class="btn ghost" data-act="export-json">${ic('dl')}Нөөц хуулбар, JSON</button></div>
+      <p class="note">Офлайн хувилбар нь интернэтгүй нээгддэг нэг HTML файл. Тухайн өдрийн бүх мэдээллийг агуулна. PDF-үүдийг таны компьютер дээрх хавтаснаас нээнэ.</p>
+      <p class="note">Excel файлд баримтын төрөл бүр тусдаа хуудсанд, ${esc(lc(CF().g))} санал ба тогтоолын заалт, он оноорх нэгтгэл тус тусдаа хуудсанд гарна.</p>
+    </section>
+    <section class="panel stack" style="gap:12px">
+      <div class="panel-h" style="margin:0"><h2>Баримтын төрөл</h2><p>Нэр болон төрлийн онцлог</p></div>
+      <div class="stack" style="gap:8px" id="typeRows">${D.types.map((t, i) => `<div class="typerow"><span class="dotc" style="--c:${tColor(t.key)}"></span><input class="inp" data-ti="${i}" data-tf="label" value="${esc(t.label)}" aria-label="Төрлийн нэр"><select class="inp" data-ti="${i}" data-tf="kind" aria-label="Төрлийн онцлог">${Object.entries(KIND_LABEL).map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`).join('')}</div>
+      <div class="row-actions"><input class="inp" id="newType" placeholder="Шинэ төрлийн нэр" style="flex:1;min-width:160px"><button class="btn" data-act="add-type">${ic('plus')}Нэмэх</button></div>
+    </section>
+    <section class="panel stack" style="gap:12px">
+      <div class="panel-h" style="margin:0"><h2>${esc(AL())} ба тохиргоо</h2></div>
+      <div class="fld"><label for="areasTa">${esc(AL())}, мөр бүрт нэг</label><textarea class="inp" id="areasTa" style="min-height:180px">${esc(D.areas.join('\n'))}</textarea></div>
+      <div class="fld"><label for="siteNm">Сайтын нэр</label><input class="inp" id="siteNm" value="${esc(D.meta.name)}"></div>
+      <label class="check"><input type="checkbox" id="sampleCk" ${D.meta.sample ? 'checked' : ''}>Жишээ өгөгдөл гэсэн тэмдэглэгээг харуулах</label>
+      <div class="row-actions"><button class="btn primary" data-act="save-settings">Тохиргоог хадгалах</button></div>
+    </section>
+  </div>`;
+}
+
+/* ---------- Excel and downloads ---------- */
+let xlsxP = null;
+function getXLSX() { if (!xlsxP) { xlsxP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js').then(() => window.XLSX); xlsxP.catch(() => { xlsxP = null; }); } return xlsxP; }
+async function offer(filename, data) {
+  const dl = await cap('downloads');
+  if (!dl) {
+    if (!window.claude) { try { const url = URL.createObjectURL(data instanceof Blob ? data : new Blob([data])); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000); return; } catch (e) { /* fall through */ } }
+    toast('Энэ орчинд файл татах боломжгүй байна'); return;
+  }
+  try { await dl.save({ filename, data }); }
+  catch (e) { if (e && e.code === 'declined') return; if (e && e.code === 'rate_limited') { toast('Өмнөх татах цонх нээлттэй байна'); return; } toast('Файлыг татаж чадсангүй'); }
+}
+const safeName = s => String(s).replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 120);
+function docRowX(d) {
+  const r = { 'Төрөл': tOf(d.type).label, 'Он': d.year, 'Огноо': fmtD(d), 'Дугаар': d.no || '', 'Агуулга': d.title, 'Хэнд': d.to || '', [AL()]: d.area || '', 'Төлөв': stLabel(d) };
+  if (kindOf(d.type) === 'law') { r['Төслийн тоо'] = projOf(d); r['Өгсөн саналын тоо'] = d.proposals || 0; if (d.accepted != null && d.accepted !== '') r['Тусгагдсан санал'] = d.accepted; }
+  Object.entries(d.x || {}).forEach(([k, v]) => { r[k] = v; });
+  if (d.summary) r['Товч агуулга'] = d.summary;
+  r['Файл'] = d.hasFile ? 'Тийм' : 'Үгүй';
+  if (d.pdf) r['PDF'] = d.pdf;
+  return r;
+}
+function sheetFrom(XLSX, rows, widths) { const ws = XLSX.utils.json_to_sheet(rows); if (widths) ws['!cols'] = widths.map(w => ({ wch: w })); return ws; }
+const WID = [22, 12, 12, 7, 60, 30, 30, 20, 12, 14, 60, 30];
+async function xlsxOut(name, build) {
+  toast('Excel файл бэлтгэж байна');
+  try { const XLSX = await getXLSX(); const wb = XLSX.utils.book_new(); build(XLSX, wb); const out = XLSX.write(wb, { type: 'array', bookType: 'xlsx' }); await offer(name, new Blob([out])); }
+  catch (e) { toast('Excel файл үүсгэж чадсангүй'); }
+}
+function compRowsX() {
+  const F = CF();
+  return S.data.comps.slice().sort((a, b) => a.no - b.no).flatMap(c => c.items.map(it => ({ [`${F.n} №`]: c.no, 'Он': c.year, 'Санал №': it.n, 'Бүлэг, сэдэв': it.area || '', 'Санал, зөвлөмж': it.text, 'Төрөл': it.kind || 'Үндсэн', 'Тусгагдсан байдал': itemLabel(it.st), 'Тогтоолд тусгагдсан заалт': it.ctext || '', 'Тайлбар': it.note || '', 'Тогтоол': c.res ? (c.res.title || resShort(c)) : 'Тогтоол гараагүй' })));
+}
+function pivotRowsX() {
+  const { rows, T } = pivotData(), F = CF();
+  const mk = (label, g) => { const o = { 'Он': label }; T.forEach(t => { if (kindOf(t.key) === 'law') { o['Хуулийн төсөл (тоо)'] = g(r => r.proj); o['Төсөлд өгсөн санал (тоо)'] = g(r => r.p); } else o[t.label] = g(r => r.c[t.key]); }); o[`${F.g} санал`] = g(r => r.ci); o['Нийт баримт'] = g(r => r.total); return o; };
+  return rows.map(r => mk(r.y, fn => fn(r))).concat([mk('Нийт', fn => sum(rows, fn))]);
+}
+const ACT = {
+  nav: a => { closeLayer(); if (!$('#reader').hidden) closeReader(); go(a.dataset.view); },
+  open: a => { if (a.dataset.rq) rememberQ(a.dataset.rq); closeLayer(); openReader('doc', a.dataset.id); },
+  comp: a => { if (a.dataset.rq) rememberQ(a.dataset.rq); closeLayer(); go('comp', { id: a.dataset.id }); },
+  'comp-from-reader': a => { closeReader(); go('comp', { id: a.dataset.id }); },
+  'open-comp-pdf': a => openReader('comp', a.dataset.id),
+  kpi: a => { S.f = freshF({ type: a.dataset.type, y1: S.dashYear === 'all' ? '' : S.dashYear, y2: S.dashYear === 'all' ? '' : S.dashYear }); S.sort = 'auto'; go('docs'); },
+  pv: a => { S.f = freshF({ type: a.dataset.type, y1: a.dataset.y, y2: a.dataset.y }); go('docs'); },
+  stf: a => { S.f = freshF({ st: a.dataset.st, y1: S.dashYear === 'all' ? '' : S.dashYear, y2: S.dashYear === 'all' ? '' : S.dashYear }); go('docs'); },
+  tof: a => { const fk = S.data.meta.addrFacet; S.f = fk ? freshF({ x: { [fk]: a.dataset.v } }) : freshF({ to: a.dataset.v }); go('docs'); },
+  legend: a => { const k = a.dataset.type; S.chartHide.has(k) ? S.chartHide.delete(k) : S.chartHide.add(k); a.setAttribute('aria-pressed', String(!S.chartHide.has(k))); drawYearChart(); },
+  tchip: a => { S.f.type = a.dataset.type; S.limit = 40; renderDocsDyn(); },
+  itf: a => { S.itemSt = a.dataset.st; render(); },
+  more: () => { S.limit += 40; renderDocsDyn(); },
+  clearf: a => { const k = a.dataset.k; if (k === 'all') S.f = freshF({ q: S.f.q, type: S.f.type }); else if (k === 'yr') { S.f.y1 = ''; S.f.y2 = ''; } else if (k === 'pdf') S.f.pdf = false; else if (k === 'file') S.f.file = false; else if (k.startsWith('fx:')) { const x = Object.assign({}, S.f.x); delete x[k.slice(3)]; S.f.x = x; } else S.f[k] = ''; renderDocsDyn(); },
+  filters: () => openFilters(),
+  fapply: () => { S.f = readFilterForm(); S.limit = 40; closeLayer(); if (S.view !== 'docs') go('docs'); else { render(); } },
+  freset: () => { S.f = freshF(); closeLayer(); render(); },
+  palette: () => openPalette(),
+  'pal-q': a => { const i = $('#palQ'); i.value = a.dataset.q; palSearch(i.value); i.focus(); },
+  'pal-all': a => { rememberQ(a.dataset.q); closeLayer(); S.f = freshF({ q: a.dataset.q }); S.sort = 'auto'; go('docs'); },
+  'close-layer': () => closeLayer(),
+  scrim: (a, e) => { if (e.target === a) closeLayer(); },
+  'close-reader': () => closeReader(),
+  zoom: a => zoom(+a.dataset.d),
+  'dl-pdf': async () => { if (!PV.path) return; const lf = STANDALONE && S.readerId && OFF.byDoc[S.readerId]; if (lf) { offer(safeName(PV.name) + '.pdf', lf); return; } try { const r = await fetch(pdfUrl(PV.path)); if (!r.ok) throw new Error(); await offer(safeName(PV.name) + '.pdf', await r.blob()); } catch (e) { toast('PDF файлыг уншиж чадсангүй'); } },
+  'dl-results': () => { const rows = applyFilters(false).map(docRowX); xlsxOut(`Баримтууд ${todayISO()}.xlsx`, (X, wb) => X.utils.book_append_sheet(wb, sheetFrom(X, rows, WID), 'Үр дүн')); },
+  'dl-pivot': () => xlsxOut(`Он оноорх нэгтгэл ${todayISO()}.xlsx`, (X, wb) => X.utils.book_append_sheet(wb, sheetFrom(X, pivotRowsX()), 'Он оноор')),
+  'export-all': () => xlsxOut(`ХЭҮК мэдээллийн сан ${todayISO()}.xlsx`, (X, wb) => {
+    types().forEach(t => { const rows = S.data.docs.filter(d => d.type === t.key).map(docRowX); if (rows.length) X.utils.book_append_sheet(wb, sheetFrom(X, rows, WID), t.label.slice(0, 31)); });
+    X.utils.book_append_sheet(wb, sheetFrom(X, compRowsX(), [10, 7, 8, 30, 60, 10, 16, 60, 30, 40]), CF().n.slice(0, 31));
+    X.utils.book_append_sheet(wb, sheetFrom(X, pivotRowsX()), 'Он оноор');
+  }),
+  'export-offline': () => exportOffline(),
+  'off-pick': () => offPick(),
+  'export-json': () => offer(`heuk-medeelliin-san-${todayISO()}.json`, JSON.stringify(S.data, null, 1)),
+  template: () => xlsxOut('Мэдээлэл оруулах загвар.xlsx', (X, wb) => types().forEach(t => X.utils.book_append_sheet(wb, sheetFrom(X, [Object.assign({ 'Д/д': 1, 'Төрөл': t.label, 'Он': new Date().getFullYear(), 'Агуулга': 'Жишээ мөр, оруулахын өмнө устгана уу', 'Огноо': todayISO().replace(/-/g, '.'), 'Дугаар': '', 'Хэнд': '' }, kindOf(t.key) === 'law' ? { 'Төслийн тоо': 1, 'Өгсөн саналын тоо': 0 } : {}, { 'Хянасан': '', 'Боловсруулсан': '', 'Тайлбар': '', 'Файл': 'Үгүй' })], WID), t.label.slice(0, 31)))),
+  import: () => { const i = $('#xlsIn'); i.value = ''; i.click(); },
+  'add-doc': () => openDocForm(null),
+  'bulk-pdf': () => openBulkPdf(),
+  'bp-folder': () => { const i = $('#bpDir'); i.value = ''; i.click(); },
+  'bp-files': () => { const i = $('#bpFiles'); i.value = ''; i.click(); },
+  'bp-reset': () => { if (BP.busy) return; BP.rows = []; openBulkPdf(); },
+  'bp-go': () => bpUpload(),
+  'edit-doc': a => openDocForm(a.dataset.id),
+  'del-doc': async a => { const d = findDoc(a.dataset.id); if (!d) return; if (!await confirmBox('Баримтыг устгах уу?', d.title)) return; dropPdf(d); S.data.docs = S.data.docs.filter(x => x.id !== d.id); closeReader(); changed(); render(); toast('Баримтыг устгалаа'); },
+  'add-comp': () => openCompForm(null),
+  'edit-comp': a => openCompForm(a.dataset.id),
+  'del-comp': async a => { const c = findComp(a.dataset.id); if (!c) return; if (!await confirmBox(`${CF().n} устгах уу?`, `${c.title}, ${c.items.length} санал хамт устгагдана.`)) return; dropPdf(c); S.data.comps = S.data.comps.filter(x => x.id !== c.id); changed(); go('comps'); toast('Устгалаа'); },
+  'add-item': a => openItemForm(a.dataset.id, null),
+  'edit-item': a => openItemForm(a.dataset.id, a.dataset.n),
+  'del-item': async a => { const c = findComp(a.dataset.id); const it = c && c.items.find(x => x.n === +a.dataset.n); if (!it) return; if (!await confirmBox('Саналыг устгах уу?', it.text)) return; c.items = c.items.filter(x => x !== it); changed(); render(); },
+  'add-type': () => { const v = $('#newType').value.trim(); if (!v) { $('#newType').focus(); return; } S.data.types.push({ key: 't' + uid(), label: v, short: v.length > 18 ? v.split(' ').slice(0, 2).join(' ') : v, kind: 'doc' }); changed(); render(); toast('Шинэ төрөл нэмэгдлээ'); },
+  'save-now': () => { clearTimeout(S.saveTimer); saveNow(); },
+  'gh-login': () => openGhLogin(),
+  'gh-logout': () => ghLogout(),
+  'save-settings': () => {
+    $$('[data-ti]').forEach(el => { const t = S.data.types[+el.dataset.ti]; const f = el.dataset.tf; const v = el.value.trim(); if (!v) return; if (f === 'label' && v !== t.label) { t.label = v; t.short = v.length > 18 ? v.split(' ').slice(0, 2).join(' ') : v; } if (f === 'kind') t.kind = v; });
+    const areas = $('#areasTa').value.split('\n').map(s => s.trim()).filter(Boolean); if (areas.length) S.data.areas = [...new Set(areas)];
+    const nm = $('#siteNm').value.trim(); if (nm) S.data.meta.name = nm;
+    S.data.meta.sample = $('#sampleCk').checked;
+    changed(); render(); toast('Тохиргоог хадгаллаа');
+  }
+};
+
+/* ---------- bulk PDF linking ---------- */
+const BP = { rows: [], busy: false, opts: {} };
+const normNo = no => String(no || '').trim().replace(/\s+/g, '').split(/[\/\\-]/).map(x => x.replace(/^0+(?=\d)/, '')).join('/');
+function typeFromPath(path) {
+  const segs = String(path || '').split(/[\\/]/).slice(0, -1).reverse();
+  for (const seg of segs) {
+    const clean = lat(seg.replace(/^[\d\s._)-]+/, ''));
+    if (clean.length < 3) continue;
+    const full = types().filter(t => { const a = lat(t.label), b = lat(t.short); return clean === a || clean === b || clean.includes(a) || clean.includes(b); });
+    if (full.length) return full.sort((x, y) => lat(y.label).length - lat(x.label).length)[0].key;
+    const part = types().filter(t => lat(t.label).includes(clean));
+    if (part.length === 1) return part[0].key;
+  }
+  return '';
+}
+function fileSignals(path) {
+  const parts = String(path).split(/[\\/]/);
+  const name = parts.pop().replace(/\.pdf$/i, '');
+  const sig = { dates: [], years: [], pairs: [], nums: [], words: [] };
+  parts.forEach(p => { const m = p.match(/(?<!\d)(19[89]\d|20[0-4]\d)(?!\d)/); if (m) sig.years.push(+m[1]); });
+  let t = norm(name).replace(/[‐-―]/g, '-');
+  t = t.replace(/(?<!\d)(\d{4})([.\-_ ])(\d{1,2})\2(\d{1,2})(?!\d)/g, (m, y, sp, mo, d) => { if (+y > 1989 && +y < 2100 && +mo >= 1 && +mo <= 12 && +d >= 1 && +d <= 31) { sig.dates.push(`${y}-${pad(mo)}-${pad(d)}`); sig.years.push(+y); return ' '; } return m; });
+  t = t.replace(/(?<!\d)(\d{1,2})([.\-_ ])(\d{1,2})\2(\d{4})(?!\d)/g, (m, d, sp, mo, y) => { if (+y > 1989 && +y < 2100 && +mo >= 1 && +mo <= 12 && +d >= 1 && +d <= 31) { sig.dates.push(`${y}-${pad(mo)}-${pad(d)}`); sig.years.push(+y); return ' '; } return m; });
+  t = t.replace(/(?<!\d)(19[89]\d|20[0-4]\d)(?!\d)/g, m => { sig.years.push(+m); return ' '; });
+  t = t.replace(/(?<!\d)(\d{1,3})\s*[\/\-_.]\s*(\d{1,4})(?!\d)/g, (m, a, b) => { sig.pairs.push(`${+a}/${+b}`); return ' '; });
+  t = t.replace(/(?<!\d)(\d{1,4})(?!\d)/g, m => { sig.nums.push(+m); return ' '; });
+  sig.words = t.split(/[^a-zа-яөүё]+/i).filter(w => w.length >= 4);
+  return sig;
+}
+function titleSim(words, d) {
+  const x = d._ix; if (!x || !words.length) return 0;
+  let hits = 0;
+  for (const w of words) {
+    if (/[а-яөү]/.test(w)) { if (x.tc.includes(w.slice(0, 5))) hits++; }
+    else { const l = lat(w).slice(0, 4); if (l.length >= 3 && x.tl.includes(l)) hits++; }
+  }
+  let sc = Math.min(6, hits * 1.5);
+  if (hits / words.length < 0.3) sc *= 0.5;
+  return sc;
+}
+function matchSig(sig, pool) {
+  let best = null, second = 0;
+  for (const d of pool) {
+    let sc = 0; const dn = normNo(d.no);
+    if (sig.dates.includes(String(d.date).slice(0, 10))) sc += 6;
+    if (dn) {
+      if (dn.includes('/') ? sig.pairs.includes(dn) : sig.nums.includes(+dn)) sc += dn.includes('/') ? 6 : 3;
+      else if (dn.includes('/') && sig.years.includes(d.year) && sig.nums.includes(+dn.split('/').pop())) sc += 3;
+    }
+    if (sig.years.length) sc += sig.years.includes(d.year) ? 2 : -3;
+    const seq = +String(d.id).split('-').pop();
+    if (seq && !sig.pairs.length && !sig.dates.length && sig.nums.includes(seq)) sc += 1;
+    sc += titleSim(sig.words, d);
+    if (!best || sc > best.sc) { if (best) second = Math.max(second, best.sc); best = { d, sc }; }
+    else if (sc > second) second = sc;
+  }
+  if (!best || best.sc < 3) return { id: '', conf: 'none', sc: 0 };
+  return { id: best.d.id, sc: best.sc, conf: best.sc >= 6 && best.sc - second >= 2 ? 'ok' : 'check' };
+}
+function bpLabelMap(type) {
+  const m = new Map(), back = {};
+  for (const d of S.data.docs) {
+    if (d.type !== type) continue;
+    let l = [d.no ? '№ ' + d.no : '', fmtD(d), d.title.length > 90 ? d.title.slice(0, 88) + '…' : d.title].filter(Boolean).join(' · ');
+    if (m.has(l)) l += ` (${String(d.id).split('-').pop()})`;
+    m.set(l, d.id); back[d.id] = l;
+  }
+  return { m, back };
+}
+function coverage() {
+  return types().map(t => { const ds = S.data.docs.filter(d => d.type === t.key); return [t, ds.filter(d => d.pdf).length, ds.length]; });
+}
+async function openBulkPdf() {
+  if (BP.busy) { bpRender(); return; }
+  const deflt = BP.opts.type || '';
+  sheet('PDF бөөнөөр холбох', `
+    <div class="drop" id="bpDrop">
+      ${ic('pdf', 28)}
+      <b>PDF хавтас эсвэл файлуудаа энд чирж оруулна уу</b>
+      <span>Нэг ангиллын хавтас (жишээ нь 1.Komissiin sanal) эсвэл бүх ангиллын хавтсыг агуулсан data хавтсыг бүхэлд нь сонгож болно.</span>
+      <div class="row-actions" style="justify-content:center"><button class="btn primary" data-act="bp-folder">${ic('layers')}Хавтас сонгох</button><button class="btn" data-act="bp-files">${ic('docs')}Файл сонгох</button></div>
+    </div>
+    <div class="fld"><label for="bpType">Ангилал</label><select class="inp" id="bpType"><option value="">Хавтасны нэрээр автоматаар тодорхойлох</option>${types().map(t => `<option value="${t.key}" ${deflt === t.key ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select><small>Хавтасны нэрээс ангиллыг тодорхойлж чадахгүй үед энд сонгосон ангиллыг ашиглана.</small></div>
+    <label class="check"><input type="checkbox" id="bpOver" ${BP.opts.over ? 'checked' : ''}>PDF-тэй баримтын файлыг шинээр солих</label>
+    <div class="note"><b>Тааруулах арга.</b> Файлын нэрэн дэх албан бичгийн дугаар (1-155, 1_155), огноо (2021.02.09), он болон гарчгийн үгсээр Excel-ийн мөртэй тааруулна. Холбохоос өмнө санал болгосон тааруулалт бүрийг шалгаж, шаардлагатай бол өөрчилнө.</div>
+    <div><div class="eyebrow" style="margin-bottom:8px">Одоогийн байдал</div><div class="cov">${coverage().map(([t, a, n]) => `<span>${esc(t.label)}</span><span>${a} / ${n} PDF-тэй</span>`).join('')}</div><p class="search-note" id="bpUsage"></p></div>`,
+    `<button class="btn ghost" data-act="close-layer">Хаах</button>`, true);
+  const dirIn = $('#bpDir'), fIn = $('#bpFiles');
+  dirIn.onchange = () => bpCollect([...dirIn.files].map(f => ({ file: f, path: f.webkitRelativePath || f.name })));
+  fIn.onchange = () => bpCollect([...fIn.files].map(f => ({ file: f, path: f.name })));
+  const dz = $('#bpDrop');
+  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+  dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+  dz.addEventListener('drop', async e => {
+    e.preventDefault(); dz.classList.remove('over');
+    const out = [], items = [...(e.dataTransfer.items || [])];
+    const entries = items.map(i => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+    if (entries.length) { for (const en of entries) await walkEntry(en, '', out); }
+    else [...e.dataTransfer.files].forEach(f => out.push({ file: f, path: f.name }));
+    bpCollect(out);
+  });
+  const assets = await cap('assets');
+  if (assets) { try { const u = (await assets.list()).usage; const el = $('#bpUsage'); if (el) el.textContent = `Хадгалах багтаамж: ${nf(u.files)} / ${nf(u.maxFiles)} файл, ${(u.bytes / 1048576).toFixed(0)} / ${(u.maxBytes / 1048576).toFixed(0)} МБ ашигласан.`; } catch (err) { /* usage is optional */ } }
+}
+async function walkEntry(entry, prefix, out) {
+  if (entry.isFile) { try { const f = await new Promise((res, rej) => entry.file(res, rej)); out.push({ file: f, path: prefix + f.name }); } catch (e) { /* unreadable file */ } return; }
+  if (entry.isDirectory) {
+    const reader = entry.createReader(); let batch;
+    do { batch = await new Promise(res => reader.readEntries(res, () => res([]))); for (const en of batch) await walkEntry(en, prefix + entry.name + '/', out); } while (batch.length);
+  }
+}
+function bpCollect(list) {
+  BP.opts.type = ($('#bpType') || {}).value || BP.opts.type || '';
+  BP.opts.over = !!($('#bpOver') || {}).checked;
+  const pdfs = list.filter(x => /\.pdf$/i.test(x.file.name));
+  const other = list.length - pdfs.length;
+  if (!pdfs.length) { toast(list.length ? 'Сонгосон хэсэгт PDF файл алга' : 'Файл сонгогдсонгүй'); return; }
+  toast(`${nf(pdfs.length)} PDF файлыг тааруулж байна`);
+  setTimeout(() => {
+    const pools = {};
+    const rows = pdfs.map(x => {
+      const type = typeFromPath(x.path) || BP.opts.type;
+      const sig = fileSignals(x.path);
+      const pool = type ? (pools[type] = pools[type] || S.data.docs.filter(d => d.type === type)) : S.data.docs;
+      const m = matchSig(sig, pool);
+      const d = m.id ? findDoc(m.id) : null;
+      return { file: x.file, path: x.path, type: type || (d ? d.type : ''), id: m.id, conf: m.conf, sc: m.sc, st: '' };
+    });
+    const byId = {};
+    rows.forEach(r => { if (!r.id) return; const o = byId[r.id]; if (!o) byId[r.id] = r; else if (r.sc > o.sc) { o.id = ''; o.conf = 'dup'; byId[r.id] = r; } else { r.id = ''; r.conf = 'dup'; } });
+    BP.rows = rows; BP.skippedNonPdf = other;
+    bpRender();
+  }, 30);
+}
+const BP_CONF = { ok: ['ok', 'Итгэлтэй'], check: ['warn', 'Шалгах'], manual: ['info', 'Гараар сонгосон'], none: ['bad', 'Олдсонгүй'], dup: ['bad', 'Давхардсан'] };
+function bpRender() {
+  const rows = BP.rows, cnt = { ok: 0, check: 0, manual: 0, none: 0, dup: 0 };
+  rows.forEach(r => cnt[r.conf]++);
+  const linkable = rows.filter(r => r.id && (BP.opts.over || !findDoc(r.id).pdf)).length;
+  const typesIn = [...new Set(rows.map(r => r.type).filter(Boolean))];
+  const maps = {}; typesIn.forEach(k => { maps[k] = bpLabelMap(k); });
+  BP.maps = maps;
+  const order = { none: 0, dup: 1, check: 2, manual: 3, ok: 4 };
+  const sorted = rows.map((r, i) => [r, i]).sort((a, b) => (a[0].type || '').localeCompare(b[0].type || '') || order[a[0].conf] - order[b[0].conf] || a[0].path.localeCompare(b[0].path));
+  let lastType = null, html = '';
+  for (const [r, i] of sorted) {
+    if (r.type !== lastType) { lastType = r.type; html += `<div class="bp-group">${esc(r.type ? tOf(r.type).label : 'Ангилал тодорхойгүй')}</div>`; }
+    const d = r.id ? findDoc(r.id) : null;
+    const [cls, lab] = BP_CONF[r.conf];
+    const stTxt = r.st === 'done' ? pill('done', 'Холбогдсон') : r.st === 'fail' ? `<span class="pill bad">${ic('bad', 13)}Алдаа</span>` : r.st === 'skip' ? `<span class="pill na">${ic('na', 13)}Алгассан</span>` : `<span class="pill ${cls}">${ic(ST_IC[cls] || 'na', 13)}${lab}</span>`;
+    html += `<div class="mrow"><div class="mfile">${esc(r.path.split(/[\\/]/).pop())}${r.path.includes('/') ? `<small>${esc(r.path.split('/').slice(0, -1).join(' / '))}</small>` : ''}</div>
+      <div class="mpick">${r.type ? `<input class="inp" list="bpl-${r.type}" data-bp="${i}" value="${esc(d ? maps[r.type].back[d.id] || '' : '')}" placeholder="Баримтыг дугаар, огноо, гарчгаар хайж сонгох" aria-label="Холбох баримт" ${BP.busy ? 'disabled' : ''}>${d && d.pdf && !BP.opts.over && !r.st ? '<small>Энэ баримт аль хэдийн PDF-тэй тул алгасна</small>' : ''}` : '<span class="pair-note">Дээрх Ангилал талбараас ангиллыг сонгоод дахин сонгоно уу</span>'}</div>
+      <div>${stTxt}</div></div>`;
+  }
+  const lists = typesIn.map(k => `<datalist id="bpl-${k}">${[...maps[k].m.keys()].map(l => `<option value="${esc(l)}">`).join('')}</datalist>`).join('');
+  sheet('PDF бөөнөөр холбох', `
+    <div class="bp-sum">
+      <span class="pill ok">${ic('ok', 13)}Итгэлтэй ${cnt.ok}</span><span class="pill warn">${ic('half', 13)}Шалгах ${cnt.check}</span>${cnt.manual ? `<span class="pill info">${ic('reply', 13)}Гараар ${cnt.manual}</span>` : ''}<span class="pill bad">${ic('bad', 13)}Олдсонгүй ${cnt.none + cnt.dup}</span>
+    </div>
+    <p class="search-note" style="margin:0">${nf(rows.length)} PDF файл${BP.skippedNonPdf ? `, ${BP.skippedNonPdf} PDF биш файлыг тооцоогүй` : ''}. "Шалгах" болон "Олдсонгүй" гэсэн мөрүүд эхэнд байна. Талбарт дугаар эсвэл гарчгийн хэсгийг бичээд жагсаалтаас зөв баримтыг сонгоно. Холбохгүй бол талбарыг хоосон үлдээнэ.</p>
+    ${BP.busy || BP.done ? `<div class="progress"><i id="bpBar" style="width:${BP.prog || 0}%"></i></div><p class="search-note" id="bpMsg" style="margin:0">${esc(BP.msg || '')}</p>` : ''}
+    <div id="bpRows">${html}</div>${lists}`,
+    `<button class="btn ghost" data-act="bp-reset" ${BP.busy ? 'disabled' : ''}>Өөр хавтас сонгох</button><span style="flex:1"></span><button class="btn ghost" data-act="close-layer">Хаах</button><button class="btn primary" data-act="bp-go" id="bpGo" ${linkable && !BP.busy ? '' : 'disabled'}>${BP.busy ? 'Холбож байна' : `${nf(linkable)} PDF холбох`}</button>`, true);
+  $('#bpRows').addEventListener('change', e => {
+    const inp = e.target.closest('[data-bp]'); if (!inp) return;
+    const r = BP.rows[+inp.dataset.bp]; const v = inp.value.trim();
+    if (!v) { r.id = ''; r.conf = 'none'; }
+    else { const id = BP.maps[r.type] && BP.maps[r.type].m.get(v); if (!id) { toast('Жагсаалтаас баримтыг сонгоно уу'); return; } const other = BP.rows.find(x => x !== r && x.id === id); if (other) { other.id = ''; other.conf = 'dup'; } r.id = id; r.conf = 'manual'; }
+    const keep = $('.sheet-b') ? $('.sheet-b').scrollTop : 0; bpRender(); const sb = $('.sheet-b'); if (sb) sb.scrollTop = keep;
+  });
+}
+async function uploadRetry(assets, file) {
+  for (let i = 0; ; i++) {
+    try { return await assets.upload(file, { type: 'application/pdf' }); }
+    catch (e) { const c = e && e.code; if ((c === 'rate_limited' || c === 'upstream_error') && i < 3) { await new Promise(r => setTimeout(r, 2500 * (i + 1) + Math.random() * 1000)); continue; } throw e; }
+  }
+}
+async function bpUpload() {
+  if (BP.busy) return;
+  const assets = GHM ? null : await cap('assets');
+  if (!assets && !(GHM && S.admin)) { toast('Энэ орчинд PDF хадгалах боломжгүй. Аппыг засварлах эрхтэйгээр нээнэ үү.'); return; }
+  const jobs = BP.rows.filter(r => r.id && !r.st && (BP.opts.over || !findDoc(r.id).pdf));
+  BP.rows.filter(r => r.id && !r.st && !jobs.includes(r)).forEach(r => { r.st = 'skip'; });
+  const total = jobs.length; if (!total) return;
+  BP.busy = true; BP.done = false; BP.prog = 0; BP.msg = `0 / ${total}`; let n = 0, ok = 0, fails = 0, sinceSave = 0;
+  bpRender();
+  const tick = () => { BP.prog = Math.round(n / total * 100); BP.msg = `${n} / ${total} файл боловсруулсан${fails ? `, ${fails} алдаатай` : ''}`; const b = $('#bpBar'), m = $('#bpMsg'); if (b) b.style.width = BP.prog + '%'; if (m) m.textContent = BP.msg; };
+  const worker = async () => {
+    while (jobs.length) {
+      const r = jobs.shift(); const d = findDoc(r.id);
+      try {
+        if (GHM) {
+          const path = `pdf/${d.id}.pdf`;
+          const sha = await GH.blob(r.file);
+          if (d.pdf && d.pdf !== path) dropPdf(d);
+          S.pendingDel.delete(path); S.pending.delete(path); GH.staged.set(path, sha);
+          if (S.blob[path]) URL.revokeObjectURL(S.blob[path]);
+          d.pdf = path; S.blob[path] = URL.createObjectURL(r.file); d.hasFile = true; await stampPdf(d, r.file, r.path); r.st = 'done'; ok++; sinceSave++;
+        } else {
+        const res = await uploadRetry(assets, r.file);
+        const old = d.pdf && String(d.pdf).startsWith('/_blob/') ? d.pdf.slice(7) : '';
+        d.pdf = '/_blob/' + res.id; S.blob[d.pdf] = res.url; d.hasFile = true; await stampPdf(d, r.file, r.path); r.st = 'done'; ok++; sinceSave++;
+        if (old && old !== res.id) { try { await assets.delete(old); } catch (e) { /* old file stays */ } }
+        }
+      } catch (e) { r.st = 'fail'; r.err = e && e.code; fails++; }
+      n++; tick();
+      if (sinceSave >= 60) { sinceSave = 0; saveNow(); }
+    }
+  };
+  await Promise.all([worker(), worker(), worker()]);
+  BP.busy = false; BP.done = true;
+  BP.msg = `${ok} PDF холбогдлоо${fails ? `. ${fails} файл алдаатай тул холбогдсонгүй, ${GHM ? 'интернэт холболтоо шалгаад дахин оролдоно уу' : 'хэмжээ нь 20 МБ-аас их эсэхийг шалгана уу'}` : ''}.`;
+  BP.prog = 100;
+  setSave('dirty'); await saveNow();
+  if ($('#bpRows')) bpRender();
+  render(); toast(`${ok} PDF холбогдлоо`);
+}
+
+/* ---------- Excel import ---------- */
+const HDR = {
+  type: ['төрөл', 'баримтын төрөл'], no: ['дугаар', '№', 'баримтын дугаар'], date: ['огноо', 'хүргүүлсэн огноо', 'date'], year: ['он'],
+  title: ['агуулга', 'гарчиг', 'нэр', 'баримтын нэр', 'гарчиг, агуулга', 'хуулийн төслийн нэр', 'судалгааны нэр', 'дүн шинжилгээ'],
+  to: ['хэнд', 'хүлээн авагч', 'хүргүүлсэн', 'хүргүүлсэн байгууллага', 'хаана'],
+  area: ['сэдэв', 'эрхийн чиглэл', 'чиглэл'], status: ['төлөв', 'хэрэгжилт', 'хэрэгжилтийн байдал'], summary: ['товч агуулга', 'агуулга, авсан арга хэмжээ'],
+  projects: ['төслийн тоо', 'хуулийн төсөл (тоо)'], proposals: ['өгсөн саналын тоо', 'өгсөн санал', 'саналын тоо', 'төсөлд өгсөн санал (тоо)'], accepted: ['тусгагдсан санал', 'туссан санал'],
+  file: ['файл'], pdf: ['pdf', 'холбоос'], skip: ['д/д', 'сар', 'онсар', '_мөр (туслах)', '_хайлт (туслах)']
+};
+const VIEW_SHEET = /хайлт|самбар|нэгтгэл|пивот|дата|тооцоо|түлхүүр|нөөц|хяналт|санхүүжилт|илтгэл/i;
+function mapHeaders(keys) { const m = {}; for (const k of keys) { const n = norm(k).trim(); for (const [f, syn] of Object.entries(HDR)) if (!m[f] && syn.includes(n)) { m[f] = k; break; } } return m; }
+function parseDate(v) {
+  if (v == null || v === '') return '';
+  if (typeof v === 'number') { if (v > 1800 && v < 2200) return `${v}-01-01`; const d = new Date(Math.round((v - 25569) * 86400000)); return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}`; }
+  const s = String(v); let m = s.match(/(\d{4})\D+(\d{1,2})\D+(\d{1,2})/); if (m) return `${m[1]}-${pad(m[2])}-${pad(m[3])}`;
+  m = s.match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/); if (m) return `${m[3]}-${pad(m[2])}-${pad(m[1])}`;
+  m = s.match(/(\d{4})/); return m ? `${m[1]}-01-01` : '';
+}
+function findStatus(type, label) { const n = norm(label).trim(); const list = stList(type); const dflt = (list.find(x => x[0] === 'unk') || list.find(x => x[0] === 'pending') || list[0] || ['na'])[0]; if (!n) return dflt; const all = list.concat(ST.doc, ST.law, ST.pub).filter(x => x[1]); const hit = all.find(([, l]) => norm(l) === n) || all.find(([, l]) => norm(l).startsWith(n) || n.startsWith(norm(l))); return hit ? hit[0] : dflt; }
+function findType(label) { const n = norm(label).trim(); if (!n) return null; const t = types().find(t => norm(t.label) === n || norm(t.short) === n) || types().find(t => n.startsWith(norm(t.short))); return t ? t.key : null; }
+$('#xlsIn').addEventListener('change', async e => {
+  const file = e.target.files[0]; if (!file) return;
+  toast('Файлыг уншиж байна');
+  try {
+    const XLSX = await getXLSX();
+    const wb = XLSX.read(await file.arrayBuffer(), { cellDates: false });
+    const seen = new Set(S.data.docs.map(d => `${d.type}|${d.year}|${norm(d.no)}|${norm(d.title)}`));
+    const add = [], used = [], ignored = []; let skipped = 0, dup = 0;
+    const meta = (wb.Workbook && wb.Workbook.Sheets) || [];
+    wb.SheetNames.forEach((sn, si) => {
+      if ((meta[si] && meta[si].Hidden) || VIEW_SHEET.test(sn)) { ignored.push(sn); return; }
+      const rows = XLSX.utils.sheet_to_json(wb.Sheets[sn], { defval: '' }); if (!rows.length) { ignored.push(sn); return; }
+      const keys = Object.keys(rows[0]); const m = mapHeaders(keys); if (!m.title) { ignored.push(sn); return; }
+      const mapped = new Set(Object.values(m));
+      const sheetType = findType(sn); let n = 0;
+      for (const r of rows) {
+        const title = String(r[m.title] || '').trim(); if (!title) continue;
+        const type = (m.type && findType(r[m.type])) || sheetType; if (!type) { skipped++; continue; }
+        let date = parseDate(m.date ? r[m.date] : ''); if (!date && m.year) date = parseDate(r[m.year]); if (!date) { skipped++; continue; }
+        const year = m.year && /^\d{4}$/.test(String(r[m.year]).trim()) ? +String(r[m.year]).trim() : +date.slice(0, 4);
+        const d = { id: `${type}-${year}-${uid()}`, type, date, year, no: String(m.no ? r[m.no] : '').trim(), title, to: m.to ? String(r[m.to]).trim() : '', area: m.area ? String(r[m.area]).trim() : '', x: {} };
+        if (m.summary && String(r[m.summary]).trim()) d.summary = String(r[m.summary]).trim();
+        if (kindOf(type) === 'law') { d.projects = +(m.projects ? r[m.projects] : 1) || 1; d.proposals = +(m.proposals ? r[m.proposals] : 0) || 0; if (m.accepted && String(r[m.accepted]).trim() !== '') d.accepted = +r[m.accepted] || 0; }
+        if (m.file) { const fv = norm(r[m.file]).trim(); d.hasFile = ['тийм', 'байгаа', 'yes'].includes(fv); }
+        if (m.pdf && r[m.pdf]) d.pdf = String(r[m.pdf]).trim();
+        for (const k of keys) { if (mapped.has(k) || HDR.skip.includes(norm(k).trim()) || /^__EMPTY/.test(k)) continue; const val = String(r[k] ?? '').trim(); if (val) d.x[k] = val; }
+        if (m.status) d.status = findStatus(type, r[m.status]);
+        else if (stList(type).some(x => x[0] === 'reply')) d.status = noteStatus(d.x['Тайлбар']);
+        else d.status = findStatus(type, '');
+        applyRules(d);
+        const key = `${d.type}|${d.year}|${norm(d.no)}|${norm(d.title)}`;
+        if (seen.has(key)) { dup++; continue; }
+        seen.add(key); add.push(d); n++;
+      }
+      used.push(`${sn} (${n})`);
+    });
+    const byT = {}; add.forEach(d => byT[d.type] = (byT[d.type] || 0) + 1);
+    sheet('Excel-ээс оруулах', `<p class="note">${esc(file.name)} файлаас ${nf(add.length)} шинэ баримт уншлаа.${dup ? ` ${nf(dup)} баримт аль хэдийн бүртгэлтэй тул давхар оруулахгүй.` : ''}${skipped ? ` ${skipped} мөрийг төрөл эсвэл огноо дутуу тул алгаслаа.` : ''}</p>
+      <div class="slist">${Object.entries(byT).map(([k, n]) => `<div class="sitem"><span class="dotc" style="--c:${tColor(k)}"></span><span class="lab">${esc(tOf(k).label)}</span><span class="n">${n}</span></div>`).join('') || '<p class="empty">Нэмэх шинэ мөр олдсонгүй.</p>'}</div>
+      ${ignored.length ? `<p class="search-note">Туслах болон тооцооны хуудсыг оруулаагүй: ${esc(ignored.join(', '))}.</p>` : ''}
+      ${S.data.meta.sample ? `<label class="check"><input type="checkbox" id="impRepl">Жишээ өгөгдлийг устгаж, зөвхөн энэ файлын мэдээллийг үлдээх</label>` : ''}`,
+      `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="impGo" ${add.length ? '' : 'disabled'}>${nf(add.length)} баримт нэмэх</button>`);
+    const go2 = $('#impGo'); if (go2) go2.onclick = () => {
+      const repl = $('#impRepl') && $('#impRepl').checked;
+      if (repl) { S.data.docs = []; S.data.comps = []; S.data.meta.sample = false; }
+      S.data.docs.push(...add);
+      add.forEach(d => { if (d.area && !S.data.areas.includes(d.area)) S.data.areas.push(d.area); });
+      closeLayer(); changed(); render(); toast(`${nf(add.length)} баримт нэмэгдлээ`);
+    };
+  } catch (err) { toast('Excel файлыг уншиж чадсангүй'); }
+});
+
+/* ---------- global events ---------- */
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-act]'); if (!a) return;
+  const fn = ACT[a.dataset.act]; if (!fn) return;
+  if (a.dataset.act === 'scrim') { fn(a, e); return; }
+  e.preventDefault(); fn(a, e);
+});
+document.addEventListener('change', e => {
+  const b = e.target.dataset && e.target.dataset.bind;
+  if (b === 'dashYear') { S.dashYear = e.target.value; render(); }
+  if (b === 'sort') { S.sort = e.target.value; renderDocsDyn(); }
+});
+let qT = 0;
+document.addEventListener('input', e => {
+  if (e.target.id === 'docQ') { clearTimeout(qT); const v = e.target.value; qT = setTimeout(() => { S.f.q = v; S.limit = 40; renderDocsDyn(); }, 120); }
+});
+document.addEventListener('focusout', e => { if (e.target.id === 'docQ') rememberQ(e.target.value); });
+$('#main').addEventListener('click', e => {
+  const h = e.target.closest('.hit'); if (!h) return;
+  if (h.dataset.year) { const y = h.dataset.year; S.dashYear = String(S.dashYear) === y ? 'all' : y; render(); }
+  if (h.dataset.comp) go('comp', { id: h.dataset.comp });
+});
+document.addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test((e.target.tagName || ''));
+  if (e.key === 'Escape') { if ($('#layer').children.length) closeLayer(); else if (!$('#reader').hidden) closeReader(); return; }
+  if (!typing && (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'))) { e.preventDefault(); openPalette(); }
+});
+let rzT = 0;
+window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { if (S.view === 'dash') drawCharts(); }, 150); });
+
+/* ---------- boot ---------- */
+$('#offDir').addEventListener('change', e => { const fl = [...e.target.files].map(f => ({ file: f, path: f.webkitRelativePath || f.name })); toast('Хавтсыг уншиж байна'); OFF.busy = true; setTimeout(() => offIndex(fl), 20); });
+renderNav();
+const BOOT = (async () => {
+  try {
+    if (STANDALONE) S.data = JSON.parse(document.getElementById('heuk-data').textContent);
+    else { const r = await fetch('data.json', { cache: 'no-cache' }); if (!r.ok) throw new Error('HTTP ' + r.status); S.data = await r.json(); }
+    prep();
+    const h = (location.hash || '').slice(1);
+    if (h && findComp(h)) { S.view = 'comp'; S.compId = h; }
+    render();
+    if (h && findDoc(h)) openReader('doc', h);
+  } catch (e) {
+    $('#main').innerHTML = `<div class="panel empty"><b>Мэдээллийг ачаалж чадсангүй</b>Хуудсыг дахин ачаалж үзнэ үү.</div>`;
+  }
+})();
+(async () => {
+  if (GHM) { ghBoot(); return; }
+  const [u, as] = await Promise.all([cap('user'), cap('assets')]);
+  let can = false;
+  try { can = u ? !!(await u.canEdit()) : false; } catch (e) { can = false; }
+  if (!can && as) can = true;
+  if (can) { S.admin = true; if (S.data) render(); else renderNav(); }
+})();
+})();
+</script>
+</body>
+</html>
