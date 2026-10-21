@@ -2164,6 +2164,7 @@ const BOOT = (async () => {
     render();
     if (h && findDoc(h)) openReader('doc', h);
   } catch (e) {
+    if (GHM && location.protocol === 'file:') { const u = `https://${GH.cfg.owner}.github.io/${GH.cfg.repo}/`; $('#main').innerHTML = `<div class="panel empty"><b>Энэ файлыг компьютер дээрээс шууд нээх боломжгүй</b>Хөтөч аюулгүй байдлын үүднээс компьютер дээрх data.json файлыг уншихыг хориглодог. Мэдээллийн санг <a href="${u}" style="color:var(--accent)">${u}</a> хаягаар нээнэ үү. Энэ холбоосыг бусадтай хуваалцаж болно.</div>`; return; }
     $('#main').innerHTML = `<div class="panel empty"><b>Мэдээллийг ачаалж чадсангүй</b>Хуудсыг дахин ачаалж үзнэ үү.</div>`;
   }
 })();
