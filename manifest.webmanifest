@@ -1,0 +1,39 @@
+{
+  "id": "./",
+  "name": "ХЭҮК мэдээллийн сан",
+  "short_name": "ХЭҮК сан",
+  "description": "Хүний эрхийн Үндэсний Комиссын санал, зөвлөмж, шаардлага, хууль тогтоомжийн төсөлд өгсөн санал, судалгаа, илтгэлийн нэгдсэн сан",
+  "lang": "mn",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F3F5F8",
+  "theme_color": "#2350C2",
+  "categories": [
+    "government",
+    "reference",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -6,6 +6,12 @@
 <title>ХЭҮК мэдээллийн сан</title>
 <meta name="description" content="Хүний эрхийн Үндэсний Комиссын санал, зөвлөмж, шаардлага, хууль тогтоомжийн төсөлд өгсөн санал, судалгаа, илтгэлийн нэгдсэн сан">
 <meta name="theme-color" content="#2350C2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ХЭҮК сан">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232350C2'/%3E%3Cpath d='M18 44V20h7v9.5h14V20h7v24h-7v-9h-14v9z' fill='%23fff'/%3E%3C/svg%3E">
 <style>html,body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Unbounded:wght@500;700&amp;display=swap" rel="stylesheet">
@@ -434,6 +440,8 @@ button.savechip:hover{background:var(--accent-soft);color:var(--accent-2)}
 .acct-t b{font-weight:500;overflow-wrap:anywhere}
 .acct-t span{font-size:12.5px;color:var(--ink-3)}
 .acct-me{font-size:12px;color:var(--ink-3);padding:0 6px}
+.share-qr{display:grid;place-items:center}
+.share-qr svg{width:200px;height:200px;background:#fff;border-radius:12px;padding:6px;box-shadow:0 0 0 1px var(--line)}
 a.btn{text-decoration:none}
 </style>
 </head>
@@ -514,7 +522,9 @@ const P = {
   bad: '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
   wait: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/>',
   na: '<circle cx="12" cy="12" r="9"/><path d="M8 12h8"/>',
-  reply: '<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v5"/>'
+  reply: '<path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 6 6v5"/>',
+  share: '<circle cx="18" cy="5" r="2.5"/><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="19" r="2.5"/><path d="m8.2 10.8 7.6-4.6M8.2 13.2l7.6 4.6"/>',
+  app: '<rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 17.5h2"/>'
 };
 const ic = (n, s = 20) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
 
@@ -547,6 +557,13 @@ const GHCFG = (() => { const el = document.getElementById('heuk-gh'); if (!el) r
 const GHM = !STANDALONE && !!GHCFG;
 /* the GitHub edition opened from a downloaded copy: data comes from data.js, PDFs open in the browser's own viewer */
 const LOCAL = GHM && location.protocol === 'file:';
+/* installed web app: offline support and the browser's install prompt */
+const APP = { prompt: null, standalone: (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true };
+if (GHM && !LOCAL && 'serviceWorker' in navigator && (location.protocol === 'https:' || /^(localhost|127\.0\.0\.1)$/.test(location.hostname))) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(e => console.warn('service worker', e)); });
+}
+window.addEventListener('beforeinstallprompt', e => { APP.prompt = e; if (S.data) renderNav(); });
+window.addEventListener('appinstalled', () => { APP.prompt = null; APP.standalone = true; if (S.data) renderNav(); toast('Апп суулгагдлаа'); });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 function cap(n) {
   if (!(n in CAP)) {
@@ -663,7 +680,9 @@ function renderNav() {
   const items = [['dash', 'Хянах самбар', 'home'], ['docs', 'Баримтууд', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
   $('#railNav').innerHTML = items.map(([v, l, i]) => `<button class="nav" data-act="nav" data-view="${v}" ${cur === v ? 'aria-current="page"' : ''}>${ic(i)}${l}</button>`).join('') +
     `<button class="nav" data-act="palette">${ic('search')}Хурдан хайлт<kbd>/</kbd></button>` +
-    (GHM && !LOCAL ? `<button class="nav" data-act="off-zip">${ic('dl')}Офлайн татах</button>` : '') +
+    (GHM && !LOCAL ? `<button class="nav" data-act="share">${ic('share')}Хуваалцах</button>` +
+      (APP.prompt && !APP.standalone ? `<button class="nav" data-act="app-install">${ic('app')}Апп суулгах</button>` : '') +
+      `<button class="nav" data-act="off-zip">${ic('dl')}Офлайн татах</button>` : '') +
     (STANDALONE && S.data && offNeeded().length ? `<button class="nav" data-act="off-pick">${ic('pdf')}${esc(offStatus())}</button>` : '');
   const tabs = [['dash', 'Самбар', 'home'], ['docs', 'Баримт', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers'], ['_s', 'Хайлт', 'search']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
   $('#tabbar').innerHTML = tabs.map(([v, l, i]) => v === '_s'
@@ -766,7 +785,7 @@ function viewDash() {
       <div class="panel-h"><h2>Сүүлд бүртгэгдсэн</h2><button class="btn ghost" data-act="nav" data-view="docs">Бүгдийг харах</button></div>
       <div class="related">${D.docs.slice(0, 6).map(d => `<button class="rel" data-act="open" data-id="${d.id}"><b style="font-weight:500">${esc(d.title)}</b><span>${esc([tShort(d.type), noTxt(d), fmtD(d)].filter(Boolean).join(', '))}</span></button>`).join('')}</div>
     </section>
-    ${GHM && !LOCAL ? `<div class="foot"><button class="linkbtn" data-act="off-zip">Офлайн ашиглахаар татах</button>${S.admin ? '' : `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>`}</div>` : ''}
+    ${GHM && !LOCAL ? `<div class="foot"><button class="linkbtn" data-act="share">Хуваалцах, апп болгож суулгах</button><button class="linkbtn" data-act="off-zip">Офлайн ашиглахаар татах</button>${S.admin ? '' : `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>`}</div>` : ''}
   </div>`;
 }
 function typePanel(docs) {
@@ -1849,6 +1868,40 @@ async function delAdmin(lid) {
   try { await AUTH.removeUser(lid); render(); toast(`${u.name} хасагдлаа`); }
   catch (e) { console.warn(e); toast(ghErr(e)); }
 }
+const siteUrl = () => new URL('./', location.href).href;
+async function appInstall() {
+  const p = APP.prompt; if (!p) { openShare(); return; }
+  try { await p.prompt(); const c = await p.userChoice; if (c && c.outcome === 'accepted') APP.prompt = null; } catch (e) { APP.prompt = null; }
+  renderNav();
+}
+async function shareCopy() {
+  const url = siteUrl();
+  try { await navigator.clipboard.writeText(url); }
+  catch (e) { const i = $('#shareUrl'); if (i) { i.select(); try { document.execCommand('copy'); } catch (x) { /* nothing more to try */ } } }
+  toast('Холбоос хуулагдлаа');
+}
+async function shareNative() {
+  try { await navigator.share({ title: S.data.meta.name || 'ХЭҮК мэдээллийн сан', text: 'Хүний эрхийн Үндэсний Комиссын санал, зөвлөмжийн нэгдсэн сан', url: siteUrl() }); }
+  catch (e) { /* the person closed the share menu */ }
+}
+async function openShare() {
+  const url = siteUrl();
+  sheet('Хуваалцах', `
+    <div class="share-qr" id="shareQr" aria-label="Сайтын QR код"></div>
+    <div class="fld"><label for="shareUrl">Сайтын холбоос</label><div class="row-actions" style="flex-wrap:nowrap"><input class="inp" id="shareUrl" readonly value="${esc(url)}" style="flex:1;min-width:0"><button class="btn" data-act="share-copy">Хуулах</button></div></div>
+    <p class="search-note" style="margin:0">QR кодыг утасны камераар уншуулахад сайт нээгдэнэ. Холбоосыг имэйл, мессежээр илгээж болно. Нээсэн хүн нэвтрэхгүйгээр мэдээллийг үзэж, хайж, PDF уншина.</p>
+    ${APP.standalone ? '' : `<div class="note"><p style="margin:0 0 6px">Апп болгож суулгах</p><ol style="margin:0;padding-left:20px;display:grid;gap:4px">
+      <li>Компьютер дээр Chrome эсвэл Edge хөтчөөр сайтыг нээж, ${APP.prompt ? 'доорх Апп суулгах товчийг' : 'хаягийн мөрний баруун талд гарах суулгах дүрсийг'} дарна.</li>
+      <li>Android утсанд Chrome хөтчөөр нээж, баруун дээд булангийн цэснээс Апп суулгах (Install app) эсвэл Нүүр дэлгэцэд нэмэх сонголтыг сонгоно.</li>
+      <li>iPhone-д Safari хөтчөөр нээж, Хуваалцах товчноос Нүүр дэлгэцэд нэмэх (Add to Home Screen) сонголтыг сонгоно.</li>
+    </ol><p style="margin:6px 0 0">Суулгасны дараа ХЭҮК сан нэртэй апп утас, компьютерийн нүүр дэлгэцэд гарч, тусдаа цонхонд нээгдэнэ. Өмнө нь үзсэн мэдээлэл болон PDF интернэтгүй үед ч нээгдэнэ.</p></div>`}`,
+    `${navigator.share ? `<button class="btn" data-act="share-native">${ic('share')}Илгээх</button>` : ''}${APP.prompt && !APP.standalone ? `<button class="btn" data-act="app-install">${ic('app')}Апп суулгах</button>` : ''}<button class="btn primary" data-act="close-layer">Хаах</button>`);
+  try {
+    if (typeof window.qrcode !== 'function') await loadScript('lib/qrcode.js');
+    const q = window.qrcode(0, 'M'); q.addData(url); q.make();
+    const box = $('#shareQr'); if (box) box.innerHTML = q.createSvgTag({ cellSize: 6, margin: 3, scalable: true });
+  } catch (e) { const box = $('#shareQr'); if (box) box.hidden = true; }
+}
 function openOfflineZip() {
   const mb = Math.round(S.data.docs.reduce((a, d) => a + (+d.pdfSize || 0), 0) / 1048576);
   const zip = `https://github.com/${GH.cfg.owner}/${GH.cfg.repo}/archive/refs/heads/${GH.cfg.branch}.zip`;
@@ -2248,6 +2301,10 @@ const ACT = {
   'gh-logout': () => ghLogout(),
   'gh-token': () => openTokenLogin(),
   'off-zip': () => openOfflineZip(),
+  share: () => openShare(),
+  'share-copy': () => shareCopy(),
+  'share-native': () => shareNative(),
+  'app-install': () => appInstall(),
   'acct-setup': () => openSetup(!S.acctNone),
   'acct-add': () => openAddAdmin(),
   'acct-del': a => delAdmin(a.dataset.lid),
