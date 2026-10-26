@@ -426,6 +426,14 @@ table.pivot{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5p
 button.savechip{cursor:pointer}
 button.savechip:hover{background:var(--accent-soft);color:var(--accent-2)}
 .note ol a{color:var(--accent);overflow-wrap:anywhere}
+.form-err{margin:0;font-size:13.5px;color:var(--bad)}
+.acct-list{display:flex;flex-direction:column}
+.acct{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.acct:last-child{border-bottom:0}
+.acct-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.acct-t b{font-weight:500;overflow-wrap:anywhere}
+.acct-t span{font-size:12.5px;color:var(--ink-3)}
+.acct-me{font-size:12px;color:var(--ink-3);padding:0 6px}
 a.btn{text-decoration:none}
 </style>
 </head>
@@ -1023,7 +1031,10 @@ let pdfjsP = null;
 function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); }); }
 function getPdfjs() {
   if (!pdfjsP) {
-    pdfjsP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js').then(() => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = (STANDALONE || GHM) ? 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js' : 'pdf.worker.min.js'; return window.pdfjsLib; });
+    const CDN = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+    /* the GitHub edition carries its own copy in lib/, so PDFs open even where the CDN is blocked */
+    const from = base => loadScript(base + 'pdf.min.js').then(() => { if (!window.pdfjsLib) throw new Error('pdf.js missing'); window.pdfjsLib.GlobalWorkerOptions.workerSrc = base + 'pdf.worker.min.js'; return window.pdfjsLib; });
+    pdfjsP = GHM ? from('lib/').catch(() => from(CDN)) : from(CDN).then(lib => { if (!STANDALONE) lib.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js'; return lib; });
     pdfjsP.catch(() => { pdfjsP = null; });
   }
   return pdfjsP;
@@ -1111,7 +1122,7 @@ async function loadPdf(path) {
     scroller.onscroll = pos; const body = $('#reader .ov-body'); if (body) body.onscroll = pos; pos();
   } catch (err) {
     if (token !== PV.token) return;
-    host.innerHTML = `<div class="pdf-msg"><b>PDF-ийг энд харуулж чадсангүй</b><span>Файлыг татаж аваад нээж болно.</span><button class="btn" data-act="dl-pdf">${ic('dl')}Татаж авах</button></div>`;
+    host.innerHTML = `<div class="pdf-msg"><b>PDF-ийг энд харуулж чадсангүй</b><span>Хөтчийн PDF уншигчаар нээх эсвэл татаж аваад нээж болно.</span><div class="row-actions" style="justify-content:center"><a class="btn" href="${esc(pdfUrl(path))}" target="_blank" rel="noopener">${ic('pdf')}Шинэ цонхонд нээх</a><button class="btn" data-act="dl-pdf">${ic('dl')}Татаж авах</button></div></div>`;
   }
 }
 async function renderPage(div, token) {
@@ -1329,23 +1340,23 @@ const GH = {
   async api(path, o = {}) {
     const url = /^https:/.test(path) ? path : `https://api.github.com/repos/${encodeURIComponent(this.cfg.owner)}/${encodeURIComponent(this.cfg.repo)}${path}`;
     const headers = { Accept: o.raw ? 'application/vnd.github.raw+json' : 'application/vnd.github+json' };
-    if (this.token) headers.Authorization = `Bearer ${this.token}`;
+    if (this.token && !o.anon) headers.Authorization = `Bearer ${this.token}`;
     if (o.body) headers['Content-Type'] = 'application/json';
     const body = o.body ? JSON.stringify(o.body) : undefined;
     for (let i = 0; ; i++) {
       let r;
       try { r = await fetch(url, { method: o.method || 'GET', headers, body, cache: 'no-store' }); }
-      catch (e) { if (i < 2) { await sleep(1500 * (i + 1)); continue; } throw Object.assign(new Error('network'), { code: 'network' }); }
+      catch (e) { if (i < 2 && !o.once) { await sleep(1500 * (i + 1)); continue; } throw Object.assign(new Error('network'), { code: 'network' }); }
       if (r.ok) return o.raw ? r.text() : r.status === 204 ? null : r.json();
       let info = null; try { info = await r.json(); } catch (e) { /* no body */ }
       const msg = String((info && info.message) || '');
       const limited = r.status === 429 || (r.status === 403 && (/rate limit/i.test(msg) || r.headers.get('retry-after')));
-      if ((limited || r.status >= 500) && i < 4) { await sleep(((+r.headers.get('retry-after')) || 4 * (i + 1)) * 1000); continue; }
+      if ((limited || r.status >= 500) && i < 4 && !o.once) { await sleep(((+r.headers.get('retry-after')) || 4 * (i + 1)) * 1000); continue; }
       const code = r.status === 401 ? 'bad_token' : (r.status === 403 || r.status === 404) ? 'no_access' : r.status === 409 ? 'conflict' : r.status === 422 ? 'invalid' : 'github';
       throw Object.assign(new Error(`GitHub ${r.status} ${msg}`), { code, status: r.status, info });
     }
   },
-  async login(token) {
+  async login(token, name) {
     this.token = String(token || '').trim();
     try {
       if (!this.token) throw Object.assign(new Error('empty'), { code: 'bad_token' });
@@ -1353,6 +1364,7 @@ const GH = {
       if (!repo.permissions || !repo.permissions.push) throw Object.assign(new Error('read only'), { code: 'no_push' });
       if (repo.default_branch) this.cfg.branch = repo.default_branch;
     } catch (e) { this.token = ''; throw e; }
+    if (name) { this.user = name; return; }
     try { this.user = (await this.api('https://api.github.com/user')).login || ''; } catch (e) { this.user = ''; }
   },
   async head() {
@@ -1400,6 +1412,174 @@ const GH = {
   }
 };
 GH.init();
+
+/* ---------- admin accounts ----------
+   admins.json holds the GitHub key encrypted with a random site key K (AES-GCM).
+   Each admin entry holds K encrypted with a key derived from that admin's password (PBKDF2-SHA256),
+   so a name and password unlock K, and K unlocks the GitHub key. Names are stored only as a hash
+   and, readable, inside a box sealed with K. */
+const AUTH = {
+  FILE: 'admins.json', ITER: 600000, MIN: 10, SKEY: 'heuk.admin',
+  me: null, raw: null, key: null, doc: null, list: [],
+  te: new TextEncoder(), td: new TextDecoder(),
+  ok() { return !!(window.crypto && crypto.subtle); },
+  err(code) { return Object.assign(new Error(code), { code }); },
+  b64e(u) { u = u instanceof Uint8Array ? u : new Uint8Array(u); let s = ''; for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000)); return btoa(s); },
+  b64d(s) { const b = atob(String(s).replace(/\s+/g, '')); const u = new Uint8Array(b.length); for (let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; },
+  clean(n) { return String(n || '').normalize('NFC').trim().replace(/\s+/g, ' '); },
+  async lid(n) { return this.b64e(await crypto.subtle.digest('SHA-256', this.te.encode('heuk-admin|' + this.clean(n).toLowerCase()))); },
+  async pwKey(pw, salt, iter) {
+    const base = await crypto.subtle.importKey('raw', this.te.encode(String(pw).normalize('NFC')), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+  },
+  aes(raw) { return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']); },
+  async seal(key, data) {
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, typeof data === 'string' ? this.te.encode(data) : data);
+    return { iv: this.b64e(iv), ct: this.b64e(ct) };
+  },
+  async open(key, box) { return new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: this.b64d(box.iv) }, key, this.b64d(box.ct))); },
+  async openText(key, box) { return this.td.decode(await this.open(key, box)); },
+  async makeUser(name, pw, role, by, raw, key) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const k = await this.pwKey(pw, salt, this.ITER);
+    return { lid: await this.lid(name), role, kdf: { salt: this.b64e(salt), iter: this.ITER }, key: await this.seal(k, raw), info: await this.seal(key, JSON.stringify({ name: this.clean(name), added: todayISO(), by: by || '' })) };
+  },
+  async checkPw(u, pw) {
+    const k = await this.pwKey(pw, this.b64d(u.kdf.salt), u.kdf.iter || this.ITER);
+    try { return await this.open(k, u.key); } catch (e) { return null; }
+  },
+  /* the API copy is current; the published copy can lag a minute or two behind a change */
+  async fetchDoc() {
+    try { return JSON.parse(await GH.api(`/contents/${this.FILE}?ref=${encodeURIComponent(GH.cfg.branch)}`, { raw: true, anon: true, once: true })); }
+    catch (e) {
+      if (e && e.status === 404) return null;
+      let r = null; try { r = await fetch(this.FILE, { cache: 'no-cache' }); } catch (x) { /* offline */ }
+      if (r && r.ok) return r.json();
+      if (r && r.status === 404) return null;
+      throw e && e.code ? e : this.err('network');
+    }
+  },
+  async readForWrite() {
+    try { const r = await GH.api(`/contents/${this.FILE}?ref=${encodeURIComponent(GH.cfg.branch)}`); return { sha: r.sha, doc: JSON.parse(this.td.decode(this.b64d(r.content))) }; }
+    catch (e) { if (e && e.status === 404) return { sha: '', doc: null }; throw e; }
+  },
+  async write(mutate) {
+    for (let i = 0; ; i++) {
+      const cur = await this.readForWrite();
+      const doc = await mutate(cur.doc);
+      const body = { message: `Админы бүртгэл шинэчлэв, ${todayISO()}`, content: this.b64e(this.te.encode(JSON.stringify(doc, null, 2) + '\n')), branch: GH.cfg.branch };
+      if (cur.sha) body.sha = cur.sha;
+      try { await GH.api(`/contents/${this.FILE}`, { method: 'PUT', body }); return doc; }
+      catch (e) { if ((e.code === 'conflict' || e.code === 'invalid') && i < 2) continue; throw e; }
+    }
+  },
+  async refreshList() {
+    const out = [];
+    for (const u of (this.doc && this.doc.users) || []) {
+      let info = {}; try { info = JSON.parse(await this.openText(this.key, u.info)); } catch (e) { /* sealed with an older key */ }
+      out.push({ lid: u.lid, role: u.role, name: info.name || 'Нэр тодорхойгүй', added: info.added || '' });
+    }
+    out.sort((a, b) => (a.role === b.role ? 0 : a.role === 'owner' ? -1 : 1) || a.name.localeCompare(b.name, 'mn'));
+    this.list = out;
+  },
+  async unlock(doc, raw, u) {
+    const key = await this.aes(raw);
+    const token = await this.openText(key, doc.token);
+    const info = JSON.parse(await this.openText(key, u.info));
+    this.raw = raw; this.key = key; this.doc = doc;
+    this.me = { lid: u.lid, name: info.name, role: u.role };
+    await this.refreshList();
+    return token;
+  },
+  async signIn(name, pw) {
+    const doc = await this.fetchDoc();
+    if (!doc) throw this.err('no_admins');
+    const lid = await this.lid(name);
+    const u = (doc.users || []).find(x => x.lid === lid);
+    if (!u) { await this.pwKey(pw, crypto.getRandomValues(new Uint8Array(16)), this.ITER); throw this.err('bad_login'); }
+    const raw = await this.checkPw(u, pw);
+    if (!raw) throw this.err('bad_login');
+    try { return await this.unlock(doc, raw, u); } catch (e) { throw this.err('bad_login'); }
+  },
+  async resume(s) {
+    const doc = await this.fetchDoc();
+    const u = doc && (doc.users || []).find(x => x.lid === s.lid);
+    if (!u) throw this.err('gone');
+    try { return await this.unlock(doc, this.b64d(s.k), u); } catch (e) { throw this.err('gone'); }
+  },
+  saved() { try { const s = localStorage.getItem(this.SKEY) || sessionStorage.getItem(this.SKEY); return s ? JSON.parse(s) : null; } catch (e) { return null; } },
+  remembered() { try { return !!localStorage.getItem(this.SKEY); } catch (e) { return false; } },
+  keep(remember) {
+    try {
+      localStorage.removeItem(this.SKEY); sessionStorage.removeItem(this.SKEY);
+      if (this.me) (remember ? localStorage : sessionStorage).setItem(this.SKEY, JSON.stringify({ k: this.b64e(this.raw), lid: this.me.lid }));
+    } catch (e) { /* storage unavailable: the session lives only in this page */ }
+  },
+  forget() { this.me = null; this.raw = null; this.key = null; this.doc = null; this.list = []; },
+  clear() { this.forget(); try { localStorage.removeItem(this.SKEY); sessionStorage.removeItem(this.SKEY); } catch (e) { /* storage unavailable */ } },
+  /* first set-up, or a fresh start when every password is lost: only the new owner remains */
+  async create(token, name, pw, reset) {
+    const raw = crypto.getRandomValues(new Uint8Array(32)), key = await this.aes(raw);
+    const owner = await this.makeUser(name, pw, 'owner', '', raw, key);
+    const doc = { v: 1, about: 'ХЭҮК мэдээллийн сангийн админ хэрэглэгчид. Нэр, нууц үгээр шифрлэгдсэн тул нууц үггүйгээр уншигдахгүй.', token: await this.seal(key, token), users: [owner] };
+    await this.write(async cur => { if (cur && !reset) throw this.err('exists_admins'); return doc; });
+    this.raw = raw; this.key = key; this.doc = doc;
+    this.me = { lid: owner.lid, name: this.clean(name), role: 'owner' };
+    await this.refreshList();
+  },
+  async addUser(name, pw, role) {
+    const lid = await this.lid(name);
+    const fresh = await this.makeUser(name, pw, role, this.me.name, this.raw, this.key);
+    this.doc = await this.write(async doc => {
+      if (!doc) throw this.err('no_admins');
+      if (doc.users.some(u => u.lid === lid)) throw this.err('exists');
+      doc.users.push(fresh); return doc;
+    });
+    await this.refreshList();
+  },
+  async removeUser(lid) {
+    this.doc = await this.write(async doc => {
+      if (!doc) throw this.err('no_admins');
+      doc.users = doc.users.filter(u => u.lid !== lid);
+      if (!doc.users.some(u => u.role === 'owner')) throw this.err('last_owner');
+      return doc;
+    });
+    await this.refreshList();
+  },
+  async setPassword(oldPw, newPw) {
+    const me = this.me;
+    this.doc = await this.write(async doc => {
+      const i = doc ? doc.users.findIndex(u => u.lid === me.lid) : -1;
+      if (i < 0) throw this.err('gone');
+      if (!await this.checkPw(doc.users[i], oldPw)) throw this.err('bad_pw');
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const k = await this.pwKey(newPw, salt, this.ITER);
+      doc.users[i] = Object.assign({}, doc.users[i], { kdf: { salt: this.b64e(salt), iter: this.ITER }, key: await this.seal(k, this.raw) });
+      return doc;
+    });
+  },
+  /* a new GitHub key; with ownerPw every other admin is signed out and the site key is replaced */
+  async replaceToken(token, ownerPw) {
+    const me = this.me;
+    let raw = this.raw, key = this.key;
+    const doc = await this.write(async doc => {
+      if (!doc) throw this.err('no_admins');
+      if (ownerPw != null) {
+        const u = doc.users.find(x => x.lid === me.lid);
+        if (!u) throw this.err('gone');
+        if (!await this.checkPw(u, ownerPw)) throw this.err('bad_pw');
+        raw = crypto.getRandomValues(new Uint8Array(32)); key = await this.aes(raw);
+        doc.users = [await this.makeUser(me.name, ownerPw, 'owner', '', raw, key)];
+      }
+      doc.token = await this.seal(key, token);
+      return doc;
+    });
+    this.raw = raw; this.key = key; this.doc = doc;
+    await this.refreshList();
+  }
+};
+
 function dropPdf(rec) {
   const p = rec && rec.pdf;
   if (!GHM || !p || !/^pdf\//.test(String(p))) return;
@@ -1423,7 +1603,12 @@ async function ghSaveOnce() {
     const code = e && e.code;
     console.warn('GitHub save failed', e);
     if (code === 'conflict') { setSave('dirty'); setTimeout(ghConflict, 0); return; }
-    if (code === 'bad_token') { setSave('error'); GH.token = ''; openGhLogin('Нэвтрэх түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал хадгалаагүй өөрчлөлт хадгалагдана.'); return; }
+    if (code === 'bad_token') {
+      setSave('error'); GH.token = '';
+      if (AUTH.me && AUTH.me.role === 'owner') { openTokenReplace('GitHub-ийн хандалтын түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал хадгалаагүй өөрчлөлт хадгалагдана.'); return; }
+      if (AUTH.me) { openGhLogin('GitHub-ийн хандалтын түлхүүрийн хугацаа дууссан тул хадгалж чадсангүй. Ерөнхий админ түлхүүрийг шинэчилсний дараа энд дахин нэвтэрвэл хадгалаагүй өөрчлөлт хадгалагдана. Энэ хуудсыг хаахгүй байна уу.'); return; }
+      openTokenLogin('Нэвтрэх түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал хадгалаагүй өөрчлөлт хадгалагдана.'); return;
+    }
     if (code === 'no_access') { setSave('error'); toast('Түлхүүрт энэ репод бичих эрх алга. Contents зүйлд Read and write эрх олгоно уу.'); return; }
     setSave('error'); toast('Хадгалж чадсангүй. Интернэт холболтоо шалгаад дахин оролдоно уу.');
   }
@@ -1439,43 +1624,222 @@ async function ghConflict() {
   try { S.data = await GH.loadData(); prep(); setSave('saved'); render(); toast('Сүүлийн хувилбарыг ачааллаа'); }
   catch (e) { setSave('error'); toast('Сүүлийн хувилбарыг ачаалж чадсангүй'); }
 }
+const formE = m => Object.assign(new Error(m), { code: 'form' });
 function ghErr(e) {
   const c = e && e.code;
+  if (c === 'form') return e.message;
+  if (c === 'bad_login') return 'Нэр эсвэл нууц үг буруу байна';
+  if (c === 'bad_pw') return 'Нууц үг буруу байна';
+  if (c === 'exists') return 'Ийм нэртэй админ бүртгэлтэй байна';
+  if (c === 'exists_admins') return 'Админы бүртгэл аль хэдийн үүссэн байна. Нэр, нууц үгээр нэвтэрнэ үү';
+  if (c === 'no_admins') return 'Админы бүртгэл үүсээгүй байна';
+  if (c === 'gone') return 'Таны админ эрх цуцлагдсан эсвэл өөрчлөгдсөн байна. Ерөнхий админд хандана уу';
+  if (c === 'tok_expired') return 'GitHub-ийн хандалтын түлхүүрийн хугацаа дууссан байна. Ерөнхий админд хандана уу';
+  if (c === 'last_owner') return 'Дор хаяж нэг ерөнхий админ үлдэх ёстой';
   if (c === 'bad_token') return 'Түлхүүр буруу эсвэл хугацаа нь дууссан байна';
   if (c === 'no_push' || c === 'no_access') return 'Энэ түлхүүрээр репод бичих эрх алга';
+  if (c === 'conflict') return 'Өөр админ зэрэг өөрчлөлт хийсэн байна. Дахин оролдоно уу';
   if (c === 'network') return 'GitHub-тэй холбогдож чадсангүй. Интернэт холболтоо шалгана уу';
-  return 'Нэвтэрч чадсангүй. Дахин оролдоно уу';
+  return 'Амжилтгүй боллоо. Дахин оролдоно уу';
 }
-function openGhLogin(msg) {
-  sheet('Админ нэвтрэх', `
-    ${msg ? `<p class="note" style="margin:0">${esc(msg)}</p>` : ''}
-    <p class="search-note" style="margin:0">Мэдээлэл нэмэх, засах эрх ${esc(GH.cfg.owner)}/${esc(GH.cfg.repo)} репод бичих эрхтэй хэрэглэгчид олгогдоно. Нэвтрэхдээ GitHub-ийн хандалтын түлхүүр ашиглана.</p>
-    <form id="ghForm" class="stack" style="gap:14px">
-      <div class="fld"><label for="ghTok">Хандалтын түлхүүр</label><input class="inp" id="ghTok" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_"></div>
-      <label class="check"><input type="checkbox" id="ghKeep" checked>Энэ төхөөрөмж дээр сануулах</label>
-    </form>
-    <div class="note"><p style="margin:0 0 6px">Түлхүүр үүсгэх дараалал</p><ol style="margin:0;padding-left:20px;display:grid;gap:4px">
+const ROLE_LABEL = { owner: 'Ерөнхий админ', admin: 'Админ' };
+function pwProblem(pw, pw2) {
+  if (pw.length < AUTH.MIN) return `Нууц үг дор хаяж ${AUTH.MIN} тэмдэгт байх ёстой`;
+  if (pw !== pw2) return 'Давтан оруулсан нууц үг таарахгүй байна';
+  return '';
+}
+function tokenSteps() {
+  return `<div class="note"><p style="margin:0 0 6px">Түлхүүр үүсгэх дараалал</p><ol style="margin:0;padding-left:20px;display:grid;gap:4px">
       <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> хуудсыг нээнэ.</li>
-      <li>Token name талбарт нэр өгч, Expiration талбарт хүчинтэй хугацааг сонгоно.</li>
+      <li>Token name талбарт нэр өгч, Expiration талбарт хүчинтэй хугацааг сонгоно. Хугацаа дуусахад шинэ түлхүүр үүсгэж оруулна.</li>
       <li>Repository access хэсэгт Only select repositories сонголтыг сонгож, ${esc(GH.cfg.repo)} репог нэмнэ.</li>
       <li>Permissions хэсгийн Repository permissions доторх Contents зүйлд Read and write эрх олгоно.</li>
       <li>Generate token товчийг дарж, гарсан түлхүүрийг хуулж энд буулгана.</li>
-    </ol></div>`,
-    `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="ghGo">Нэвтрэх</button>`);
+    </ol></div>`;
+}
+const noteP = msg => msg ? `<p class="note" style="margin:0">${esc(msg)}</p>` : '';
+const tokField = id => `<div class="fld"><label for="${id}">GitHub-ийн хандалтын түлхүүр</label><input class="inp" id="${id}" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_"></div>`;
+const pwField = (id, label, ac) => `<div class="fld"><label for="${id}">${esc(label)}</label><input class="inp" id="${id}" type="password" autocomplete="${ac}"></div>`;
+const nameField = (id, label, val) => `<div class="fld"><label for="${id}">${esc(label)}</label><input class="inp" id="${id}" autocomplete="username" spellcheck="false" maxlength="60" value="${esc(val || '')}"></div>`;
+const formErr = id => `<p class="form-err" id="${id}Err" role="alert" hidden></p><button type="submit" hidden></button>`;
+const sheetFoot = (id, label) => `<button class="btn ghost" data-act="close-layer">Болих</button><button class="btn primary" id="${id}">${esc(label)}</button>`;
+/* one async action for a sheet: its main button and the Enter key, with a busy label and an inline error line */
+function sheetAction(formId, btnId, busy, run) {
+  const b = $('#' + btnId), label = b.textContent;
   const go = async () => {
-    const t = $('#ghTok').value.trim(); if (!t) { $('#ghTok').focus(); return; }
-    const b = $('#ghGo'); b.disabled = true; b.textContent = 'Шалгаж байна';
-    try { await ghEnter(t, $('#ghKeep').checked); closeLayer(); }
-    catch (e) { b.disabled = false; b.textContent = 'Нэвтрэх'; toast(ghErr(e)); }
+    if (b.disabled) return;
+    const err = $('#' + formId + 'Err'); if (err) err.hidden = true;
+    b.disabled = true; b.textContent = busy;
+    try { await run(); }
+    catch (e) {
+      if (!e || e.code !== 'form') console.warn(e);
+      const el = $('#' + formId + 'Err');
+      if (el) { el.textContent = ghErr(e); el.hidden = false; } else toast(ghErr(e));
+    } finally { if (b.isConnected) { b.disabled = false; b.textContent = label; } }
   };
-  $('#ghGo').onclick = go;
-  $('#ghForm').addEventListener('submit', e => { e.preventDefault(); go(); });
-  setTimeout(() => { const i = $('#ghTok'); if (i) i.focus(); }, 30);
+  b.onclick = go;
+  $('#' + formId).addEventListener('submit', e => { e.preventDefault(); go(); });
+}
+const focusSoon = id => setTimeout(() => { const i = $('#' + id); if (i) i.focus(); }, 30);
+
+async function openGhLogin(msg) {
+  if (!AUTH.ok()) { openTokenLogin(msg); return; }
+  sheet('Админ нэвтрэх', `<div id="lgWait"><p class="search-note" style="margin:0">Ачаалж байна</p></div>`, `<button class="btn ghost" data-act="close-layer">Болих</button>`);
+  let doc; try { doc = await AUTH.fetchDoc(); } catch (e) { doc = undefined; }
+  if (!$('#lgWait')) return;
+  if (doc === null) { openSetup(false, msg); return; }
+  sheet('Админ нэвтрэх', `
+    ${noteP(msg)}
+    <form id="lg" class="stack" style="gap:14px">
+      ${nameField('lgName', 'Нэр', AUTH.me ? AUTH.me.name : '')}
+      ${pwField('lgPw', 'Нууц үг', 'current-password')}
+      <label class="check"><input type="checkbox" id="lgKeep">Энэ төхөөрөмж дээр сануулах</label>
+      ${formErr('lg')}
+    </form>
+    <p class="search-note" style="margin:0">Нэр, нууц үгийг ерөнхий админ олгоно. Нууц үгээ мартсан бол ерөнхий админд хандана уу.</p>
+    <button class="linkbtn" data-act="gh-token">GitHub түлхүүрээр нэвтрэх</button>`, sheetFoot('lgGo', 'Нэвтрэх'));
+  sheetAction('lg', 'lgGo', 'Шалгаж байна', async () => {
+    const name = AUTH.clean($('#lgName').value), pw = $('#lgPw').value;
+    if (!name) { $('#lgName').focus(); throw formE('Нэрээ оруулна уу'); }
+    if (!pw) { $('#lgPw').focus(); throw formE('Нууц үгээ оруулна уу'); }
+    await nameEnter(name, pw, $('#lgKeep').checked);
+  });
+  focusSoon(AUTH.me ? 'lgPw' : 'lgName');
+}
+async function nameEnter(name, pw, remember) {
+  const token = await AUTH.signIn(name, pw);
+  try { await ghEnter(token, remember); closeLayer(); }
+  catch (e) {
+    if (e && e.code === 'bad_token' && AUTH.me && AUTH.me.role === 'owner') { openTokenReplace('GitHub-ийн хандалтын түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал нэвтэрнэ.', remember); return; }
+    AUTH.forget();
+    throw e && e.code === 'bad_token' ? AUTH.err('tok_expired') : e;
+  }
+}
+function openTokenLogin(msg) {
+  sheet('GitHub түлхүүрээр нэвтрэх', `
+    ${noteP(msg)}
+    <p class="search-note" style="margin:0">Энэ аргаар ерөнхий админ нэвтэрч, админы бүртгэлийг анх үүсгэх эсвэл бүх нууц үг мартагдсан үед бүртгэлийг шинээр үүсгэнэ.</p>
+    <form id="tk" class="stack" style="gap:14px">
+      ${tokField('tkTok')}
+      <label class="check"><input type="checkbox" id="tkKeep">Энэ төхөөрөмж дээр сануулах</label>
+      ${formErr('tk')}
+    </form>
+    ${tokenSteps()}`, sheetFoot('tkGo', 'Нэвтрэх'));
+  sheetAction('tk', 'tkGo', 'Шалгаж байна', async () => {
+    const t = $('#tkTok').value.trim();
+    if (!t) { $('#tkTok').focus(); throw formE('Түлхүүрээ оруулна уу'); }
+    AUTH.forget();
+    await ghEnter(t, $('#tkKeep').checked); closeLayer();
+  });
+  focusSoon('tkTok');
+}
+function openSetup(reset, msg) {
+  const haveTok = !!(S.admin && GH.token);
+  sheet(reset ? 'Админы бүртгэлийг шинээр үүсгэх' : 'Админы бүртгэл үүсгэх', `
+    ${noteP(msg)}
+    <p class="note" style="margin:0">${reset
+      ? 'Одоогийн бүх админы нэвтрэх эрх цуцлагдаж, зөвхөн таны бүртгэл үлдэнэ. Бусад админыг дараа нь шинэ нууц үгээр дахин нэмнэ.'
+      : 'Админы бүртгэл хараахан үүсээгүй байна. Ерөнхий админ GitHub-ийн хандалтын түлхүүрийг нэг удаа оруулж, өөрийн нэр, нууц үгийг тохируулна. Үүний дараа бусад админыг нэр, нууц үгээр нэмэх бөгөөд тэд GitHub бүртгэлгүйгээр нэвтэрнэ.'}</p>
+    <form id="su" class="stack" style="gap:14px">
+      ${nameField('suName', 'Таны нэр', '')}
+      ${pwField('suPw', `Нууц үг, дор хаяж ${AUTH.MIN} тэмдэгт`, 'new-password')}
+      ${pwField('suPw2', 'Нууц үгээ давтах', 'new-password')}
+      ${haveTok ? '' : tokField('suTok')}
+      <label class="check"><input type="checkbox" id="suKeep">Энэ төхөөрөмж дээр сануулах</label>
+      ${formErr('su')}
+    </form>
+    ${haveTok ? '' : tokenSteps()}`, sheetFoot('suGo', reset ? 'Шинээр үүсгэх' : 'Бүртгэл үүсгэх'));
+  sheetAction('su', 'suGo', 'Хадгалж байна', async () => {
+    const name = AUTH.clean($('#suName').value), pw = $('#suPw').value;
+    if (!name) { $('#suName').focus(); throw formE('Нэрээ оруулна уу'); }
+    const p = pwProblem(pw, $('#suPw2').value); if (p) throw formE(p);
+    if (!haveTok) {
+      const t = $('#suTok').value.trim();
+      if (!t) { $('#suTok').focus(); throw formE('GitHub-ийн хандалтын түлхүүрийг оруулна уу'); }
+      await GH.login(t);
+    }
+    await AUTH.create(GH.token, name, pw, reset);
+    await ghEnter(GH.token, $('#suKeep').checked, true);
+    closeLayer(); S.view = 'admin'; render();
+    toast(reset ? 'Админы бүртгэлийг шинээр үүсгэлээ' : 'Админы бүртгэл үүслээ. Одоо бусад админыг нэмж болно');
+  });
+  focusSoon('suName');
+}
+function openTokenReplace(msg, remember) {
+  sheet('GitHub түлхүүр солих', `
+    ${noteP(msg)}
+    <p class="search-note" style="margin:0">Шинэ түлхүүр оруулахад админуудын нэр, нууц үг өөрчлөгдөхгүй.</p>
+    <form id="rt" class="stack" style="gap:14px">
+      ${tokField('rtTok')}
+      <label class="check"><input type="checkbox" id="rtRekey">Бусад админы нэвтрэх эрхийг цуцлах</label>
+      <div id="rtPwBox" hidden>${pwField('rtPw', 'Таны нууц үг', 'current-password')}</div>
+      ${formErr('rt')}
+    </form>
+    <p class="note" style="margin:0">Хассан админы эрхийг бүрэн цуцлахын тулд GitHub дээр хуучин түлхүүрийг хүчингүй болгож, шинэ түлхүүрийг энэ сонголттойгоор оруулна. Ингэхэд зөвхөн таны бүртгэл үлдэж, бусад админыг шинэ нууц үгээр дахин нэмнэ.</p>
+    ${tokenSteps()}`, sheetFoot('rtGo', 'Хадгалах'));
+  $('#rtRekey').onchange = e => { $('#rtPwBox').hidden = !e.target.checked; };
+  sheetAction('rt', 'rtGo', 'Хадгалж байна', async () => {
+    const t = $('#rtTok').value.trim(), rekey = $('#rtRekey').checked, pw = $('#rtPw').value;
+    if (!t) { $('#rtTok').focus(); throw formE('Шинэ түлхүүрээ оруулна уу'); }
+    if (rekey && !pw) { $('#rtPw').focus(); throw formE('Нууц үгээ оруулна уу'); }
+    const where = AUTH.saved() ? AUTH.remembered() : null;
+    await GH.login(t, AUTH.me.name);
+    await AUTH.replaceToken(GH.token, rekey ? pw : null);
+    closeLayer();
+    if (!S.admin) { await ghEnter(GH.token, !!remember, true); toast('Шинэ түлхүүр хадгалагдлаа. Та нэвтэрлээ'); return; }
+    if (rekey && where != null) AUTH.keep(where);
+    toast(rekey ? 'Шинэ түлхүүр хадгалагдаж, бусад админы эрх цуцлагдлаа' : 'Шинэ түлхүүр хадгалагдлаа');
+    if (['dirty', 'error'].includes(S.saveState)) saveNow(); else render();
+  });
+  focusSoon('rtTok');
+}
+function openAddAdmin() {
+  sheet('Админ нэмэх', `
+    <form id="aa" class="stack" style="gap:14px">
+      ${nameField('aaName', 'Нэр', '').replace('autocomplete="username"', 'autocomplete="off" placeholder="Жишээ нь Б.Болд"')}
+      ${pwField('aaPw', `Нууц үг, дор хаяж ${AUTH.MIN} тэмдэгт`, 'new-password')}
+      ${pwField('aaPw2', 'Нууц үгээ давтах', 'new-password')}
+      <div class="fld"><label for="aaRole">Эрх</label><select class="inp" id="aaRole"><option value="admin">Админ, мэдээлэл нэмж засна</option><option value="owner">Ерөнхий админ, мөн админ нэмж хасна</option></select></div>
+      ${formErr('aa')}
+    </form>
+    <p class="note" style="margin:0">Нэр, нууц үгийг тухайн хүнд биечлэн эсвэл найдвартай сувгаар дамжуулна. Нэвтрэхдээ нэрийг энд бичсэнтэй адил оруулах ба том, жижиг үсэг хамаарахгүй. Нэвтэрсний дараа нууц үгээ Удирдлага хэсгээс өөрөө сольж болно.</p>`, sheetFoot('aaGo', 'Нэмэх'));
+  sheetAction('aa', 'aaGo', 'Хадгалж байна', async () => {
+    const name = AUTH.clean($('#aaName').value), pw = $('#aaPw').value;
+    if (!name) { $('#aaName').focus(); throw formE('Нэрийг оруулна уу'); }
+    const p = pwProblem(pw, $('#aaPw2').value); if (p) throw formE(p);
+    await AUTH.addUser(name, pw, $('#aaRole').value);
+    closeLayer(); render(); toast(`${name} админаар нэмэгдлээ`);
+  });
+  focusSoon('aaName');
+}
+function openChangePw() {
+  sheet('Нууц үг солих', `
+    <form id="cp" class="stack" style="gap:14px">
+      ${pwField('cpOld', 'Одоогийн нууц үг', 'current-password')}
+      ${pwField('cpNew', `Шинэ нууц үг, дор хаяж ${AUTH.MIN} тэмдэгт`, 'new-password')}
+      ${pwField('cpNew2', 'Шинэ нууц үгээ давтах', 'new-password')}
+      ${formErr('cp')}
+    </form>`, sheetFoot('cpGo', 'Солих'));
+  sheetAction('cp', 'cpGo', 'Хадгалж байна', async () => {
+    const old = $('#cpOld').value, pw = $('#cpNew').value;
+    if (!old) { $('#cpOld').focus(); throw formE('Одоогийн нууц үгээ оруулна уу'); }
+    const p = pwProblem(pw, $('#cpNew2').value); if (p) throw formE(p);
+    await AUTH.setPassword(old, pw);
+    closeLayer(); toast('Нууц үг солигдлоо');
+  });
+  focusSoon('cpOld');
+}
+async function delAdmin(lid) {
+  const u = AUTH.list.find(x => x.lid === lid); if (!u) return;
+  if (!await confirmBox('Админыг хасах уу?', `${u.name} цаашид энэ сайтад нэвтрэх боломжгүй болно. Эрхийг бүрэн цуцлахыг хүсвэл дараа нь GitHub түлхүүр солих хэсгээр шинэ түлхүүр оруулж, бусад админы эрхийг шинэчилнэ үү.`, 'Хасах')) return;
+  try { await AUTH.removeUser(lid); render(); toast(`${u.name} хасагдлаа`); }
+  catch (e) { console.warn(e); toast(ghErr(e)); }
 }
 async function ghEnter(token, remember, silent) {
-  await GH.login(token);
-  if (remember != null) GH.keep(GH.token, remember);
+  await GH.login(token, AUTH.me ? AUTH.me.name : '');
+  if (remember != null) { if (AUTH.me) { GH.keep('', false); AUTH.keep(remember); } else { AUTH.clear(); GH.keep(GH.token, remember); } }
   await BOOT.catch(() => {});
+  if (!AUTH.me) AUTH.fetchDoc().then(d => { S.acctNone = !d; if (S.view === 'admin') render(); }).catch(() => {});
   if (S.admin && ['dirty', 'error'].includes(S.saveState)) { renderNav(); toast('Дахин нэвтэрлээ. Өөрчлөлтийг хадгалж байна'); saveNow(); return; }
   S.data = await GH.loadData(); prep();
   S.admin = true; S.saveState = 'idle';
@@ -1483,6 +1847,15 @@ async function ghEnter(token, remember, silent) {
   if (!silent) toast(`${GH.user || 'Админ'} нэвтэрлээ. Мэдээлэл нэмж, засах боломжтой`);
 }
 async function ghBoot() {
+  const s = AUTH.ok() && AUTH.saved();
+  if (s) {
+    try { const t = await AUTH.resume(s); await ghEnter(t, null, true); }
+    catch (e) {
+      if (e && e.code === 'bad_token' && AUTH.me && AUTH.me.role === 'owner') { await BOOT.catch(() => {}); openTokenReplace('GitHub-ийн хандалтын түлхүүрийн хугацаа дууссан эсвэл хүчингүй болсон байна. Шинэ түлхүүр оруулбал нэвтэрнэ.', AUTH.remembered()); return; }
+      if (e && e.code === 'network') AUTH.forget(); else AUTH.clear();
+    }
+    return;
+  }
   const t = GH.saved();
   if (t) { try { await ghEnter(t, null, true); } catch (e) { if (e && e.code !== 'network') GH.keep('', false); } return; }
   if (/[?&]admin(=|&|$)/.test(location.search)) { await BOOT.catch(() => {}); openGhLogin(); }
@@ -1490,16 +1863,34 @@ async function ghBoot() {
 async function ghLogout() {
   const unsaved = ['dirty', 'saving', 'error'].includes(S.saveState);
   if (unsaved && !await confirmBox('Хадгалаагүй өөрчлөлт байна', 'Гарвал хадгалаагүй өөрчлөлт алга болно.', 'Гарах')) return;
-  clearTimeout(S.saveTimer); GH.keep('', false); GH.token = ''; GH.user = ''; GH.staged.clear(); S.pending.clear(); S.pendingDel.clear();
+  clearTimeout(S.saveTimer); GH.keep('', false); AUTH.clear(); GH.token = ''; GH.user = ''; GH.staged.clear(); S.pending.clear(); S.pendingDel.clear();
   if (unsaved) { location.reload(); return; }
   S.admin = false; S.saveState = 'idle'; if (S.view === 'admin') S.view = 'dash';
   render(); toast('Админ эрхээс гарлаа');
 }
 function ghPanel() {
+  const who = AUTH.me ? `Та ${esc(AUTH.me.name)} нэрээр, ${esc(lc(ROLE_LABEL[AUTH.me.role] || 'админ'))} эрхтэй нэвтэрсэн байна.` : `Та GitHub түлхүүрээр нэвтэрсэн байна${GH.user ? `, хэрэглэгч ${esc(GH.user)}` : ''}.`;
   return `<section class="panel stack" style="gap:12px">
-      <div class="panel-h" style="margin:0"><h2>GitHub холболт</h2></div>
-      <p class="note" style="margin:0">Мэдээлэл ${esc(GH.cfg.owner)}/${esc(GH.cfg.repo)} репогийн ${esc(GH.cfg.branch)} салбарт хадгалагдана${GH.user ? `. Нэвтэрсэн хэрэглэгч ${esc(GH.user)}` : ''}. Засвар хийснээс хойш 10 секунд өнгөрөхөд автоматаар хадгална. Хадгалаагүй өөрчлөлт байх үед дээд талын товчоор шууд хадгалж болно.</p>
-      <div class="row-actions"><a class="btn ghost" href="${esc(GH.repoUrl())}" target="_blank" rel="noopener">Репог нээх</a><button class="btn ghost" data-act="gh-logout">Гарах</button></div>
+      <div class="panel-h" style="margin:0"><h2>Нэвтрэлт</h2></div>
+      <p class="note" style="margin:0">${who} Засвар хийснээс хойш 10 секунд өнгөрөхөд өөрчлөлт ${esc(GH.cfg.owner)}/${esc(GH.cfg.repo)} репод автоматаар хадгалагдана. Хадгалаагүй өөрчлөлт байх үед дээд талын товчоор шууд хадгалж болно.</p>
+      <div class="row-actions">${AUTH.me ? `<button class="btn" data-act="acct-pw">Нууц үг солих</button>` : ''}<a class="btn ghost" href="${esc(GH.repoUrl())}" target="_blank" rel="noopener">Репог нээх</a><button class="btn ghost" data-act="gh-logout">Гарах</button></div>
+    </section>`;
+}
+function acctPanel() {
+  const head = `<div class="panel-h" style="margin:0"><h2>Админ хэрэглэгчид</h2><p>Нэр, нууц үгээр нэвтэрдэг хүмүүс</p></div>`;
+  if (!AUTH.me) {
+    return `<section class="panel stack" style="gap:12px">${head}
+      <p class="note" style="margin:0">${S.acctNone ? 'Админы бүртгэл үүсээгүй байна. Бүртгэл үүсгэвэл бусад админ GitHub бүртгэлгүйгээр нэр, нууц үгээр нэвтэрнэ.' : 'Админ нэмэх, хасахын тулд нэр, нууц үгээр нэвтэрнэ үү. Бүх нууц үг мартагдсан бол бүртгэлийг шинээр үүсгэж болно.'}</p>
+      ${AUTH.ok() ? `<div class="row-actions"><button class="btn ${S.acctNone ? 'primary' : 'ghost'}" data-act="acct-setup">${S.acctNone ? 'Админы бүртгэл үүсгэх' : 'Бүртгэлийг шинээр үүсгэх'}</button></div>` : ''}
+    </section>`;
+  }
+  const owner = AUTH.me.role === 'owner';
+  const rows = AUTH.list.map(u => `<div class="acct"><div class="acct-t"><b>${esc(u.name)}</b><span>${esc(ROLE_LABEL[u.role] || 'Админ')}${u.added ? `, ${esc(u.added.replace(/-/g, '.'))}` : ''}</span></div>${u.lid === AUTH.me.lid ? '<span class="acct-me">Та</span>' : owner ? `<button class="btn ghost" data-act="acct-del" data-lid="${esc(u.lid)}">${ic('trash')}Хасах</button>` : ''}</div>`).join('');
+  return `<section class="panel stack" style="gap:12px">${head}
+      <div class="acct-list">${rows}</div>
+      ${owner
+        ? `<div class="row-actions"><button class="btn primary" data-act="acct-add">${ic('plus')}Админ нэмэх</button><button class="btn ghost" data-act="acct-token">GitHub түлхүүр солих</button></div>`
+        : `<p class="note" style="margin:0">Админ нэмэх, хасах эрх ерөнхий админд байна.</p>`}
     </section>`;
 }
 function ghTop() {
@@ -1698,7 +2089,7 @@ function viewAdmin() {
   return `
   <div class="head"><div><div class="eyebrow">Админ</div><h1 class="h1">Удирдлага</h1><p class="sub">${GHM ? 'Хадгалсан өөрчлөлт нийтийн хуудсанд 1-2 минутын дотор гарна.' : 'Энд хийсэн өөрчлөлт бүх хэрэглэгчид шууд харагдана.'}</p></div><div>${saveChip()}</div></div>
   <div class="adm">
-    ${GHM ? ghPanel() : ''}
+    ${GHM ? ghPanel() + acctPanel() : ''}
     <section class="panel stack" style="gap:12px">
       <div class="panel-h" style="margin:0"><h2>Мэдээлэл нэмэх</h2></div>
       <div class="row-actions"><button class="btn primary" data-act="add-doc">${ic('plus')}Баримт нэмэх</button><button class="btn" data-act="add-comp">${ic('plus')}${esc(CF().n)} нэмэх</button></div>
@@ -1822,6 +2213,12 @@ const ACT = {
   'save-now': () => { clearTimeout(S.saveTimer); saveNow(); },
   'gh-login': () => openGhLogin(),
   'gh-logout': () => ghLogout(),
+  'gh-token': () => openTokenLogin(),
+  'acct-setup': () => openSetup(!S.acctNone),
+  'acct-add': () => openAddAdmin(),
+  'acct-del': a => delAdmin(a.dataset.lid),
+  'acct-pw': () => openChangePw(),
+  'acct-token': () => openTokenReplace(),
   'save-settings': () => {
     $$('[data-ti]').forEach(el => { const t = S.data.types[+el.dataset.ti]; const f = el.dataset.tf; const v = el.value.trim(); if (!v) return; if (f === 'label' && v !== t.label) { t.label = v; t.short = v.length > 18 ? v.split(' ').slice(0, 2).join(' ') : v; } if (f === 'kind') t.kind = v; });
     const areas = $('#areasTa').value.split('\n').map(s => s.trim()).filter(Boolean); if (areas.length) S.data.areas = [...new Set(areas)];
