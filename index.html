@@ -663,6 +663,7 @@ function renderNav() {
   const items = [['dash', 'Хянах самбар', 'home'], ['docs', 'Баримтууд', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
   $('#railNav').innerHTML = items.map(([v, l, i]) => `<button class="nav" data-act="nav" data-view="${v}" ${cur === v ? 'aria-current="page"' : ''}>${ic(i)}${l}</button>`).join('') +
     `<button class="nav" data-act="palette">${ic('search')}Хурдан хайлт<kbd>/</kbd></button>` +
+    (GHM && !LOCAL ? `<button class="nav" data-act="off-zip">${ic('dl')}Офлайн татах</button>` : '') +
     (STANDALONE && S.data && offNeeded().length ? `<button class="nav" data-act="off-pick">${ic('pdf')}${esc(offStatus())}</button>` : '');
   const tabs = [['dash', 'Самбар', 'home'], ['docs', 'Баримт', 'docs'], ['comps', S.data ? CF().n : 'Эмхэтгэл', 'layers'], ['_s', 'Хайлт', 'search']].concat(S.admin ? [['admin', 'Удирдлага', 'gear']] : []);
   $('#tabbar').innerHTML = tabs.map(([v, l, i]) => v === '_s'
@@ -765,7 +766,7 @@ function viewDash() {
       <div class="panel-h"><h2>Сүүлд бүртгэгдсэн</h2><button class="btn ghost" data-act="nav" data-view="docs">Бүгдийг харах</button></div>
       <div class="related">${D.docs.slice(0, 6).map(d => `<button class="rel" data-act="open" data-id="${d.id}"><b style="font-weight:500">${esc(d.title)}</b><span>${esc([tShort(d.type), noTxt(d), fmtD(d)].filter(Boolean).join(', '))}</span></button>`).join('')}</div>
     </section>
-    ${GHM && !LOCAL && !S.admin ? `<div class="foot"><button class="linkbtn" data-act="off-zip">Офлайн ашиглахаар татах</button><button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button></div>` : ''}
+    ${GHM && !LOCAL ? `<div class="foot"><button class="linkbtn" data-act="off-zip">Офлайн ашиглахаар татах</button>${S.admin ? '' : `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>`}</div>` : ''}
   </div>`;
 }
 function typePanel(docs) {
@@ -2123,9 +2124,9 @@ function viewAdmin() {
     </section>
     <section class="panel stack" style="gap:12px">
       <div class="panel-h" style="margin:0"><h2>Татаж авах</h2></div>
-      <div class="row-actions"><button class="btn primary" data-act="export-offline">${ic('dl')}Офлайн хувилбар, HTML</button></div>
+      <div class="row-actions">${GHM && !LOCAL ? `<button class="btn primary" data-act="off-zip">${ic('dl')}Офлайн хувилбар, PDF-тэй ZIP</button><button class="btn ghost" data-act="export-offline">${ic('dl')}Нэг HTML файл</button>` : `<button class="btn primary" data-act="export-offline">${ic('dl')}Офлайн хувилбар, HTML</button>`}</div>
       <div class="row-actions"><button class="btn" data-act="export-all">${ic('dl')}Бүх мэдээлэл, Excel</button><button class="btn ghost" data-act="export-json">${ic('dl')}Нөөц хуулбар, JSON</button></div>
-      <p class="note">Офлайн хувилбар нь интернэтгүй нээгддэг нэг HTML файл. Тухайн өдрийн бүх мэдээллийг агуулна. PDF-үүдийг таны компьютер дээрх хавтаснаас нээнэ.</p>
+      <p class="note">${GHM && !LOCAL ? 'PDF-тэй ZIP нь бүх мэдээлэл болон PDF-ийг агуулна. Задлаад index.html файлыг нээхэд интернэтгүй ажиллаж, PDF шууд нээгдэнэ. Нэг HTML файл нь зөвхөн мэдээллийг агуулах тул PDF нээхэд компьютер дээрх PDF хавтсаа сонгоно.' : 'Офлайн хувилбар нь интернэтгүй нээгддэг нэг HTML файл. Тухайн өдрийн бүх мэдээллийг агуулна. PDF-үүдийг таны компьютер дээрх хавтаснаас нээнэ.'}</p>
       <p class="note">Excel файлд баримтын төрөл бүр тусдаа хуудсанд, ${esc(lc(CF().g))} санал ба тогтоолын заалт, он оноорх нэгтгэл тус тусдаа хуудсанд гарна.</p>
     </section>
     <section class="panel stack" style="gap:12px">
