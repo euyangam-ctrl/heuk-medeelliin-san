@@ -1,0 +1,26 @@
+{
+  "v": 1,
+  "about": "ХЭҮК мэдээллийн сангийн админ хэрэглэгчид. Нэр, нууц үгээр шифрлэгдсэн тул нууц үггүйгээр уншигдахгүй.",
+  "token": {
+    "iv": "WEKtZDLi2kIsQwal",
+    "ct": "3csgwmM4+AuztV5LKUsGMZtCmH/y/yDAIm2IBjKDDOl4e382vK4LKo+qaF2ToBEI9AzCwFyWzRd0yeL3ZllxoKF8n0kjj9e3d61hPhBm8q/FHpsG+d5Iy5F3hJGb6TrBK9oLmHEoXdXzYM6RGA=="
+  },
+  "users": [
+    {
+      "lid": "HXaK0+Xla+dr5B/e76Z+gWVueiTYs17Vt07vshKioho=",
+      "role": "owner",
+      "kdf": {
+        "salt": "isJDNYHrrkD3dsqymVA0+A==",
+        "iter": 600000
+      },
+      "key": {
+        "iv": "vAa6myVPwkng4L8l",
+        "ct": "+d3YKtAFBAp7aDdyNfAUrk0syw0+/1WWLaM9/j5CYnFhrNK7rFG4xZvRVKXAVGLO"
+      },
+      "info": {
+        "iv": "iuIpQgiLHWIPBwoB",
+        "ct": "ksrwQrLt9yEuZsF5gqnSdm7gRzvD+RPtb9gZP0IY31g5Ooz9mhPiCNsWk4WLlENupouDqVay6xrnFWjA"
+      }
+    }
+  ]
+}
