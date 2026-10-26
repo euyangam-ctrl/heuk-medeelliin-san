@@ -422,7 +422,7 @@ table.pivot{border-collapse:separate;border-spacing:0;width:100%;font-size:13.5p
 /* GitHub edition: admin sign-in link and clickable save chip */
 .linkbtn{font-size:12.5px;color:var(--ink-3);text-decoration:underline;text-underline-offset:3px;width:max-content}
 .linkbtn:hover{color:var(--accent)}
-.foot{display:flex;justify-content:center;padding:6px 0 2px}
+.foot{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;padding:6px 0 2px}
 button.savechip{cursor:pointer}
 button.savechip:hover{background:var(--accent-soft);color:var(--accent-2)}
 .note ol a{color:var(--accent);overflow-wrap:anywhere}
@@ -545,6 +545,8 @@ const CAP = {};
 const STANDALONE = !!document.getElementById('heuk-data');
 const GHCFG = (() => { const el = document.getElementById('heuk-gh'); if (!el) return null; try { return JSON.parse(el.textContent); } catch (e) { return {}; } })();
 const GHM = !STANDALONE && !!GHCFG;
+/* the GitHub edition opened from a downloaded copy: data comes from data.js, PDFs open in the browser's own viewer */
+const LOCAL = GHM && location.protocol === 'file:';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 function cap(n) {
   if (!(n in CAP)) {
@@ -672,7 +674,7 @@ function renderNav() {
     $('#topUpd').textContent = upd; ghTop();
     const nm = S.data.meta.name.replace(/^ХЭҮК\s*/, '') || 'Мэдээллийн сан';
     $('#siteName').textContent = nm.charAt(0).toUpperCase() + nm.slice(1);
-    $('#railFoot').innerHTML = (S.admin ? saveChip() : '') + `<span>${esc(upd)}</span>` + (STANDALONE ? `<span class="badge">Татаж авсан хувилбар</span>` : '') + (S.data.meta.sample ? `<span class="badge">Жишээ өгөгдөл</span>` : '') + (GHM && !S.admin ? `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>` : '');
+    $('#railFoot').innerHTML = (S.admin ? saveChip() : '') + `<span>${esc(upd)}</span>` + (STANDALONE || LOCAL ? `<span class="badge">Татаж авсан хувилбар</span>` : '') + (S.data.meta.sample ? `<span class="badge">Жишээ өгөгдөл</span>` : '') + (GHM && !LOCAL && !S.admin ? `<button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button>` : '');
   }
 }
 function saveChip() {
@@ -763,7 +765,7 @@ function viewDash() {
       <div class="panel-h"><h2>Сүүлд бүртгэгдсэн</h2><button class="btn ghost" data-act="nav" data-view="docs">Бүгдийг харах</button></div>
       <div class="related">${D.docs.slice(0, 6).map(d => `<button class="rel" data-act="open" data-id="${d.id}"><b style="font-weight:500">${esc(d.title)}</b><span>${esc([tShort(d.type), noTxt(d), fmtD(d)].filter(Boolean).join(', '))}</span></button>`).join('')}</div>
     </section>
-    ${GHM && !S.admin ? `<div class="foot"><button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button></div>` : ''}
+    ${GHM && !LOCAL && !S.admin ? `<div class="foot"><button class="linkbtn" data-act="off-zip">Офлайн ашиглахаар татах</button><button class="linkbtn" data-act="gh-login">Админ нэвтрэх</button></div>` : ''}
   </div>`;
 }
 function typePanel(docs) {
@@ -1093,6 +1095,7 @@ function openReader(kind, id) {
   v.hidden = false; document.body.classList.add('locked');
   PV.path = rec.pdf || ''; PV.ver = rec.pdfSha ? String(rec.pdfSha).slice(0, 12) : ''; PV.name = (kind === 'doc' ? `${tShort(rec.type)} ${rec.no || ''} ${rec.title}` : `${F.n} ${rec.no} ${rec.year}`);
   if (rec.pdf && offlinePdf(rec)) showLocalPdf(rec);
+  else if (rec.pdf && LOCAL && !S.blob[rec.pdf]) showFilePdf(rec);
   else if (rec.pdf) loadPdf(rec.pdf);
   else $('#pdfPages').innerHTML = `<div class="pdf-msg"><b>PDF хавсаргаагүй байна</b><span>${rec.hasFile ? 'Эх файл байгууллагад хадгалагдаж байгаа гэж бүртгэгдсэн. PDF-ийг хавсаргавал энд нээгдэнэ.' : 'PDF хавсаргавал энд нээгдэнэ.'}</span>${S.admin && kind === 'doc' ? `<button class="btn" data-act="edit-doc" data-id="${rec.id}">${ic('up')}PDF хавсаргах</button>` : ''}</div>`;
   $('.ov-bar .iconbtn', v).focus();
@@ -1154,6 +1157,13 @@ function offStatus() {
   if (!need) return '';
   return OFF.read == null ? 'PDF хавтас сонгох' : `PDF: ${nf(OFF.found)} / ${nf(need)} олдсон`;
 }
+function showFilePdf(rec) {
+  const host = $('#pdfPages'); if (!host) return;
+  destroyPdf();
+  const u = encodeURI(rec.pdf);
+  host.closest('.reader-pdf').classList.add('native');
+  host.innerHTML = `<div class="pdf-alt"><span class="mono">${esc(rec.pdf)}</span><a href="${esc(u)}" target="_blank" rel="noopener">Шинэ цонхонд нээх</a></div><iframe class="pdf-native" src="${esc(u)}" title="${esc(rec.title)}"></iframe>`;
+}
 function showLocalPdf(rec) {
   const host = $('#pdfPages'); if (!host) return;
   const f = OFF.byDoc[rec.id];
@@ -1170,7 +1180,7 @@ function showLocalPdf(rec) {
     ? 'Сонгосон хавтсаас PDF файл олдсонгүй. Хавтас зөв эсэхийг шалгана уу.'
     : `Сонгосон хавтаснаас ${nf(OFF.read)} PDF уншиж, ${nf(OFF.found)} баримттай тааруулсан. Энэ баримтын PDF тэдгээрийн дотор олдсонгүй.`;
   host.innerHTML = `<div class="pdf-msg"><b>${OFF.read == null ? 'PDF хавтсаа сонгоно уу' : 'Энэ баримтын PDF олдсонгүй'}</b>
-    <span>${info || 'Энэ нь татаж авсан хувилбар. PDF файлуудыг таны компьютер дээрх хавтаснаас нээнэ. E:\\uyanga\\data\\data хавтсыг бүхэлд нь сонгоно уу. Хөтөч "файл оруулах уу" гэж асуувал зөвшөөрнө. Файлууд таны компьютерээс гадагш гарахгүй.'}</span>
+    <span>${info || 'Энэ нь татаж авсан хувилбар. PDF файлуудыг таны компьютер дээрх хавтаснаас нээнэ. PDF файлууд хадгалагдсан хавтсыг, жишээ нь татаж авсан сангийн pdf хавтсыг бүхэлд нь сонгоно уу. Хөтөч "файл оруулах уу" гэж асуувал зөвшөөрнө. Файлууд таны компьютерээс гадагш гарахгүй.'}</span>
     <div class="row-actions" style="justify-content:center"><button class="btn primary" data-act="off-pick">${ic('layers')}${OFF.read == null ? 'PDF хавтас сонгох' : 'Өөр хавтас сонгох'}</button></div>
     ${OFF.busy ? '<span>Файлуудыг шалгаж байна</span>' : ''}</div>`;
 }
@@ -1585,6 +1595,7 @@ function dropPdf(rec) {
   if (!GHM || !p || !/^pdf\//.test(String(p))) return;
   if (S.pending.has(p)) S.pending.delete(p); else S.pendingDel.add(p);
 }
+const dataJs = json => 'window.HEUK_DATA = ' + json + ';\n';
 async function ghSaveOnce() {
   if (S.ghAsk) return;
   if (!S.admin || !GH.token) { setSave('demo'); return; }
@@ -1595,7 +1606,9 @@ async function ghSaveOnce() {
     for (const [p, f] of [...S.pending]) { const sha = await GH.blob(f); if (S.pending.get(p) === f) { S.pending.delete(p); GH.staged.set(p, sha); } }
     for (const p of [...S.pendingDel]) { GH.staged.set(p, null); S.pendingDel.delete(p); }
     S.data.meta.updated = todayISO();
-    GH.staged.set('data.json', await GH.blob(JSON.stringify(S.data)));
+    const json = JSON.stringify(S.data);
+    GH.staged.set('data.json', await GH.blob(json));
+    GH.staged.set('data.js', await GH.blob(dataJs(json)));
     await GH.commit(`Мэдээллийн сан шинэчлэв, ${todayISO()}${GH.user ? ', ' + GH.user : ''}`, force);
     setSave(S.rev === rev && !S.pending.size && !S.pendingDel.size ? 'saved' : 'dirty'); renderNav();
     if (!S.ghTold) { S.ghTold = true; toast('Хадгаллаа. Нийтийн хуудсанд 1-2 минутын дотор шинэчлэгдэнэ'); }
@@ -1834,6 +1847,17 @@ async function delAdmin(lid) {
   if (!await confirmBox('Админыг хасах уу?', `${u.name} цаашид энэ сайтад нэвтрэх боломжгүй болно. Эрхийг бүрэн цуцлахыг хүсвэл дараа нь GitHub түлхүүр солих хэсгээр шинэ түлхүүр оруулж, бусад админы эрхийг шинэчилнэ үү.`, 'Хасах')) return;
   try { await AUTH.removeUser(lid); render(); toast(`${u.name} хасагдлаа`); }
   catch (e) { console.warn(e); toast(ghErr(e)); }
+}
+function openOfflineZip() {
+  const mb = Math.round(S.data.docs.reduce((a, d) => a + (+d.pdfSize || 0), 0) / 1048576);
+  const zip = `https://github.com/${GH.cfg.owner}/${GH.cfg.repo}/archive/refs/heads/${GH.cfg.branch}.zip`;
+  sheet('Офлайн ашиглах', `
+    <p class="note" style="margin:0">Мэдээллийн санг бүх PDF-ийн хамт компьютер дээрээ татаж авбал интернэтгүй үед ч хайлт хийх, хяналтын самбар үзэх, PDF нээх, Excel татах боломжтой. Татаж авсан хувилбар тухайн өдрийн мэдээллийг агуулах тул шинэчлэлийг авахын тулд дахин татна.</p>
+    <div class="note"><ol style="margin:0;padding-left:20px;display:grid;gap:4px">
+      <li>ZIP татах товчийг дарна. Файлын хэмжээ ${nf(mb)} МБ орчим тул татахад хэсэг хугацаа шаардана.</li>
+      <li>Татсан ZIP файл дээр хулганы баруун товчийг дарж Extract All (Бүгдийг задлах) сонголтоор задлана.</li>
+      <li>Задалсан хавтасны index.html файлыг Chrome, Edge эсвэл Firefox хөтчөөр нээнэ. PDF хөтчийн өөрийн уншигчаар нээгдэнэ.</li>
+    </ol></div>`, `<button class="btn ghost" data-act="close-layer">Хаах</button><a class="btn primary" href="${esc(zip)}" download>${ic('dl')}ZIP татах</a>`);
 }
 async function ghEnter(token, remember, silent) {
   await GH.login(token, AUTH.me ? AUTH.me.name : '');
@@ -2121,7 +2145,15 @@ function viewAdmin() {
 
 /* ---------- Excel and downloads ---------- */
 let xlsxP = null;
-function getXLSX() { if (!xlsxP) { xlsxP = loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js').then(() => window.XLSX); xlsxP.catch(() => { xlsxP = null; }); } return xlsxP; }
+function getXLSX() {
+  if (!xlsxP) {
+    const cdn = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    const from = src => loadScript(src).then(() => { if (!window.XLSX) throw new Error('xlsx missing'); return window.XLSX; });
+    xlsxP = GHM ? from('lib/xlsx.full.min.js').catch(() => from(cdn)) : from(cdn);
+    xlsxP.catch(() => { xlsxP = null; });
+  }
+  return xlsxP;
+}
 async function offer(filename, data) {
   const dl = await cap('downloads');
   if (!dl) {
@@ -2182,7 +2214,7 @@ const ACT = {
   scrim: (a, e) => { if (e.target === a) closeLayer(); },
   'close-reader': () => closeReader(),
   zoom: a => zoom(+a.dataset.d),
-  'dl-pdf': async () => { if (!PV.path) return; const lf = STANDALONE && S.readerId && OFF.byDoc[S.readerId]; if (lf) { offer(safeName(PV.name) + '.pdf', lf); return; } try { const r = await fetch(pdfUrl(PV.path)); if (!r.ok) throw new Error(); await offer(safeName(PV.name) + '.pdf', await r.blob()); } catch (e) { toast('PDF файлыг уншиж чадсангүй'); } },
+  'dl-pdf': async () => { if (!PV.path) return; if (LOCAL && !S.blob[PV.path]) { window.open(encodeURI(PV.path), '_blank', 'noopener'); return; } const lf = STANDALONE && S.readerId && OFF.byDoc[S.readerId]; if (lf) { offer(safeName(PV.name) + '.pdf', lf); return; } try { const r = await fetch(pdfUrl(PV.path)); if (!r.ok) throw new Error(); await offer(safeName(PV.name) + '.pdf', await r.blob()); } catch (e) { toast('PDF файлыг уншиж чадсангүй'); } },
   'dl-results': () => { const rows = applyFilters(false).map(docRowX); xlsxOut(`Баримтууд ${todayISO()}.xlsx`, (X, wb) => X.utils.book_append_sheet(wb, sheetFrom(X, rows, WID), 'Үр дүн')); },
   'dl-pivot': () => xlsxOut(`Он оноорх нэгтгэл ${todayISO()}.xlsx`, (X, wb) => X.utils.book_append_sheet(wb, sheetFrom(X, pivotRowsX()), 'Он оноор')),
   'export-all': () => xlsxOut(`ХЭҮК мэдээллийн сан ${todayISO()}.xlsx`, (X, wb) => {
@@ -2214,6 +2246,7 @@ const ACT = {
   'gh-login': () => openGhLogin(),
   'gh-logout': () => ghLogout(),
   'gh-token': () => openTokenLogin(),
+  'off-zip': () => openOfflineZip(),
   'acct-setup': () => openSetup(!S.acctNone),
   'acct-add': () => openAddAdmin(),
   'acct-del': a => delAdmin(a.dataset.lid),
@@ -2554,6 +2587,7 @@ renderNav();
 const BOOT = (async () => {
   try {
     if (STANDALONE) S.data = JSON.parse(document.getElementById('heuk-data').textContent);
+    else if (LOCAL) { await loadScript('data.js').catch(() => {}); if (!window.HEUK_DATA) throw new Error('data.js missing'); S.data = window.HEUK_DATA; }
     else { const r = await fetch('data.json', { cache: 'no-cache' }); if (!r.ok) throw new Error('HTTP ' + r.status); S.data = await r.json(); }
     prep();
     const h = (location.hash || '').slice(1);
@@ -2561,12 +2595,12 @@ const BOOT = (async () => {
     render();
     if (h && findDoc(h)) openReader('doc', h);
   } catch (e) {
-    if (GHM && location.protocol === 'file:') { const u = `https://${GH.cfg.owner}.github.io/${GH.cfg.repo}/`; $('#main').innerHTML = `<div class="panel empty"><b>Энэ файлыг компьютер дээрээс шууд нээх боломжгүй</b>Хөтөч аюулгүй байдлын үүднээс компьютер дээрх data.json файлыг уншихыг хориглодог. Мэдээллийн санг <a href="${u}" style="color:var(--accent)">${u}</a> хаягаар нээнэ үү. Энэ холбоосыг бусадтай хуваалцаж болно.</div>`; return; }
+    if (LOCAL) { const u = `https://${GH.cfg.owner}.github.io/${GH.cfg.repo}/`; $('#main').innerHTML = `<div class="panel empty"><b>Мэдээллийн файл олдсонгүй</b>index.html файлыг татаж авсан хавтасны дотроос нээнэ үү. ZIP файлын дотроос шууд нээсэн бол эхлээд ZIP файлыг задлаад (Extract All), задалсан хавтасны index.html файлыг нээнэ. Хавтсанд data.js файл болон pdf хавтас байх ёстой. Онлайн хувилбар <a href="${u}" style="color:var(--accent)">${u}</a> хаягаар нээгдэнэ.</div>`; return; }
     $('#main').innerHTML = `<div class="panel empty"><b>Мэдээллийг ачаалж чадсангүй</b>Хуудсыг дахин ачаалж үзнэ үү.</div>`;
   }
 })();
 (async () => {
-  if (GHM) { ghBoot(); return; }
+  if (GHM) { if (!LOCAL) ghBoot(); return; }
   const [u, as] = await Promise.all([cap('user'), cap('assets')]);
   let can = false;
   try { can = u ? !!(await u.canEdit()) : false; } catch (e) { can = false; }
