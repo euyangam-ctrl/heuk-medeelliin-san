@@ -1998,7 +1998,7 @@ function openDocForm(id) {
   <form id="docForm" class="stack" style="gap:14px">
     <div class="fld"><label for="df_type">Баримтын төрөл</label><select class="inp" id="df_type" name="type">${types().map(t => `<option value="${t.key}" ${d.type === t.key ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select></div>
     <div class="two"><div class="fld"><label for="df_no">Дугаар</label><input class="inp" id="df_no" name="no" value="${esc(d.no || '')}" placeholder="1/155"></div>
-      <div class="fld"><label for="df_date">Огноо</label><input class="inp" id="df_date" type="date" name="date" value="${esc(String(d.date || '').slice(0, 10))}" required></div></div>
+      <div class="fld"><label for="df_date">Огноо</label><input class="inp" id="df_date" type="date" name="date" value="${esc(String(d.date || '').slice(0, 10))}" min="2001-01-01" required></div></div>
     <div class="fld"><label for="df_title">Агуулга, гарчиг</label><textarea class="inp" id="df_title" name="title" required style="min-height:64px">${esc(d.title || '')}</textarea></div>
     <div class="fld"><label for="df_to">Хүлээн авагч</label><input class="inp" id="df_to" name="to" list="toList" value="${esc(d.to || '')}"><datalist id="toList">${tos.map(t => `<option value="${esc(t)}">`).join('')}</datalist></div>
     <div class="two"><div class="fld"><label for="df_area">${esc(AL())}</label><select class="inp" id="df_area" name="area"><option value="">Автоматаар тодорхойлох</option>${D.areas.map(a => `<option ${d.area === a ? 'selected' : ''}>${esc(a)}</option>`).join('')}</select></div>
